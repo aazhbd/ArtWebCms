@@ -1,10 +1,26 @@
 {% extends path_sys_template %}
 
-{% block head %}
+{% block title %}
+    {{ page_title|default('ArtCMS :: Home') }}
+{% endblock %}
+
+{% block headtags %}
     {{ parent() }}
+    {% set header_file = "%template_path%/headtags.twig"|replace({'%template_path%': path_user_template}) %}
+    {% include header_file %}
+{% endblock %}
+
+{% block contentheader %}
+    {% set cheader_file = "%template_path%/header.twig"|replace({'%template_path%': path_user_template}) %}
+    {% include cheader_file %}
 {% endblock %}
 
 {% block contentbody %}
     {{ parent() }}
     {{ body_content }}
+{% endblock %}
+
+{% block footers %}
+    {% set footer_file = "%template_path%/footer.twig"|replace({'%template_path%': path_user_template}) %}
+    {% include footer_file %}
 {% endblock %}

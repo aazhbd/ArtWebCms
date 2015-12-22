@@ -26,4 +26,14 @@ class Views extends Controller
 
         $this->display($app, 'home.twig');
     }
+
+    public function viewLogin($params, $app) {
+        $app->setTemplateData(
+            array(
+                'title' => 'Login',
+            )
+        );
+
+        $this->display($app, 'frm_login.twig');
+    }
 }

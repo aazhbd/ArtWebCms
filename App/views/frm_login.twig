@@ -20,7 +20,7 @@
 {% set is_login = user.getIsLogin() %}
 
 {% block contentheader %}
-    {% set cheader_file = "%template_path%/cheader.twig"|replace({'%template_path%': path_user_template}) %}
+    {% set cheader_file = "%template_path%/header.twig"|replace({'%template_path%': path_user_template}) %}
     {% include cheader_file %}
 {% endblock %}
 
@@ -30,7 +30,7 @@
 
     <form class="pure-form pure-form-aligned" id="art-form" method="post" action="{{ path_url_postfix }}/login">
         <fieldset>
-            <legend>{{ legend|default('Type your email and password below to login to your user account.') }}</legend>
+            <legend>{{ legend | default('Enter email and password to login.') }}</legend>
             <div class="pure-control-group">
                 <label for="email">Email</label>
                 <input id="email" type="text" placeholder="Your email address" name="email">

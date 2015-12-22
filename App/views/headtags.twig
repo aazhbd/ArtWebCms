@@ -1,0 +1,19 @@
+<meta name="author" content="www.articulatelogic.com, {{ author|default("aazhbd") }}" />
+<meta name="description" content="{{ descrip|striptags }}" />
+<meta name="keywords" content="ArtCMS, {{ keys }}" />
+<meta name="robots" content="index, follow, I followed" />
+
+<link href="{{ path_url }}/vendor/components/jqueryui/themes/ui-lightness/jquery-ui.min.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="{{ path_url }}{{ user_var.project_path_static.css }}/admin.css" type="text/css" rel="stylesheet" media="screen" />
+
+<script src="{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="{{ path_url }}{{ user_var.project_path_static.js }}/validate/jquery.validate.min.js" type="text/javascript"></script>
+<script src="{{ path_url }}{{ user_var.project_path_static.js }}/validate/additional-methods.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        if($("#reports").html() == '') {
+            $("#reports").hide();
+        }
+    });
+</script>
