@@ -1,0 +1,259 @@
+/**
+* Basic Template.
+*
+* @author        ArticulateLogic Labs
+* @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com 
+* @copyright     Copyright (c)2013 ArticulateLogic Labs
+* @link          http://www.articulatelogic.com
+* @since         Version 1.0
+*  
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    font: 0.8em Verdana, Helvetica, sans-serif;
+    color: #000;
+    margin: 0 auto;
+    position: absolute;
+}
+
+div {
+    height: auto;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+h1 a {
+    text-decoration: none;
+    color: #333;
+}
+
+h2, h2 a {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+h3, h3 a {
+    font-size: 1em;
+}
+
+ul {
+    list-style: none;
+}
+
+p {
+    text-align: justify;
+    font-size: .9em;
+    margin-bottom: .3em;
+    padding: 1em 0;
+}
+
+p a {
+    color: #1D62B3;
+}
+
+a {
+    text-decoration: none;
+    color: #1D62B3;
+    font-size: 1em;
+}
+
+a:hover {
+    background: none;
+    color: #E43C15;
+}
+
+img {
+    border: none;
+}
+
+/* head */
+
+#contentheader {
+    background: #fff;
+    box-shadow: 0 0px 10px 0px #acacac;
+    opacity: 0.82;
+    position: fixed;
+    top: 0px;
+    padding: 11px 0;
+    width: 100%;
+    z-index: 999;
+}
+
+#navigatemenu {
+    float: left;
+    z-index: 999;
+}
+
+/* end head */
+
+/* reports starts here */
+
+#reports {
+    color: #000;
+    width: auto;
+    height: 20px;
+    background: #cfc;
+    border: 1px solid #0f0;
+    padding: 5px;
+    margin: 3px;
+}
+
+/* reports ends here */
+
+/* error starts here */
+
+#errors {
+    color: #000;
+    width: auto;
+    height: 20px;
+    background: #FCC;
+    border: 1px solid #F00;
+    padding: 5px;
+    margin: 3px;
+}
+
+/* error ends here */
+
+/* logo starts here */
+
+#logo {
+    float: left;
+    height: 37px;
+}
+
+/* logo ends here */
+
+/* banner starts here */
+
+#banner {
+    width: 91%;
+    margin: auto;
+    padding: 0;
+}
+
+#search {
+    float: left;
+    width: 28%;
+}
+
+.search {
+    float: left;
+    padding: 4px 0;
+    width: 75%;
+}
+
+#frmsearch {
+    width: 100%;
+    padding: 2px;
+    outline: none;
+}
+
+.btnsearch {
+    width: 22%;
+    padding: 0;
+    padding: 4px;
+}
+
+/* banner ends here */
+
+#topright {
+    float: right;
+    padding: 10px 0;
+}
+
+/* contentbody starts here */
+
+#contentbody {
+    margin: 82px auto 0;
+    background: #fff no-repeat;
+    padding: 0 4em;
+    min-height: 480px;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+}
+
+/* contentbody ends here */
+
+/* title starts here */
+
+.title {
+    font-size: 2em;
+    color: #1D62B3;
+    padding: 1em 0;
+}
+
+/* title ends here */
+
+/* subtitle starts here */
+
+.subtitle {
+    color: #101010;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1em;
+    padding-top: .1em;
+    padding-bottom: 0.2em;
+}
+
+/* subtitle ends here */
+
+/* body starts here */
+
+.body {
+    color: #000;
+    text-align: justify;
+    font-size: 1em;
+    padding: .5em 0;
+    line-height: 1.9em;
+}
+
+/* body ends here */
+
+/* footer starts here*/
+
+#footer {
+    text-align: center;
+    margin: auto;
+    color: #999;
+    float: none;
+    padding: 10px;
+}
+
+#footer p {
+    text-align: center;
+}
+
+/* footer ends here*/
+
+/* selectors */
+
+#selectors {
+    background: #fff;
+    opacity: 0.82;
+    float: left;
+    width: 91%;
+    max-height: 130px;
+    min-height: 100px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    position: fixed;
+    top: 80px;
+    margin: 0 auto;
+}
+
+.choices {
+    float: left;
+    padding: 0px 11px;
+}
+
+/* end selectors */
