@@ -1,39 +1,65 @@
 {% extends path_sys_template %}
 
-{% block head %}
+{% block title %}
+    {{ page_title | default('ArtCMS :: Signup') }}
+{% endblock %}
+
+{% block headtags %}
     {{ parent() }}
+    {% set header_file = "%template_path%/headtags.twig" | replace({'%template_path%': path_user_template}) %}
+    {% include header_file %}
+    <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#errors").hide();
+            var maxYear = new Date('Y');
+            $('#birthdate').datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1900:'+ maxYear,
+                minDate: "-100y",
+                maxDate: "+0y",
+                showAnim: "slideDown"
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block contentheader %}
+    {% set cheader_file = "%template_path%/cheader.twig"|replace({'%template_path%': path_user_template}) %}
+    {% include cheader_file %}
 {% endblock %}
 
 {% block contentbody %}
     {{ parent() }}
-    {{ body_content }}
 
-    <form class="pure-form pure-form-aligned">
+    <form class="pure-form pure-form-aligned" id="art-form" method="post" action="{{ path_url_postfix }}/signup">
         <fieldset>
-            <legend>Signup</legend>
+            <legend>{{ legend|default('Please fillup the form below to Signup for an account in ArtCMS.') }}</legend>
             <div class="pure-control-group">
                 <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Username">
+                <input id="name" type="text" placeholder="Username" name="name">
             </div>
 
             <div class="pure-control-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" placeholder="Email">
+                <input id="email" type="email" placeholder="Email" name="email">
             </div>
 
             <div class="pure-control-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" placeholder="Password">
+                <input id="password" type="password" placeholder="Password" name="password">
             </div>
 
             <div class="pure-control-group">
-                <label for="password">Re-type Password</label>
-                <input id="password" type="password" placeholder="Re-type Password">
+                <label for="rpass">Re-type Password</label>
+                <input id="rpass" type="password" placeholder="Re-type Password" name="rpass">
             </div>
 
             <div class="pure-control-group">
                 <label for="gender">Gender</label>
-                <select id="gender">
+                <select id="gender" name="gender">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                 </select>
@@ -41,16 +67,88 @@
 
             <div class="pure-control-group">
                 <label for="birthdate">Birthdate</label>
-                <input id="birthdate" type="text" placeholder="birthdate">
+                <input id="birthdate" type="text" placeholder="Birthdate" name="birthdate">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="g-recaptcha" style="float: left;">Captcha</label>
+                <div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
+                <input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
             </div>
 
             <div class="pure-controls">
-                <label for="cb" class="pure-checkbox">
-                    <input id="cb" type="checkbox"> I've read the terms and conditions
+                <label for="agree" class="pure-checkbox" id="agree-label" style="display: block;  clear: both;">
+                    <input id="agree" type="checkbox" name="agree" value="1"> I've read the <a href='{{ path_url_postfix }}/a/terms'>terms and conditions</a>
                 </label>
 
-                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Signup</button>
             </div>
         </fieldset>
     </form>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#art-form").validate({
+                ignore: ".ignore",
+                groups: {
+                    agree: "agree"
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") == "agree") {
+                        error.insertAfter("#agree-label");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules:{
+                    name:{ required: true , maxlength: 100 },
+                    email:{ required: true, email: true , maxlength: 50},
+                    password:{ required: true, maxlength: 20},
+                    rpass:{ required: true, maxlength: 20, equalTo: "#password" },
+                    gender:{ required: true },
+                    birthdate:{ required: true },
+                    agree: { required: true },
+                    "hiddenRecaptcha": {
+                        required: function() {
+                            if(grecaptcha.getResponse() == '') {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                },
+                messages:{
+                    name: {
+                        required: "Please enter your full name.",
+                        maxlength: "Name maybe atmost 100 characters long. Please shorten your name."
+                    },
+                    email: {
+                        required: "Please enter a valid email address.",
+                        email: "Please enter a valid email address.",
+                        maxlength: "Email maybe atmost 50 characters long. Please use a shorter email address."
+                    },
+                    password: {
+                        required: "Please enter a minimum 5 character password.",
+                        maxlength: "Name maybe atmost 20 characters long. Please type a shorter password."
+                    },
+                    rpass: {
+                        required: "Please type your password again.",
+                        equalTo: "Your re-typed password does not match the new password you entered."
+                    },
+                    gender: "Please select sex",
+                    birthdate: {
+                        required: "Please select your birth date"
+                    },
+                    agree: "You must select the checkbox to agree to our terms and conditions before you signup",
+                    "hiddenRecaptcha": "The captcha was not validated. Please try again."
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block footers %}
+    {% set footer_file = "%template_path%/footer.twig"|replace({'%template_path%': path_user_template}) %}
+    {% include footer_file %}
 {% endblock %}

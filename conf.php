@@ -15,7 +15,7 @@ $conf = array(
         'path_static' => '/Template/static/',
         'path_user_template' => '/App/views',
         'user_var' => array(
-            'project_name' => 'The ArtWeb',
+            'project_name' => 'ArtCMS :: Articulate Content Management System',
         ),
     ),
     'staging' => array(
