@@ -1,6 +1,6 @@
 {
-  "name": "articulate/webapplication",
-  "description": "ArtWeb is a fast, secure, feature rich, scalable web application framework for PHP5, using Symfony2 components integrating with the best practices of MVC.",
+  "name": "articulate/webcms",
+  "description": "A text content management system based on ArtWeb. ArtCMS is a fast, secure, feature rich, scalable text content management system for PHP5, using Symfony2 components integrating with the best practices of MVC.",
   "license": "MIT",
   "require": {
     "php": ">=5.3.0",
