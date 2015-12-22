@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block contentheader %}
-    {% set cheader_file = "%template_path%/cheader.twig"|replace({'%template_path%': path_user_template}) %}
+    {% set cheader_file = "%template_path%/header.twig"|replace({'%template_path%': path_user_template}) %}
     {% include cheader_file %}
 {% endblock %}
 
