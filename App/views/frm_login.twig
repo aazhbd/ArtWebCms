@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block headtags %}
-    {{ parent() }}
-    {% set header_file = "%template_path%/headtags.twig"|replace({'%template_path%': path_user_template}) %}
-    {% include header_file %}
+    <script src="{{ path_url }}{{ user_var.project_static }}/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             if($("#errors").html() == '') {
@@ -15,13 +13,6 @@
             }
         });
     </script>
-{% endblock %}
-
-{% set is_login = user.getIsLogin() %}
-
-{% block contentheader %}
-    {% set cheader_file = "%template_path%/header.twig"|replace({'%template_path%': path_user_template}) %}
-    {% include cheader_file %}
 {% endblock %}
 
 {% block contentbody %}
@@ -66,7 +57,3 @@
     </script>
 {% endblock %}
 
-{% block footers %}
-    {% set footer_file = "%template_path%/footer.twig"|replace({'%template_path%': path_user_template}) %}
-    {% include footer_file %}
-{% endblock %}

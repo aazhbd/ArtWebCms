@@ -7,7 +7,7 @@
     "symfony/http-foundation": "~2.5",
     "lichtner/fluentpdo": "dev-master",
     "components/jquery": "~2.1",
-    "components/normalize.css": "2.*",
+    "components/jqueryui": "^1.11",
     "symfony/expression-language": "~2.5",
     "twig/twig": "~1.16"
   },

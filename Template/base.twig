@@ -2,6 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="www.articulatelogic.com, {{ author|default("aazhbd") }}" />
+    <meta name="description" content="{{ descrip | striptags }}" />
+    <meta name="keywords" content="ArtCMS, {{ keys }}" />
+    <meta name="robots" content="index, follow, I followed" />
 
     <title>{% block title %} {{ user_var.project_name }}{% endblock %}</title>
 
@@ -12,9 +16,8 @@
     <!--[if lte IE 6]>
     <link href="{{ path_static }}css/msie.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <![endif]-->
-
+    <script src="{{ path_url }}/vendor/components/jquery/jquery.min.js" type="text/javascript"></script>
     {% block headtags %}
-        <script src="{{ path_url }}/vendor/components/jquery/jquery.js" type="text/javascript"></script>
     {% endblock %}
 </head>
 

@@ -5,14 +5,19 @@
 {% endblock %}
 
 {% block headtags %}
-    {{ parent() }}
-    {% set header_file = "%template_path%/headtags.twig" | replace({'%template_path%': path_user_template}) %}
-    {% include header_file %}
+    <link href="{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <script src="{{ path_url }}{{ user_var.project_static }}/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function()
+        {
             $("#errors").hide();
+
             var maxYear = new Date('Y');
+
             $('#birthdate').datepicker({
                 dateFormat: 'dd/mm/yy',
                 changeMonth: true,
@@ -26,35 +31,30 @@
     </script>
 {% endblock %}
 
-{% block contentheader %}
-    {% set cheader_file = "%template_path%/header.twig"|replace({'%template_path%': path_user_template}) %}
-    {% include cheader_file %}
-{% endblock %}
-
 {% block contentbody %}
     {{ parent() }}
 
-    <form class="pure-form pure-form-aligned" id="art-form" method="post" action="{{ path_url_postfix }}/signup">
+    <form class="pure-form pure-form-aligned" id="signupform" method="post" action="{{ path_url_postfix }}/signup">
         <fieldset>
-            <legend>{{ legend|default('Please fillup the form below to Signup for an account in ArtCMS.') }}</legend>
+            <legend>{{ legend|default('Enter information to signup.') }}</legend>
             <div class="pure-control-group">
                 <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Username" name="name">
+                <input id="name" type="text" placeholder="Name" name="name" />
             </div>
 
             <div class="pure-control-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" placeholder="Email" name="email">
+                <input id="email" type="email" placeholder="Email" name="email" />
             </div>
 
             <div class="pure-control-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" placeholder="Password" name="password">
+                <input id="password" type="password" placeholder="Password" name="password" />
             </div>
 
             <div class="pure-control-group">
                 <label for="rpass">Re-type Password</label>
-                <input id="rpass" type="password" placeholder="Re-type Password" name="rpass">
+                <input id="rpass" type="password" placeholder="Re-type Password" name="rpass" />
             </div>
 
             <div class="pure-control-group">
@@ -67,13 +67,13 @@
 
             <div class="pure-control-group">
                 <label for="birthdate">Birthdate</label>
-                <input id="birthdate" type="text" placeholder="Birthdate" name="birthdate">
+                <input id="birthdate" type="text" placeholder="Birthdate" name="birthdate" />
             </div>
 
             <div class="pure-control-group">
                 <label for="g-recaptcha" style="float: left;">Captcha</label>
                 <div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
-                <input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
+                <input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" />
             </div>
 
             <div class="pure-controls">
@@ -81,14 +81,14 @@
                     <input id="agree" type="checkbox" name="agree" value="1"> I've read the <a href='{{ path_url_postfix }}/a/terms'>terms and conditions</a>
                 </label>
 
-                <button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Signup</button>
+                <input type="submit" class="pure-button pure-button-primary" name="submit" value="Signup" style="display: block; clear: both; margin-top: 5px; " />
             </div>
         </fieldset>
     </form>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#art-form").validate({
+            $("#signupform").validate({
                 ignore: ".ignore",
                 groups: {
                     agree: "agree"
@@ -121,20 +121,20 @@
                 messages:{
                     name: {
                         required: "Please enter your full name.",
-                        maxlength: "Name maybe atmost 100 characters long. Please shorten your name."
+                        maxlength: "Name can't be longer than 100 characters."
                     },
                     email: {
                         required: "Please enter a valid email address.",
                         email: "Please enter a valid email address.",
-                        maxlength: "Email maybe atmost 50 characters long. Please use a shorter email address."
+                        maxlength: "Email can't be longer than 50 characters."
                     },
                     password: {
                         required: "Please enter a minimum 5 character password.",
-                        maxlength: "Name maybe atmost 20 characters long. Please type a shorter password."
+                        maxlength: "Password can't be longer than 20 characters."
                     },
                     rpass: {
                         required: "Please type your password again.",
-                        equalTo: "Your re-typed password does not match the new password you entered."
+                        equalTo: "Password don't match."
                     },
                     gender: "Please select sex",
                     birthdate: {
@@ -146,9 +146,4 @@
             });
         });
     </script>
-{% endblock %}
-
-{% block footers %}
-    {% set footer_file = "%template_path%/footer.twig"|replace({'%template_path%': path_user_template}) %}
-    {% include footer_file %}
 {% endblock %}
