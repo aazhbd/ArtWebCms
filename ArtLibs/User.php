@@ -5,10 +5,6 @@ namespace ArtLibs;
 
 class User
 {
-    protected $username;
-
-    protected $password;
-
     protected $user_status;
 
     protected $authenticated;
@@ -38,6 +34,7 @@ class User
         }
         catch(\Exception $ex){
             $this->getError()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return false;
         }
 
         if($query == false) {
@@ -59,6 +56,7 @@ class User
         }
         catch(\Exception $ex){
             $this->getError()->addMessage("Error adding new user: " . $ex->getMessage());
+            return false;
         }
 
         return true;
@@ -74,6 +72,7 @@ class User
         }
         catch(\Exception $ex){
             $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+            return false;
         }
 
         return true;
@@ -89,45 +88,10 @@ class User
         }
         catch(\Exception $ex){
             $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+            return false;
         }
 
         return true;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param mixed $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-        return $this;
     }
 
     /**
