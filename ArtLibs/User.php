@@ -46,16 +46,17 @@ class User
         }
     }
 
-    public function userExists($email) {
+    public static function userExists($email, $app) {
         try {
-            $query = $this->getData()->from("users")
+            $query = $app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
                 ->select(array('id'))
                 ->where(array("email" => $email))
                 ->fetch();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            $error = new ErrorManager();
+            $error->addMessage("Error retrieving user information : " . $ex->getMessage());
             return false;
         }
 
@@ -67,48 +68,51 @@ class User
         }
     }
 
-    public function addUser($uinfo=array()) {
+    public static function addUser($uinfo=array(), $app) {
         if (empty($uinfo)) {
             return false;
         }
 
         try {
-            $query = $this->getData()->insertInto('users')->values($uinfo)->execute();
+            $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo)->execute();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Error adding new user: " . $ex->getMessage());
+            $error = new ErrorManager();
+            $error->addMessage("Error adding new user: " . $ex->getMessage());
             return false;
         }
 
         return true;
     }
 
-    public function disableUser($user_id=null) {
+    public static function disableUser($user_id=null, $app) {
         if($user_id == null) {
             return false;
         }
 
         try {
-            $query = $this->getData()->update('users', array('state' => 1), $user_id)->execute();
+            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 1), $user_id)->execute();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+            $error = new ErrorManager();
+            $error->addMessage("Error disabling user: " . $ex->getMessage());
             return false;
         }
 
         return true;
     }
 
-    public function enableUser($user_id=null) {
+    public static function enableUser($user_id=null, $app) {
         if($user_id == null) {
             return false;
         }
 
         try {
-            $query = $this->getData()->update('users', array('state' => 0), $user_id)->execute();
+            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 0), $user_id)->execute();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+            $error = new ErrorManager();
+            $error->addMessage("Error disabling user: " . $ex->getMessage());
             return false;
         }
 
