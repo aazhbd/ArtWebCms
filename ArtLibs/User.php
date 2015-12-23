@@ -37,7 +37,7 @@ class User
                 ->fetch();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Failed to retrieve user information in User class : " . $ex->getMessage());
+            $this->getError()->addMessage("Error retrieving user information : " . $ex->getMessage());
         }
 
         if($query == false) {
@@ -49,16 +49,49 @@ class User
         }
     }
 
-    public function addUser() {
+    public function addUser($uinfo=array()) {
+        if (empty($uinfo)) {
+            return false;
+        }
 
+        try {
+            $query = $this->getData()->insertInto('users')->values($uinfo)->execute();
+        }
+        catch(\Exception $ex){
+            $this->getError()->addMessage("Error adding new user: " . $ex->getMessage());
+        }
+
+        return true;
     }
 
-    public function removeUser() {
+    public function disableUser($user_id=null) {
+        if($user_id == null) {
+            return false;
+        }
 
+        try {
+            $query = $this->getData()->update('users', array('state' => 1), $user_id)->execute();
+        }
+        catch(\Exception $ex){
+            $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+        }
+
+        return true;
     }
 
-    public function disableUser() {
+    public function enableUser($user_id=null) {
+        if($user_id == null) {
+            return false;
+        }
 
+        try {
+            $query = $this->getData()->update('users', array('state' => 0), $user_id)->execute();
+        }
+        catch(\Exception $ex){
+            $this->getError()->addMessage("Error disabling user: " . $ex->getMessage());
+        }
+
+        return true;
     }
 
     /**
