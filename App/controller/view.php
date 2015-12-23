@@ -1,6 +1,8 @@
 <?php
 
 use ArtLibs\Controller;
+use ArtLibs\User;
+
 
 class Views extends Controller
 {
@@ -29,22 +31,16 @@ class Views extends Controller
 
     public function viewLogin($params, $app)
     {
-        $app->setTemplateData(
-            array(
+        $app->setTemplateData(array(
                 'title' => 'Login',
-            )
-        );
+            ));
 
         $this->display($app, 'frm_login.twig');
     }
 
     public function viewSignup($params, $app)
     {
-        $app->setTemplateData(
-            array(
-                'title' => 'Signup',
-            )
-        );
+        $app->setTemplateData(array('title' => 'Signup',));
 
         $this->display($app, 'frm_signup.twig');
     }
