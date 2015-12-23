@@ -46,6 +46,12 @@ class Views extends Controller
                 'date_ofbirth' => trim($app->getRequest()->request->get('birthdate')),
             );
 
+            if(User::userExists($user_data['email'], $app)) {
+                $app->setTemplateData(array('content_message' => 'Signup was unsuccessful, user with email ' . $user_data['email'] . ' already exists. Try different email'));
+                $this->display($app, 'frm_signup.twig');
+                return;
+            }
+
             if(User::addUser($user_data, $app)) {
                 $app->setTemplateData(array('content_message' => 'The user is successfully added and can login',));
             }
