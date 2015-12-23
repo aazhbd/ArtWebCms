@@ -46,6 +46,27 @@ class User
         }
     }
 
+    public function userExists($email) {
+        try {
+            $query = $this->getData()->from("users")
+                ->select(null)
+                ->select(array('id'))
+                ->where(array("email" => $email))
+                ->fetch();
+        }
+        catch(\Exception $ex){
+            $this->getError()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return false;
+        }
+
+        if($query == false) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     public function addUser($uinfo=array()) {
         if (empty($uinfo)) {
             return false;
