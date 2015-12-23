@@ -61,6 +61,10 @@
             <div id="reports">{{ error }}</div>
         {% endfor %}
 
+        {% if content_message %}
+            <div id="reports">{{ content_message }}</div>
+        {% endif %}
+
         {% if title %}
             <h2 class="title">
                 {{ title }}

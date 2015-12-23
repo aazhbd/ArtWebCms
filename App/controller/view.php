@@ -31,9 +31,30 @@ class Views extends Controller
 
     public function viewLogin($params, $app)
     {
-        $app->setTemplateData(array(
+        $app->setTemplateData(
+            array(
                 'title' => 'Login',
-            ));
+            )
+        );
+
+        if($app->getRequest()->getMethod() == "POST") {
+            $user_data = array(
+                'email' => trim($app->getRequest()->request->get('email')),
+                'pass' => trim($app->getRequest()->request->get('password')),
+                'firstname' => trim($app->getRequest()->request->get('name')),
+                'gender' => trim($app->getRequest()->request->get('gender')),
+                'date_ofbirth' => trim($app->getRequest()->request->get('birthdate')),
+            );
+
+            if(User::addUser($user_data, $app)) {
+                $app->setTemplateData(array('content_message' => 'The user is successfully added and can login',));
+            }
+            else {
+                $app->setTemplateData(array('content_message' => 'Signup was unsuccessful, try again.',));
+                $this->display($app, 'frm_signup.twig');
+                return;
+            }
+        }
 
         $this->display($app, 'frm_login.twig');
     }

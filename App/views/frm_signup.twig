@@ -34,7 +34,7 @@
 {% block contentbody %}
     {{ parent() }}
 
-    <form class="pure-form pure-form-aligned" id="signupform" method="post" action="{{ path_url_postfix }}/signup">
+    <form class="pure-form pure-form-aligned" id="signupform" method="post" action="{{ path_url_postfix }}/login">
         <fieldset>
             <legend>{{ legend|default('Enter information to signup.') }}</legend>
             <div class="pure-control-group">

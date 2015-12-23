@@ -73,8 +73,11 @@ class User
             return false;
         }
 
+        $executed = false;
+
         try {
-            $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo)->execute();
+            $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);
+            $executed = $query->execute(true);
         }
         catch(\Exception $ex){
             $error = new ErrorManager();
@@ -82,7 +85,7 @@ class User
             return false;
         }
 
-        return true;
+        return $executed;
     }
 
     public static function disableUser($user_id=null, $app) {
@@ -91,7 +94,8 @@ class User
         }
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 1), $user_id)->execute();
+            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 1), $user_id);
+            $query->execute(true);
         }
         catch(\Exception $ex){
             $error = new ErrorManager();
@@ -108,7 +112,7 @@ class User
         }
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 0), $user_id)->execute();
+            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 0), $user_id)->execute(true);
         }
         catch(\Exception $ex){
             $error = new ErrorManager();
