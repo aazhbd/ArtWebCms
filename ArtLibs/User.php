@@ -24,6 +24,9 @@ class User
         $this->authenticated = $this->getUser($email, $pass);
     }
 
+    /**
+     * @return boolean
+     */
     public function getUser($user, $pass) {
         try {
             $query = $this->getData()->from("users")
@@ -46,6 +49,9 @@ class User
         }
     }
 
+    /**
+     * @return boolean
+     */
     public static function userExists($email, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
@@ -68,6 +74,9 @@ class User
         }
     }
 
+    /**
+     * @return boolean
+     */
     public static function addUser($uinfo=array(), $app) {
         if (empty($uinfo)) {
             return false;
@@ -88,6 +97,9 @@ class User
         return $executed;
     }
 
+    /**
+     * @return boolean
+     */
     public static function disableUser($user_id=null, $app) {
         if($user_id == null) {
             return false;
@@ -106,6 +118,9 @@ class User
         return true;
     }
 
+    /**
+     * @return boolean
+     */
     public static function enableUser($user_id=null, $app) {
         if($user_id == null) {
             return false;

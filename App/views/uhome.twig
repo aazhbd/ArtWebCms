@@ -1,0 +1,23 @@
+{% extends path_sys_template %}
+
+{% block title %}
+    {{ page_title|default('ArtCMS :: User home') }}
+{% endblock %}
+
+{% block headtags %}
+    <script src="{{ path_url }}{{ user_var.project_static }}/jquery.validate.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if($("#errors").html() == '') {
+                $("#errors").hide();
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block contentbody %}
+    {{ parent() }}
+    {{ body_content }}
+
+{% endblock %}
+
