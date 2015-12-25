@@ -66,6 +66,14 @@ class User
         return true;
     }
 
+    public static function clearSession($app) {
+        if($app->getSession()->get('is_authenticated')) {
+            $app->getSession()->set('is_authenticated', false);
+            $app->getSession()->set('user_info', null);
+        }
+        return true;
+    }
+
     /**
      * @return boolean
      */
