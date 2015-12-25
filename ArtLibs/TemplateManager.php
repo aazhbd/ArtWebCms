@@ -14,6 +14,7 @@ class TemplateManager
                 )
             )
         );
+        $this->template->addGlobal("session", $app->getSession());
     }
 
     /**

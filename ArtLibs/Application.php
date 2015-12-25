@@ -305,7 +305,6 @@ class Application
 
         if ($this->template_manager == false) {
             $this->template_manager = new TemplateManager($this);
-            $this->template_manager->getTemplate()->addGlobal("session", $this->getSession());
         }
         return $this->template_manager;
     }
