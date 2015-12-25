@@ -108,8 +108,8 @@ class Views extends Controller
         $app->setTemplateData(array('title' => 'Not found'));
         $article = false;
 
-        if(isset($params['article_id'])){
-            $aid = $params['article_id'];
+        if(isset($params['aid'])){
+            $aid = $params['aid'];
             $article = $this->getArticlesById($aid, $app);
         }
         elseif(isset($params['aurl'])) {
@@ -124,7 +124,7 @@ class Views extends Controller
                 $app->setTemplateData(array(
                     'title' => $article[0]['title'],
                     'subtitle' => $article[0]['subtitle'],
-                    'body' => $article[0]['body'],
+                    'body' => stripslashes($article[0]['body']),
                     'article' => $article
                 ));
             }
@@ -162,7 +162,7 @@ class Views extends Controller
                 'subtitle' => trim($app->getRequest()->request->get('subtitle')),
                 'url' => trim($app->getRequest()->request->get('aurl')),
                 'category_id' => trim($app->getRequest()->request->get('category')),
-                'body' => trim($app->getRequest()->request->get('abody')),
+                'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
                 'date_inserted' => new FluentLiteral('NOW()'),
             );
 
