@@ -24,7 +24,7 @@
         {{ parent() }}
         {{ body_content }}
 
-        <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="">
+        <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/article/list">
             <fieldset>
                 <input type="text" class="pure-input-1-2" placeholder="Title" name="title" />
                 <input type="text" class="pure-input-1-2" placeholder="Subtitle" name="subtitle" />

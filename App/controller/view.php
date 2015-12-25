@@ -133,11 +133,43 @@ class Views extends Controller
         $this->display($app, 'article.twig');
     }
 
+    public function addArticle($article_data, $app) {
+        if (empty($article_data)) {
+            return false;
+        }
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);
+            $executed = $query->execute(true);
+        }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error adding new article: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
+    }
+
     public function viewArticleList($params, $app)
     {
         $app->setTemplateData(array(
             'title' => 'All articles',
         ));
+
+        if($app->getRequest()->getMethod() == "POST") {
+            $article_data = array(
+                'title' => trim($app->getRequest()->request->get('title')),
+                'subtitle' => trim($app->getRequest()->request->get('subtitle')),
+                'url' => trim($app->getRequest()->request->get('aurl')),
+                'category_id' => trim($app->getRequest()->request->get('category')),
+                'body' => trim($app->getRequest()->request->get('abody')),
+                'date_inserted' => new FluentLiteral('NOW()'),
+            );
+
+            if($this->addArticle($article_data, $app)) {
+                $app->setTemplateData(array('title' => "New article added successfully."));
+            }
+        }
 
         $user_info = $app->getSession()->get('user_info');
 
