@@ -1,0 +1,80 @@
+{% extends path_user_template ~ '/home.twig' %}
+
+{% block title %}
+    {{ page_title|default('ArtCMS :: Add article') }}
+{% endblock %}
+
+{% block headtags %}
+    <script src="{{ path_url }}{{ user_var.project_static }}/simplemde.min.js" type="text/javascript"></script>
+    <link href="{{ path_url }}{{ user_var.project_static }}/simplemde.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if($("#errors").html() == '') {
+                $("#errors").hide();
+            }
+
+            var simplemde = new SimpleMDE({ element: $("#markbody")[0] });
+        });
+    </script>
+{% endblock %}
+
+{% block contentbody %}
+    {% if session.get('user_info').utype == 1 %}
+        {{ parent() }}
+        {{ body_content }}
+
+        <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="">
+            <fieldset>
+                <input type="text" class="pure-input-1-2" placeholder="Title" name="title" />
+                <input type="text" class="pure-input-1-2" placeholder="Subtitle" name="subtitle" />
+            </fieldset>
+
+            <fieldset>
+                <input type="text" class="pure-input-1-2" placeholder="Url" name="aurl" />
+                <select class="pure-input-1-2" name="category">
+                    {% for cat in categories %}
+                        <option value="{{ cat.id }}">{{ cat.catname }}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+
+            <fieldset class="pure-group">
+                <textarea class="pure-input-1-2" placeholder="Content" id="markbody" rows="20" name="abody"></textarea>
+            </fieldset>
+
+            <input type="submit" class="pure-button pure-input-1-2 pure-button-primary"  value="Submit"  />
+        </form>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#publish").validate({
+                    rules:{
+                        title:{ required: true , maxlength: 100 },
+                        aurl:{ required: true, maxlength: 50},
+                        category:{ required: true },
+                        abody:{ required: true, maxlength: 2000 }
+                    },
+                    messages:{
+                        title: {
+                            required: "Enter title.",
+                            maxlength: "Can't be longer than 100 characters."
+                        },
+                        aurl: {
+                            required: "Enter url.",
+                            maxlength: "Can't be longer than 50 characters."
+                        },
+                        category: {
+                            required: "Category required.",
+                        },
+                        abody: {
+                            required: "Enter password again.",
+                            maxlength: "Article can't be longer than 2000 characters."
+                        }
+                    }
+                });
+            });
+        </script>
+
+    {% endif %}
+{% endblock %}
+

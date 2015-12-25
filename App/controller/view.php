@@ -105,6 +105,7 @@ class Views extends Controller
     }
 
     public function viewArticle($params, $app) {
+        $app->setTemplateData(array('title' => 'Not found'));
         $article = false;
 
         if(isset($params['article_id'])){
@@ -130,6 +131,61 @@ class Views extends Controller
         }
 
         $this->display($app, 'article.twig');
+    }
+
+    public function viewArticleList($params, $app)
+    {
+        $app->setTemplateData(array(
+            'title' => 'All articles',
+        ));
+
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            $articles = $this->getArticles($app);
+            if($articles) {
+                $app->setTemplateData(array('articles' => $articles));
+            }
+        }
+
+        $this->display($app, 'article.twig');
+    }
+
+    public function frmArticle($params, $app)
+    {
+        $app->setTemplateData(array(
+                'title' => 'Add new article',
+            ));
+
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            $categories = $this->getCategories($app);
+
+            if($categories) {
+                $app->setTemplateData(array('categories' => $categories));
+            }
+        }
+
+        $this->display($app, 'frm_article.twig');
+    }
+
+    public function getCategories($app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("categories")
+                ->fetchAll();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return null;
+        }
+
+        if($query == false) {
+            return null;
+        }
+        else {
+            return $query;
+        }
     }
 
     public function viewCustom($params, $app)

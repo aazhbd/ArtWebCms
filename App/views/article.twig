@@ -26,6 +26,52 @@
     {% if session.get('user_info').utype == 1 %}
         {{ parent() }}
         {{ body_content }}
+
+        <div style="float: right; padding: 10px;">
+            <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/add/">+ Add Article</a>
+        </div>
+
+        {% if articles %}
+            <table class="pure-table-horizontal" id="sortedtable" style="width: 91%">
+                <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Category Id</td>
+                    <td>Url</td>
+                    <td>Title</td>
+                    <td>Subtitle</td>
+                    <td>Body</td>
+                    <td>Date inserted</td>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <td>ID</td>
+                    <td>Category Id</td>
+                    <td>Url</td>
+                    <td>Title</td>
+                    <td>Subtitle</td>
+                    <td>Body</td>
+                    <td>Date inserted</td>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for a in articles %}
+                    <tr>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.id }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.category_id }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.url }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 25)|raw }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.body|slice(0, 130)|raw }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+
+
     {% endif %}
 {% endblock %}
 

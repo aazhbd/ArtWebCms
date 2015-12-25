@@ -7,6 +7,7 @@
 {% block headtags %}
     <script src="{{ path_url }}{{ user_var.project_static }}/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="{{ path_url }}{{ user_var.project_static }}/jquery.dataTables.css" rel="stylesheet" type="text/css" media="screen"/>
+
     <script type="text/javascript">
         $(document).ready(function(){
             if($("#errors").html() == '') {
@@ -27,27 +28,33 @@
     {{ body_content }}
 
     {% if session.get('user_info').utype == 1 %}
-        <table class="pure-table-horizontal" id="sortedtable" style="width: 100%">
+
+        <div style="float: right; padding: 10px;">
+            <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/add/">+ Add Article</a>
+        </div>
+
+        {% if articles %}
+        <table class="pure-table-horizontal" id="sortedtable" style="width: 91%">
             <thead>
             <tr>
-                <td>id</td>
-                <td>category_id</td>
-                <td>url</td>
-                <td>title</td>
-                <td>subtitle</td>
-                <td>body</td>
-                <td>date_inserted</td>
+                <td>ID</td>
+                <td>Category Id</td>
+                <td>Url</td>
+                <td>Title</td>
+                <td>Subtitle</td>
+                <td>Body</td>
+                <td>Date inserted</td>
             </tr>
             </thead>
             <tfoot>
             <tr>
-                <td>id</td>
-                <td>category_id</td>
-                <td>url</td>
-                <td>title</td>
-                <td>subtitle</td>
-                <td>body</td>
-                <td>date_inserted</td>
+                <td>ID</td>
+                <td>Category Id</td>
+                <td>Url</td>
+                <td>Title</td>
+                <td>Subtitle</td>
+                <td>Body</td>
+                <td>Date inserted</td>
             </tr>
             </tfoot>
             <tbody>
@@ -57,12 +64,13 @@
                     <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.category_id }}</a></td>
                     <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.url }}</a></td>
                     <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 10) }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.body|slice(0, 100) }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 25)|raw }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.body|slice(0, 130)|raw }}</a></td>
                     <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
                 </tr>
             {% endfor %}
         </table>
+        {% endif %}
     {% endif %}
 {% endblock %}
 
