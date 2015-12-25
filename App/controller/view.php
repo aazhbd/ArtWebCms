@@ -57,6 +57,7 @@ class Views extends Controller
                 'firstname' => trim($app->getRequest()->request->get('name')),
                 'gender' => trim($app->getRequest()->request->get('gender')),
                 'date_ofbirth' => trim($app->getRequest()->request->get('birthdate')),
+                'ustatus' => 1,
             );
 
             if(User::userExists($user_data['email'], $app)) {

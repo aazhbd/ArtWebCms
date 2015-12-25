@@ -32,7 +32,7 @@ class User
             $query = $this->app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
                 ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'state'))
-                ->where(array("email" => $user, "pass" => $pass))
+                ->where(array("email" => $user, "pass" => $pass, "ustatus" => 1))
                 ->fetch();
         }
         catch(\Exception $ex){
@@ -106,8 +106,6 @@ class User
         if (empty($uinfo)) {
             return false;
         }
-
-        $executed = false;
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);
