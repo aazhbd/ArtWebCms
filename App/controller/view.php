@@ -84,4 +84,17 @@ class Views extends Controller
 
         $this->display($app, 'frm_signup.twig');
     }
+
+    public function viewLogout($param, $app) {
+        $app->setTemplateData(array( 'title' => 'Logout', ));
+
+        if($app->getSession()->get('is_authenticated')) {
+            $app->getSession()->set('is_authenticated', false);
+            $app->getSession()->set('user_info', null);
+        }
+
+        $app->setTemplateData(array('content_message' => 'The user successfully logged out.'));
+
+        $this->display($app, 'frm_login.twig');
+    }
 }
