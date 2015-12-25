@@ -8,12 +8,10 @@ class Views extends Controller
 {
     public function viewHome($params, $app)
     {
-        $app->setTemplateData(
-            array(
+        $app->setTemplateData(array(
                 'title' => 'Home',
                 'user_var.project_name' => "Test information"
-            )
-        );
+            ));
 
         if($app->getRequest()->getMethod() == "POST") {
             $email = $app->getRequest()->request->get('email');
@@ -31,7 +29,37 @@ class Views extends Controller
             }
         }
 
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            $articles = $this->getArticles($app);
+            if($articles) {
+                $app->setTemplateData(array('articles' => $articles));
+            }
+        }
+
         $this->display($app, 'uhome.twig');
+    }
+
+    public function getArticles($app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("articles")
+                ->select(null)
+                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
+                ->orderBy('date_inserted DESC')
+                ->fetchAll();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return null;
+        }
+
+        if($query == false) {
+            return null;
+        }
+        else {
+            return $query;
+        }
     }
 
     public function viewCustom($params, $app)
