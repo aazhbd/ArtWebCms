@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="www.articulatelogic.com, {{ author|default("aazhbd") }}" />
     <meta name="description" content="{{ descrip | striptags }}" />
     <meta name="keywords" content="ArtCMS, {{ keys }}" />
@@ -60,10 +60,6 @@
         {% for error in errors %}
             <div id="reports">{{ error }}</div>
         {% endfor %}
-
-        {% if content_message %}
-            <div id="reports">{{ content_message }}</div>
-        {% endif %}
 
         {% if title %}
             <h2 class="title">

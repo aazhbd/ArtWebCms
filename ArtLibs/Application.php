@@ -2,6 +2,7 @@
 namespace ArtLibs;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class Application
 {
@@ -22,6 +23,8 @@ class Application
     protected $routes;
 
     protected $request;
+
+    protected $session;
 
     function __construct()
     {
@@ -50,13 +53,17 @@ class Application
                 return;
             }
 
-            /* If all libraries are not loaded successfully then set object */
+            /* If all libraries are loaded successfully then set object */
 
             $this->data_manager = $this->setDataManager();
 
             if ($this->data_manager->getMessage() != false) {
                 $this->getErrorManager()->addMessage('Exception occurred : ' . $this->data_manager->getMessage());
             }
+
+            /* start session */
+            $this->session = new Session();
+            $this->session->start();
 
             $this->routes = $this->setRoutes(false);
             $this->route_manager = $this->setRouteManager(false);
@@ -65,6 +72,22 @@ class Application
         } catch (\Exception $ex) {
             $this->getErrorManager()->addMessage('Exception occurred : ' . $ex->getMessage());
         }
+    }
+
+    /**
+     * @return Session
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param Session $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
     }
 
     /**
@@ -282,6 +305,7 @@ class Application
 
         if ($this->template_manager == false) {
             $this->template_manager = new TemplateManager($this);
+            $this->template_manager->getTemplate()->addGlobal("session", $this->getSession());
         }
         return $this->template_manager;
     }

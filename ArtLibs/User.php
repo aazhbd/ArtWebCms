@@ -11,17 +11,17 @@ class User
 
     protected $user_info;
 
-    protected $data;
-
-    protected $error;
+    protected $app;
 
     public function __construct($app, $email, $pass) {
-        $this->data = $app->getDataManager()->getDataManager();
-        $this->error = $app->getErrorManager();
+        $this->app = $app;
 
         $this->user_info = array();
 
         $this->authenticated = $this->getUser($email, $pass);
+        if($this->authenticated) {
+            $this->setSession();
+        }
     }
 
     /**
@@ -29,14 +29,14 @@ class User
      */
     public function getUser($user, $pass) {
         try {
-            $query = $this->getData()->from("users")
+            $query = $this->app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
-                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'validator', 'state'))
+                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'state'))
                 ->where(array("email" => $user, "pass" => $pass))
                 ->fetch();
         }
         catch(\Exception $ex){
-            $this->getError()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            $this->getApp()->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return false;
         }
 
@@ -47,6 +47,23 @@ class User
             $this->setUserInfo($query);
             return true;
         }
+    }
+
+    public function setSession() {
+        if(!$this->getApp()->getSession()->isStarted()) {
+            try {
+                $this->getApp()->getRequest()->getSession()->start();
+            }
+            catch(\Exception $ex) {
+                $this->getApp()->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+                return false;
+            }
+        }
+
+        $this->getApp()->getSession()->set('is_authenticated', true);
+        $this->getApp()->getSession()->set('user_info', $this->getUserInfo());
+
+        return true;
     }
 
     /**
@@ -141,6 +158,24 @@ class User
     /**
      * @return mixed
      */
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+    /**
+     * @param mixed $app
+     * @return User
+     */
+    public function setApp($app)
+    {
+        $this->app = $app;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUserStatus()
     {
         if($this->isAuthenticated())
@@ -199,42 +234,6 @@ class User
     public function setUserInfo($user_info)
     {
         $this->user_info = $user_info;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param mixed $data
-     * @return User
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
-     * @param mixed $error
-     * @return User
-     */
-    public function setError($error)
-    {
-        $this->error = $error;
         return $this;
     }
 
