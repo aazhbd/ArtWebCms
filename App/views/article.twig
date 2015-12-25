@@ -1,0 +1,31 @@
+{% extends path_user_template ~ '/home.twig' %}
+
+{% block title %}
+    {{ page_title|default('ArtCMS :: User home') }}
+{% endblock %}
+
+{% block headtags %}
+    <script src="{{ path_url }}{{ user_var.project_static }}/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="{{ path_url }}{{ user_var.project_static }}/jquery.dataTables.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if($("#errors").html() == '') {
+                $("#errors").hide();
+            }
+
+            $('#sortedtable').dataTable({
+                "sPaginationType": "full_numbers",
+                "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
+                "iDisplayLength": 25,
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block contentbody %}
+    {% if session.get('user_info').utype == 1 %}
+        {{ parent() }}
+        {{ body_content }}
+    {% endif %}
+{% endblock %}
+

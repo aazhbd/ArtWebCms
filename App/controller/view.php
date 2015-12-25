@@ -62,6 +62,76 @@ class Views extends Controller
         }
     }
 
+    public function getArticlesById($aid, $app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("articles")
+                ->select(null)
+                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
+                ->where(array("id" => $aid,))
+                ->fetchAll();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return null;
+        }
+
+        if($query == false) {
+            return null;
+        }
+        else {
+            return $query;
+        }
+    }
+
+    public function getArticlesByUrl($aurl, $app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("articles")
+                ->select(null)
+                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
+                ->where(array("url" => $aurl,))
+                ->fetchAll();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return null;
+        }
+
+        if($query == false) {
+            return null;
+        }
+        else {
+            return $query;
+        }
+    }
+
+    public function viewArticle($params, $app) {
+        $article = false;
+
+        if(isset($params['article_id'])){
+            $aid = $params['article_id'];
+            $article = $this->getArticlesById($aid, $app);
+        }
+        elseif(isset($params['aurl'])) {
+            $aurl = $params['aurl'];
+            $article = $this->getArticlesByUrl($aurl, $app);
+        }
+
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            if($article) {
+                $app->setTemplateData(array(
+                    'title' => $article[0]['title'],
+                    'subtitle' => $article[0]['subtitle'],
+                    'body' => $article[0]['body'],
+                    'article' => $article
+                ));
+            }
+        }
+
+        $this->display($app, 'article.twig');
+    }
+
     public function viewCustom($params, $app)
     {
         $app->setTemplateData(

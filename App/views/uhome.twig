@@ -53,13 +53,13 @@
             <tbody>
             {% for a in articles %}
                 <tr>
-                    <td><a href="/{{ a.url }}/">{{ a.id }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.category_id }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.url }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.title }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.subtitle|slice(0, 10) }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.body|slice(0, 100) }}</a></td>
-                    <td><a href="/{{ a.url }}/">{{ a.date_inserted }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.id }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.category_id }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.url }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 10) }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.body|slice(0, 100) }}</a></td>
+                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
                 </tr>
             {% endfor %}
         </table>
