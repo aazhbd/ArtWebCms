@@ -211,8 +211,17 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
-            $categories = $this->getCategories($app);
+            if($app->getRequest()->getMethod() == "POST") {
+                $category = array(
+                    'catname' => trim($app->getRequest()->request->get('catname')),
+                );
 
+                if($this->addCategory($category, $app)) {
+                    $app->setTemplateData(array('content_message' => 'New category successfully added.'));
+                }
+            }
+
+            $categories = $this->getCategories($app);
             if($categories) {
                 $app->setTemplateData(array('categories' => $categories));
             }
@@ -237,6 +246,24 @@ class Views extends Controller
         else {
             return $query;
         }
+    }
+
+    public function addCategory($category=array(), $app) {
+        if (empty($category)) {
+            return false;
+        }
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
+            echo $query->getQuery();
+            $executed = $query->execute(true);
+        }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
     }
 
     public function viewCustom($params, $app)
