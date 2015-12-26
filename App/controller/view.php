@@ -80,7 +80,7 @@ class Views extends Controller
             }
         }
 
-        $this->display($app, 'article.twig');
+        $this->display($app, 'list_article.twig');
     }
 
     public function viewArticleList($params, $app)
@@ -113,7 +113,7 @@ class Views extends Controller
             }
         }
 
-        $this->display($app, 'article.twig');
+        $this->display($app, 'list_article.twig');
     }
 
     public function frmArticle($params, $app)
