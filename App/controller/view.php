@@ -202,6 +202,25 @@ class Views extends Controller
         $this->display($app, 'frm_article.twig');
     }
 
+    public function frmCategory($params, $app)
+    {
+        $app->setTemplateData(array(
+            'title' => 'Add new category',
+        ));
+
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            $categories = $this->getCategories($app);
+
+            if($categories) {
+                $app->setTemplateData(array('categories' => $categories));
+            }
+        }
+
+        $this->display($app, 'frm_category.twig');
+    }
+
     public function getCategories($app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")

@@ -11,6 +11,7 @@ $routes = array(
         '/a/(?<aid>\d+)' => '/controller/Views/viewArticle',
         '/article/add' => '/controller/Views/frmArticle',
         '/article/list' => '/controller/Views/viewArticleList',
+        '/category/add' => '/controller/Views/frmCategory',
     )
 );
 
