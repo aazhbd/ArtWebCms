@@ -2,10 +2,23 @@
 
 use ArtLibs\Controller;
 use ArtLibs\User;
+use ArtLibs\Article;
 
 
 class Views extends Controller
 {
+    public function viewCustom($params, $app)
+    {
+        $app->setTemplateData(
+            array(
+                'title' => 'This is custom page',
+                'body_content' => 'A test custom page loaded from controller/view.php.'
+            )
+        );
+
+        $this->display($app, 'home.twig');
+    }
+
     public function viewHome($params, $app)
     {
         $app->setTemplateData(array(
@@ -32,7 +45,7 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
-            $articles = $this->getArticles($app);
+            $articles = Article::getArticles($app);
             if($articles) {
                 $app->setTemplateData(array('articles' => $articles));
             }
@@ -41,80 +54,17 @@ class Views extends Controller
         $this->display($app, 'uhome.twig');
     }
 
-    public function getArticles($app) {
-        try {
-            $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->select(null)
-                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
-                ->orderBy('date_inserted DESC')
-                ->fetchAll();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
-        }
-
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
-    }
-
-    public function getArticlesById($aid, $app) {
-        try {
-            $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->select(null)
-                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
-                ->where(array("id" => $aid,))
-                ->fetchAll();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
-        }
-
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
-    }
-
-    public function getArticlesByUrl($aurl, $app) {
-        try {
-            $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->select(null)
-                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
-                ->where(array("url" => $aurl,))
-                ->fetchAll();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
-        }
-
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
-    }
-
     public function viewArticle($params, $app) {
         $app->setTemplateData(array('title' => 'Not found'));
         $article = false;
 
         if(isset($params['aid'])){
             $aid = $params['aid'];
-            $article = $this->getArticlesById($aid, $app);
+            $article = Article::getArticlesById($aid, $app);
         }
         elseif(isset($params['aurl'])) {
             $aurl = $params['aurl'];
-            $article = $this->getArticlesByUrl($aurl, $app);
+            $article = Article::getArticlesByUrl($aurl, $app);
         }
 
         $user_info = $app->getSession()->get('user_info');
@@ -133,23 +83,6 @@ class Views extends Controller
         $this->display($app, 'article.twig');
     }
 
-    public function addArticle($article_data, $app) {
-        if (empty($article_data)) {
-            return false;
-        }
-
-        try {
-            $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);
-            $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error adding new article: " . $ex->getMessage());
-            return false;
-        }
-
-        return $executed;
-    }
-
     public function viewArticleList($params, $app)
     {
         $app->setTemplateData(array(
@@ -166,7 +99,7 @@ class Views extends Controller
                 'date_inserted' => new FluentLiteral('NOW()'),
             );
 
-            if($this->addArticle($article_data, $app)) {
+            if(Article::addArticle($article_data, $app)) {
                 $app->setTemplateData(array('title' => "New article added successfully."));
             }
         }
@@ -174,7 +107,7 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
-            $articles = $this->getArticles($app);
+            $articles = Article::getArticles($app);
             if($articles) {
                 $app->setTemplateData(array('articles' => $articles));
             }
@@ -192,7 +125,7 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
-            $categories = $this->getCategories($app);
+            $categories = Article::getCategories($app);
 
             if($categories) {
                 $app->setTemplateData(array('categories' => $categories));
@@ -221,61 +154,13 @@ class Views extends Controller
                 }
             }
 
-            $categories = $this->getCategories($app);
+            $categories = Article::getCategories($app);
             if($categories) {
                 $app->setTemplateData(array('categories' => $categories));
             }
         }
 
         $this->display($app, 'frm_category.twig');
-    }
-
-    public function getCategories($app) {
-        try {
-            $query = $app->getDataManager()->getDataManager()->from("categories")
-                ->fetchAll();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
-        }
-
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
-    }
-
-    public function addCategory($category=array(), $app) {
-        if (empty($category)) {
-            return false;
-        }
-
-        try {
-            $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
-            echo $query->getQuery();
-            $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
-            return false;
-        }
-
-        return $executed;
-    }
-
-    public function viewCustom($params, $app)
-    {
-        $app->setTemplateData(
-            array(
-                'title' => 'This is custom page',
-                'body_content' => 'A test custom page loaded from controller/view.php.'
-            )
-        );
-
-        $this->display($app, 'home.twig');
     }
 
     public function viewLogin($params, $app)
@@ -320,6 +205,8 @@ class Views extends Controller
 
     public function viewLogout($param, $app) {
         $app->setTemplateData(array( 'title' => 'Logout', ));
+
+        $logout = false;
 
         if($app->getSession()->get('is_authenticated')) {
             $logout = User::clearSession($app);
