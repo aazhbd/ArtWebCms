@@ -135,7 +135,7 @@ class Views extends Controller
         $this->display($app, 'frm_article.twig');
     }
 
-    public function frmCategory($params, $app)
+    public function viewCategoryList($params, $app)
     {
         $app->setTemplateData(array(
             'title' => 'Add new category',
@@ -160,7 +160,7 @@ class Views extends Controller
             }
         }
 
-        $this->display($app, 'frm_category.twig');
+        $this->display($app, 'list_category.twig');
     }
 
     public function viewUserList($params, $app)

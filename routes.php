@@ -15,7 +15,7 @@ $routes = array(
 
         '/user/list' => '/controller/Views/viewUserList',
 
-        '/category/add' => '/controller/Views/frmCategory',
+        '/category/list' => '/controller/Views/viewCategoryList',
     )
 );
 

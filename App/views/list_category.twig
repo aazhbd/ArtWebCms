@@ -6,22 +6,11 @@
 
 {% block headtags %}
     <script src="{{ path_url }}{{ user_var.project_static }}/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="{{ path_url }}/vendor/tinymce/tinymce/tinymce.jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             if($("#errors").html() == '') {
                 $("#errors").hide();
             }
-
-            tinymce.init({
-                selector:'#editorbody',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview anchor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table contextmenu paste code'
-                ],
-                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
-            });
         });
     </script>
 {% endblock %}
