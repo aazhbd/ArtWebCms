@@ -163,6 +163,42 @@ class Views extends Controller
         $this->display($app, 'frm_category.twig');
     }
 
+    public function viewUserList($params, $app)
+    {
+        $app->setTemplateData(array(
+            'title' => 'All users',
+        ));
+
+        $user_info = $app->getSession()->get('user_info');
+
+        if($user_info['utype'] == 1) {
+            if($app->getRequest()->getMethod() == "POST") {
+                $user_data = array(
+                    'email' => trim($app->getRequest()->request->get('email')),
+                    'pass' => trim($app->getRequest()->request->get('password')),
+                    'firstname' => trim($app->getRequest()->request->get('name')),
+                    'gender' => trim($app->getRequest()->request->get('gender')),
+                    'date_ofbirth' => trim($app->getRequest()->request->get('birthdate')),
+                    'ustatus' => 1,
+                );
+
+                if(User::userExists($user_data['email'], $app)) {
+                    $app->setTemplateData(array('content_message' => 'User with email ' . $user_data['email'] . ' already exists. Try different email'));
+                }
+                elseif(User::addUser($user_data, $app)) {
+                    $app->setTemplateData(array('title' => "New user added."));
+                }
+            }
+
+            $users = User::getUsers($app);
+            if($users) {
+                $app->setTemplateData(array('users' => $users));
+            }
+        }
+
+        $this->display($app, 'list_users.twig');
+    }
+
     public function viewLogin($params, $app)
     {
         $app->setTemplateData(array( 'title' => 'Login', ));

@@ -161,6 +161,21 @@ class User
         return true;
     }
 
+    public static function getUsers($app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("users")
+                ->select(null)
+                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'state'))
+                ->fetchAll();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return false;
+        }
+
+        return $query;
+    }
+
     /**
      * @return mixed
      */
