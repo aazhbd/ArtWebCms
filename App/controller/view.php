@@ -67,17 +67,13 @@ class Views extends Controller
             $article = Article::getArticlesByUrl($aurl, $app);
         }
 
-        $user_info = $app->getSession()->get('user_info');
-
-        if($user_info['utype'] == 1) {
-            if($article) {
-                $app->setTemplateData(array(
-                    'title' => $article[0]['title'],
-                    'subtitle' => $article[0]['subtitle'],
-                    'body' => stripslashes($article[0]['body']),
-                    'article' => $article
-                ));
-            }
+        if($article) {
+            $app->setTemplateData(array(
+                'title' => $article[0]['title'],
+                'subtitle' => $article[0]['subtitle'],
+                'body' => stripslashes($article[0]['body']),
+                'article' => $article
+            ));
         }
 
         $this->display($app, 'list_article.twig');
