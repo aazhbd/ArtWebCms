@@ -143,6 +143,7 @@ class Views extends Controller
             if($app->getRequest()->getMethod() == "POST") {
                 $category = array(
                     'catname' => trim($app->getRequest()->request->get('catname')),
+                    'date_inserted' => new FluentLiteral('NOW()'),
                 );
 
                 if(Article::addCategory($category, $app)) {
