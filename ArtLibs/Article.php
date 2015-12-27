@@ -110,7 +110,6 @@ class Article
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
-            echo $query->getQuery();
             $executed = $query->execute(true);
         }
         catch(\PDOException $ex){

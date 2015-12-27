@@ -149,7 +149,7 @@ class Views extends Controller
                     'catname' => trim($app->getRequest()->request->get('catname')),
                 );
 
-                if($this->addCategory($category, $app)) {
+                if(Article::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }
