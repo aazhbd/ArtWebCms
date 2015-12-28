@@ -122,7 +122,7 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
-            $categories = Article::getCategories($app);
+            $categories = Category::getCategories($app);
 
             if($categories) {
                 $app->setTemplateData(array('categories' => $categories));
