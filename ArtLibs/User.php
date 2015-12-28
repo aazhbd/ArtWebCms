@@ -165,7 +165,7 @@ class User
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
-                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'state'))
+                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'gender', 'ustatus', 'utype', 'state'))
                 ->fetchAll();
         }
         catch(\Exception $ex){
