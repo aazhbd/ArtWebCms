@@ -140,6 +140,12 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if($user_info['utype'] == 1) {
+            if(isset($params[2])) {
+                if(Article::setStateCategory($params[1], $params[2], $app)) {
+                    $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
+                }
+            }
+
             if($app->getRequest()->getMethod() == "POST") {
                 $category = array(
                     'catname' => trim($app->getRequest()->request->get('catname')),

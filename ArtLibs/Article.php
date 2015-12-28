@@ -120,7 +120,35 @@ class Article
         return $executed;
     }
 
+    public static function setStateCategory($state, $category_id, $app) {
+        if(!isset($state)) {
+            return false;
+        }
 
+        if(!isset($category_id)) {
+            return false;
+        }
 
+        if($state == "enable") {
+            $s = 0;
+        }
+        elseif($state == "disable") {
+            $s = 1;
+        }
+        else {
+            return false;
+        }
 
+        try {
+            $query = $app->getDataManager()->getDataManager()->update('categories', array('state' => $s), $category_id);
+            $query->execute(true);
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error disabling user: " . $ex->getMessage());
+            return false;
+        }
+
+        return true;
+
+    }
 }
