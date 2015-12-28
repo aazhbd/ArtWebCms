@@ -23,31 +23,30 @@ class Views extends Controller
     public function viewHome($params, $app)
     {
         $app->setTemplateData(array(
-                'title' => 'Home',
-                'user_var.project_name' => "Test information"
-            ));
+            'title' => 'Home',
+            'user_var.project_name' => "Test information"
+        ));
 
-        if($app->getRequest()->getMethod() == "POST") {
+        if ($app->getRequest()->getMethod() == "POST") {
             $email = $app->getRequest()->request->get('email');
             $pass = $app->getRequest()->request->get('password');
 
             $user = new User($app, $email, $pass);
 
-            if(!$user->isAuthenticated()) {
+            if (!$user->isAuthenticated()) {
                 $app->setTemplateData(array('content_message' => 'Login unsuccessful, try again.'));
                 $this->display($app, 'frm_login.twig');
                 return;
-            }
-            else {
+            } else {
                 $app->setTemplateData(array('content_message' => 'Login successful.'));
             }
         }
 
         $user_info = $app->getSession()->get('user_info');
 
-        if($user_info['utype'] == 1) {
+        if ($user_info['utype'] == 1) {
             $articles = Article::getArticles($app);
-            if($articles) {
+            if ($articles) {
                 $app->setTemplateData(array('articles' => $articles));
             }
         }
@@ -55,20 +54,20 @@ class Views extends Controller
         $this->display($app, 'uhome.twig');
     }
 
-    public function viewArticle($params, $app) {
+    public function viewArticle($params, $app)
+    {
         $app->setTemplateData(array('title' => 'Not found'));
         $article = false;
 
-        if(isset($params['aid'])){
+        if (isset($params['aid'])) {
             $aid = $params['aid'];
             $article = Article::getArticlesById($aid, $app);
-        }
-        elseif(isset($params['aurl'])) {
+        } elseif (isset($params['aurl'])) {
             $aurl = $params['aurl'];
             $article = Article::getArticlesByUrl($aurl, $app);
         }
 
-        if($article) {
+        if ($article) {
             $app->setTemplateData(array(
                 'title' => $article[0]['title'],
                 'subtitle' => $article[0]['subtitle'],
@@ -86,7 +85,7 @@ class Views extends Controller
             'title' => 'All articles',
         ));
 
-        if($app->getRequest()->getMethod() == "POST") {
+        if ($app->getRequest()->getMethod() == "POST") {
             $article_data = array(
                 'title' => trim($app->getRequest()->request->get('title')),
                 'subtitle' => trim($app->getRequest()->request->get('subtitle')),
@@ -95,16 +94,16 @@ class Views extends Controller
                 'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
             );
 
-            if(Article::addArticle($article_data, $app)) {
+            if (Article::addArticle($article_data, $app)) {
                 $app->setTemplateData(array('title' => "New article added successfully."));
             }
         }
 
         $user_info = $app->getSession()->get('user_info');
 
-        if($user_info['utype'] == 1) {
+        if ($user_info['utype'] == 1) {
             $articles = Article::getArticles($app);
-            if($articles) {
+            if ($articles) {
                 $app->setTemplateData(array('articles' => $articles));
             }
         }
@@ -115,15 +114,15 @@ class Views extends Controller
     public function frmArticle($params, $app)
     {
         $app->setTemplateData(array(
-                'title' => 'Add new article',
-            ));
+            'title' => 'Add new article',
+        ));
 
         $user_info = $app->getSession()->get('user_info');
 
-        if($user_info['utype'] == 1) {
+        if ($user_info['utype'] == 1) {
             $categories = Category::getCategories($app);
 
-            if($categories) {
+            if ($categories) {
                 $app->setTemplateData(array('categories' => $categories));
             }
         }
@@ -139,44 +138,42 @@ class Views extends Controller
 
         $user_info = $app->getSession()->get('user_info');
 
-        if($user_info['utype'] == 1) {
-            if(isset($params[2])) {
+        if ($user_info['utype'] == 1) {
+            if (isset($params[2])) {
                 $action = $params[1];
                 $cat_id = $params[2];
-                if($action == "edit") {
+
+                if ($action == "edit") {
                     $cat_pre = Category::getCategoryById($cat_id, $app);
                     $app->setTemplateData(array('action' => 'edit', 'cat_id' => $cat_id, 'cat_pre' => $cat_pre));
-                }
-                elseif ($action == "enable") {
-                    if(Category::setStateCategory(0, $cat_id, $app)) {
+                } elseif ($action == "enable") {
+                    if (Category::setStateCategory(0, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
-                }
-                elseif ($action == "disable") {
-                    if(Category::setStateCategory(1, $cat_id, $app)) {
+                } elseif ($action == "disable") {
+                    if (Category::setStateCategory(1, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
                 }
             }
 
-            if($app->getRequest()->getMethod() == "POST") {
+            if ($app->getRequest()->getMethod() == "POST") {
                 $category = array(
                     'catname' => trim($app->getRequest()->request->get('catname')),
                 );
 
-                if($app->getRequest()->request->get('editval')) {
+                if ($app->getRequest()->request->get('editval')) {
                     $cid = $app->getRequest()->request->get('editval');
-                    if(Category::updateCategory($cid, $category, $app)) {
+                    if (Category::updateCategory($cid, $category, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category successfully updated.'));
                     }
-                }
-                elseif(Category::addCategory($category, $app)) {
+                } elseif (Category::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }
 
             $categories = Category::getCategories($app);
-            if($categories) {
+            if ($categories) {
                 $app->setTemplateData(array('categories' => $categories));
             }
         }
@@ -192,8 +189,8 @@ class Views extends Controller
 
         $user_info = $app->getSession()->get('user_info');
 
-        if($user_info['utype'] == 1) {
-            if($app->getRequest()->getMethod() == "POST") {
+        if ($user_info['utype'] == 1) {
+            if ($app->getRequest()->getMethod() == "POST") {
                 $user_data = array(
                     'email' => trim($app->getRequest()->request->get('email')),
                     'pass' => trim($app->getRequest()->request->get('password')),
@@ -203,16 +200,15 @@ class Views extends Controller
                     'ustatus' => 1,
                 );
 
-                if(User::userExists($user_data['email'], $app)) {
+                if (User::userExists($user_data['email'], $app)) {
                     $app->setTemplateData(array('content_message' => 'User with email ' . $user_data['email'] . ' already exists. Try different email'));
-                }
-                elseif(User::addUser($user_data, $app)) {
+                } elseif (User::addUser($user_data, $app)) {
                     $app->setTemplateData(array('title' => "New user added."));
                 }
             }
 
             $users = User::getUsers($app);
-            if($users) {
+            if ($users) {
                 $app->setTemplateData(array('users' => $users));
             }
         }
@@ -222,9 +218,9 @@ class Views extends Controller
 
     public function viewLogin($params, $app)
     {
-        $app->setTemplateData(array( 'title' => 'Login', ));
+        $app->setTemplateData(array('title' => 'Login',));
 
-        if($app->getRequest()->getMethod() == "POST") {
+        if ($app->getRequest()->getMethod() == "POST") {
             $user_data = array(
                 'email' => trim($app->getRequest()->request->get('email')),
                 'pass' => trim($app->getRequest()->request->get('password')),
@@ -234,16 +230,15 @@ class Views extends Controller
                 'ustatus' => 1,
             );
 
-            if(User::userExists($user_data['email'], $app)) {
+            if (User::userExists($user_data['email'], $app)) {
                 $app->setTemplateData(array('title' => 'Signup', 'content_message' => 'Signup was unsuccessful, user with email ' . $user_data['email'] . ' already exists. Try different email'));
                 $this->display($app, 'frm_signup.twig');
                 return;
             }
 
-            if(User::addUser($user_data, $app)) {
+            if (User::addUser($user_data, $app)) {
                 $app->setTemplateData(array('title' => 'Login', 'content_message' => 'The user is successfully added and can login',));
-            }
-            else {
+            } else {
                 $app->setTemplateData(array('title' => 'Signup', 'content_message' => 'Signup was unsuccessful, try again.',));
                 $this->display($app, 'frm_signup.twig');
                 return;
@@ -260,16 +255,17 @@ class Views extends Controller
         $this->display($app, 'frm_signup.twig');
     }
 
-    public function viewLogout($param, $app) {
-        $app->setTemplateData(array( 'title' => 'Logout', ));
+    public function viewLogout($param, $app)
+    {
+        $app->setTemplateData(array('title' => 'Logout',));
 
         $logout = false;
 
-        if($app->getSession()->get('is_authenticated')) {
+        if ($app->getSession()->get('is_authenticated')) {
             $logout = User::clearSession($app);
         }
 
-        if($logout) {
+        if ($logout) {
             $app->setTemplateData(array('content_message' => 'The user successfully logged out.'));
         }
 
