@@ -3,6 +3,7 @@
 use ArtLibs\Controller;
 use ArtLibs\User;
 use ArtLibs\Article;
+use ArtLibs\Category;
 
 
 class Views extends Controller
@@ -144,16 +145,16 @@ class Views extends Controller
                 $action = $params[1];
                 $cat_id = $params[2];
                 if($action == "edit") {
-                    $cat_pre = Article::getCategoryById($cat_id, $app);
+                    $cat_pre = Category::getCategoryById($cat_id, $app);
                     $app->setTemplateData(array('action' => 'edit', 'cat_id' => $cat_id, 'cat_pre' => $cat_pre));
                 }
                 elseif ($action == "enable") {
-                    if(Article::setStateCategory(0, $cat_id, $app)) {
+                    if(Category::setStateCategory(0, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
                 }
                 elseif ($action == "disable") {
-                    if(Article::setStateCategory(1, $cat_id, $app)) {
+                    if(Category::setStateCategory(1, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
                 }
@@ -166,16 +167,16 @@ class Views extends Controller
 
                 if($app->getRequest()->request->get('editval')) {
                     $cid = $app->getRequest()->request->get('editval');
-                    if(Article::updateCategory($cid, $category, $app)) {
+                    if(Category::updateCategory($cid, $category, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category successfully updated.'));
                     }
                 }
-                elseif(Article::addCategory($category, $app)) {
+                elseif(Category::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }
 
-            $categories = Article::getCategories($app);
+            $categories = Category::getCategories($app);
             if($categories) {
                 $app->setTemplateData(array('categories' => $categories));
             }
