@@ -141,18 +141,36 @@ class Views extends Controller
 
         if($user_info['utype'] == 1) {
             if(isset($params[2])) {
-                if(Article::setStateCategory($params[1], $params[2], $app)) {
-                    $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
+                $action = $params[1];
+                $cat_id = $params[2];
+                if($action == "edit") {
+                    $cat_pre = Article::getCategoryById($cat_id, $app);
+                    $app->setTemplateData(array('action' => 'edit', 'cat_id' => $cat_id, 'cat_pre' => $cat_pre));
+                }
+                elseif ($action == "enable") {
+                    if(Article::setStateCategory(0, $cat_id, $app)) {
+                        $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
+                    }
+                }
+                elseif ($action == "disable") {
+                    if(Article::setStateCategory(1, $cat_id, $app)) {
+                        $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
+                    }
                 }
             }
 
             if($app->getRequest()->getMethod() == "POST") {
                 $category = array(
                     'catname' => trim($app->getRequest()->request->get('catname')),
-                    'date_inserted' => new FluentLiteral('NOW()'),
                 );
 
-                if(Article::addCategory($category, $app)) {
+                if($app->getRequest()->request->get('editval')) {
+                    $cid = $app->getRequest()->request->get('editval');
+                    if(Article::updateCategory($cid, $category, $app)) {
+                        $app->setTemplateData(array('content_message' => 'Category successfully updated.'));
+                    }
+                }
+                elseif(Article::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }

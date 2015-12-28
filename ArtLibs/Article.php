@@ -13,7 +13,7 @@ class Article
                 ->orderBy('date_inserted DESC')
                 ->fetchAll();
         }
-        catch(\Exception $ex){
+        catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return null;
         }
@@ -34,7 +34,7 @@ class Article
                 ->where(array("id" => $aid,))
                 ->fetchAll();
         }
-        catch(\Exception $ex){
+        catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return null;
         }
@@ -55,7 +55,7 @@ class Article
                 ->where(array("url" => $aurl,))
                 ->fetchAll();
         }
-        catch(\Exception $ex){
+        catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return null;
         }
@@ -90,7 +90,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("categories")
                 ->fetchAll();
         }
-        catch(\Exception $ex){
+        catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return null;
         }
@@ -103,10 +103,26 @@ class Article
         }
     }
 
+    public static function getCategoryById($cat_id, $app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("categories")
+                ->where(array("id" => $cat_id,))
+                ->fetch();
+        }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return null;
+        }
+
+        return $query;
+    }
+
     public static function addCategory($category=array(), $app) {
         if (empty($category)) {
             return false;
         }
+
+        $category['date_inserted'] = new \FluentLiteral('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
@@ -120,35 +136,40 @@ class Article
         return $executed;
     }
 
+    public static function updateCategory($cat_id, $category=array(), $app) {
+        if (empty($category) || !isset($cat_id)) {
+            return false;
+        }
+
+        $category['date_updated'] = new \FluentLiteral('NOW()');
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->update('categories', $category, $cat_id);
+            $executed = $query->execute(true);
+        }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
+    }
+
     public static function setStateCategory($state, $category_id, $app) {
-        if(!isset($state)) {
-            return false;
-        }
-
-        if(!isset($category_id)) {
-            return false;
-        }
-
-        if($state == "enable") {
-            $s = 0;
-        }
-        elseif($state == "disable") {
-            $s = 1;
-        }
-        else {
+        if(!isset($state) || !isset($category_id)) {
             return false;
         }
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('categories', array('state' => $s), $category_id);
-            $query->execute(true);
+            $query = $app->getDataManager()->getDataManager()->update('categories', array('state' => $state), $category_id);
+            $executed = $query->execute(true);
         }
-        catch(\Exception $ex){
+        catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error disabling user: " . $ex->getMessage());
             return false;
         }
 
-        return true;
-
+        return $executed;
     }
+
 }

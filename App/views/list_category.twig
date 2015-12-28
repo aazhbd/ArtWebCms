@@ -30,7 +30,10 @@
 
         <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/category/list/">
             <fieldset>
-                <input type="text" class="pure-input-1-2" placeholder="Category name" name="catname" />
+                {% if action == "edit" %}
+                    <input type="hidden" value="{{ cat_id }}" name="editval" />
+                {% endif %}
+                <input type="text" class="pure-input-1-2" placeholder="Category name" value="{{ cat_pre.catname }}" name="catname" />
             </fieldset>
 
             <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
