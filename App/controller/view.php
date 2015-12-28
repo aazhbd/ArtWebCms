@@ -93,7 +93,6 @@ class Views extends Controller
                 'url' => trim($app->getRequest()->request->get('aurl')),
                 'category_id' => trim($app->getRequest()->request->get('category')),
                 'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
-                'date_inserted' => new FluentLiteral('NOW()'),
             );
 
             if(Article::addArticle($article_data, $app)) {

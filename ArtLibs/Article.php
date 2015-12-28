@@ -5,6 +5,9 @@ namespace ArtLibs;
 
 class Article
 {
+    /**
+     * @return mixed
+     */
     public static function getArticles($app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
@@ -26,6 +29,9 @@ class Article
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function getArticlesById($aid, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
@@ -47,6 +53,9 @@ class Article
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function getArticlesByUrl($aurl, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
@@ -68,10 +77,15 @@ class Article
         }
     }
 
+    /**
+     * @return boolean
+     */
     public static function addArticle($article_data, $app) {
         if (empty($article_data)) {
             return false;
         }
+
+        $article_data['date_inserted'] = new \FluentLiteral('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);

@@ -49,6 +49,9 @@ class User
         }
     }
 
+    /**
+     * @return boolean
+     */
     public function setSession() {
         if(!$this->getApp()->getSession()->isStarted()) {
             try {
@@ -107,6 +110,8 @@ class User
             return false;
         }
 
+        $uinfo['date_inserted'] = new \FluentLiteral('NOW()');
+
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);
             $executed = $query->execute(true);
@@ -161,6 +166,9 @@ class User
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     public static function getUsers($app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")

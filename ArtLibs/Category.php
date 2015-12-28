@@ -5,6 +5,9 @@ namespace ArtLibs;
 
 class Category
 {
+    /**
+     * @return mixed
+     */
     public static function getCategories($app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")
@@ -23,6 +26,9 @@ class Category
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function getCategoryById($cat_id, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")
@@ -37,6 +43,9 @@ class Category
         return $query;
     }
 
+    /**
+     * @return boolean
+     */
     public static function addCategory($category=array(), $app) {
         if (empty($category)) {
             return false;
@@ -56,6 +65,9 @@ class Category
         return $executed;
     }
 
+    /**
+     * @return boolean
+     */
     public static function updateCategory($cat_id, $category=array(), $app) {
         if (empty($category) || !isset($cat_id)) {
             return false;
@@ -75,6 +87,9 @@ class Category
         return $executed;
     }
 
+    /**
+     * @return boolean
+     */
     public static function setStateCategory($state, $category_id, $app) {
         if(!isset($state) || !isset($category_id)) {
             return false;
