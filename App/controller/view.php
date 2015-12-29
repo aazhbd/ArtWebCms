@@ -191,8 +191,7 @@ class Views extends Controller
                     if (Category::updateCategory($cid, $category, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category successfully updated.'));
                     }
-                }
-                elseif (Category::addCategory($category, $app)) {
+                } elseif (Category::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }

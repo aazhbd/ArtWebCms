@@ -9,6 +9,9 @@ class ErrorManager
 
     private $path_log;
 
+    /**
+     * ErrorManager constructor.
+     */
     function __construct()
     {
         $this->messages = array();

@@ -38,6 +38,10 @@ class Configuration
 
     private $conf;
 
+    /**
+     * Configuration constructor.
+     * @param $app
+     */
     public function __construct($app)
     {
         $this->path = str_replace(DIRECTORY_SEPARATOR, '/', realpath(dirname(__FILE__) . '/..'));
@@ -99,6 +103,7 @@ class Configuration
     }
 
     /**
+     * @param $library
      * @return string
      */
     public function loadLibrary($library)
@@ -122,6 +127,7 @@ class Configuration
     }
 
     /**
+     * @param $conf
      * @return string
      */
     public function setConfiguration($conf)

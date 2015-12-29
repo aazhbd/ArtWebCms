@@ -6,6 +6,7 @@ namespace ArtLibs;
 class Article
 {
     /**
+     * @param $app
      * @return mixed
      */
     public static function getArticles($app) {
@@ -30,6 +31,8 @@ class Article
     }
 
     /**
+     * @param $aid
+     * @param $app
      * @return mixed
      */
     public static function getArticlesById($aid, $app) {
@@ -54,6 +57,8 @@ class Article
     }
 
     /**
+     * @param $aurl
+     * @param $app
      * @return mixed
      */
     public static function getArticlesByUrl($aurl, $app) {
@@ -78,7 +83,9 @@ class Article
     }
 
     /**
-     * @return boolean
+     * @param $article_data
+     * @param $app
+     * @return bool
      */
     public static function addArticle($article_data, $app) {
         if (empty($article_data)) {

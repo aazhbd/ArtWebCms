@@ -5,6 +5,10 @@ class TemplateManager
 {
     private $template;
 
+    /**
+     * TemplateManager constructor.
+     * @param $app
+     */
     function __construct($app)
     {
         $this->template = new \Twig_Environment(

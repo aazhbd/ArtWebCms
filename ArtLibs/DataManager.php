@@ -8,6 +8,10 @@ class DataManager
 
     private $message;
 
+    /**
+     * DataManager constructor.
+     * @param $conf
+     */
     function __construct($conf)
     {
         $this->message = "";

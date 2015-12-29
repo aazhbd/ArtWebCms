@@ -27,11 +27,19 @@ class Controller
         $this->response = $response;
     }
 
+    /**
+     * Controller constructor.
+     */
     function __construct()
     {
 
     }
 
+    /**
+     * @param $app
+     * @param $data
+     * @throws \Exception
+     */
     public function jsonResponse($app, $data)
     {
         $this->response = new JsonResponse();
@@ -39,6 +47,10 @@ class Controller
         $this->response->send();
     }
 
+    /**
+     * @param $app
+     * @param $filePath
+     */
     public function fileResponse($app, $filePath)
     {
         if (!file_exists($filePath)) {
@@ -58,6 +70,10 @@ class Controller
         return;
     }
 
+    /**
+     * @param $app
+     * @param $template
+     */
     public function display($app, $template)
     {
         $this->response = new Response(

@@ -11,6 +11,10 @@ class RouteManager
 
     private $routes;
 
+    /**
+     * RouteManager constructor.
+     * @param $app
+     */
     function __construct($app)
     {
         $this->app = $app;
@@ -45,6 +49,9 @@ class RouteManager
         return $this;
     }
 
+    /**
+     * @param array $route_conf
+     */
     public function dispatchUrl($route_conf = array())
     {
         $this->setUrlParams();

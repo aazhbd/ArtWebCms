@@ -13,6 +13,12 @@ class User
 
     protected $app;
 
+    /**
+     * User constructor.
+     * @param $app
+     * @param $email
+     * @param $pass
+     */
     public function __construct($app, $email, $pass) {
         $this->app = $app;
 
@@ -25,7 +31,9 @@ class User
     }
 
     /**
-     * @return boolean
+     * @param $user
+     * @param $pass
+     * @return bool
      */
     public function getUser($user, $pass) {
         try {
@@ -69,6 +77,10 @@ class User
         return true;
     }
 
+    /**
+     * @param $app
+     * @return bool
+     */
     public static function clearSession($app) {
         if($app->getSession()->get('is_authenticated')) {
             $app->getSession()->set('is_authenticated', false);
@@ -78,7 +90,9 @@ class User
     }
 
     /**
-     * @return boolean
+     * @param $email
+     * @param $app
+     * @return bool
      */
     public static function userExists($email, $app) {
         try {
@@ -103,7 +117,9 @@ class User
     }
 
     /**
-     * @return boolean
+     * @param array $uinfo
+     * @param $app
+     * @return bool
      */
     public static function addUser($uinfo=array(), $app) {
         if (empty($uinfo)) {
@@ -126,7 +142,9 @@ class User
     }
 
     /**
-     * @return boolean
+     * @param null $user_id
+     * @param $app
+     * @return bool
      */
     public static function disableUser($user_id=null, $app) {
         if($user_id == null) {
@@ -147,7 +165,9 @@ class User
     }
 
     /**
-     * @return boolean
+     * @param null $user_id
+     * @param $app
+     * @return bool
      */
     public static function enableUser($user_id=null, $app) {
         if($user_id == null) {
@@ -167,6 +187,7 @@ class User
     }
 
     /**
+     * @param $app
      * @return mixed
      */
     public static function getUsers($app) {
@@ -216,10 +237,10 @@ class User
     }
 
     /**
-     * @param mixed $user_status
      * @return User
+     * @internal param mixed $user_status
      */
-    public function setUserStatus($user_status)
+    public function setUserStatus()
     {
         if($this->isAuthenticated()) {
             $info = $this->getUserInfo();
