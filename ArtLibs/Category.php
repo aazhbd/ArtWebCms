@@ -6,27 +6,32 @@ namespace ArtLibs;
 class Category
 {
     /**
+     * @param $app
+     * @param null $state
      * @return mixed
      */
-    public static function getCategories($app) {
+    public static function getCategories($app, $state=null) {
+        if(!isset($state)) {
+            $query = $app->getDataManager()->getDataManager()->from("categories");
+        }
+        else {
+            $query = $app->getDataManager()->getDataManager()->from("categories")->where(array("state" => $state));
+        }
+
         try {
-            $query = $app->getDataManager()->getDataManager()->from("categories")
-                ->fetchAll();
+            $q = $query->fetchAll();
         }
         catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
             return null;
         }
 
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
+        return $q;
     }
 
     /**
+     * @param $cat_id
+     * @param $app
      * @return mixed
      */
     public static function getCategoryById($cat_id, $app) {

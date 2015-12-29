@@ -95,7 +95,7 @@ class Views extends Controller
             );
 
             if (Article::addArticle($article_data, $app)) {
-                $app->setTemplateData(array('title' => "New article added successfully."));
+                $app->setTemplateData(array('content_message' => "New article added successfully."));
             }
         }
 
@@ -120,7 +120,7 @@ class Views extends Controller
         $user_info = $app->getSession()->get('user_info');
 
         if ($user_info['utype'] == 1) {
-            $categories = Category::getCategories($app);
+            $categories = Category::getCategories($app, 0);
 
             if ($categories) {
                 $app->setTemplateData(array('categories' => $categories));
@@ -167,7 +167,8 @@ class Views extends Controller
                     if (Category::updateCategory($cid, $category, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category successfully updated.'));
                     }
-                } elseif (Category::addCategory($category, $app)) {
+                }
+                elseif (Category::addCategory($category, $app)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added.'));
                 }
             }
@@ -203,7 +204,7 @@ class Views extends Controller
                 if (User::userExists($user_data['email'], $app)) {
                     $app->setTemplateData(array('content_message' => 'User with email ' . $user_data['email'] . ' already exists. Try different email'));
                 } elseif (User::addUser($user_data, $app)) {
-                    $app->setTemplateData(array('title' => "New user added."));
+                    $app->setTemplateData(array('content_message' => "New user added."));
                 }
             }
 
