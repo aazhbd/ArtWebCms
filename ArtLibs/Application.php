@@ -26,6 +26,9 @@ class Application
 
     protected $session;
 
+    /**
+     * Application constructor.
+     */
     function __construct()
     {
         $this->error_manager = $this->setErrorManager(false);
