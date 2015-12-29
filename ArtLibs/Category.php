@@ -49,7 +49,9 @@ class Category
     }
 
     /**
-     * @return boolean
+     * @param array $category
+     * @param $app
+     * @return bool
      */
     public static function addCategory($category=array(), $app) {
         if (empty($category)) {
@@ -71,7 +73,10 @@ class Category
     }
 
     /**
-     * @return boolean
+     * @param $cat_id
+     * @param array $category
+     * @param $app
+     * @return bool
      */
     public static function updateCategory($cat_id, $category=array(), $app) {
         if (empty($category) || !isset($cat_id)) {
@@ -93,7 +98,10 @@ class Category
     }
 
     /**
-     * @return boolean
+     * @param $state
+     * @param $category_id
+     * @param $app
+     * @return bool
      */
     public static function setStateCategory($state, $category_id, $app) {
         if(!isset($state) || !isset($category_id)) {

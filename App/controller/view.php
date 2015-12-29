@@ -8,6 +8,10 @@ use ArtLibs\Category;
 
 class Views extends Controller
 {
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewCustom($params, $app)
     {
         $app->setTemplateData(
@@ -20,6 +24,10 @@ class Views extends Controller
         $this->display($app, 'home.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewHome($params, $app)
     {
         $app->setTemplateData(array(
@@ -54,6 +62,10 @@ class Views extends Controller
         $this->display($app, 'uhome.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewArticle($params, $app)
     {
         $app->setTemplateData(array('title' => 'Not found'));
@@ -79,6 +91,10 @@ class Views extends Controller
         $this->display($app, 'list_article.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewArticleList($params, $app)
     {
         $app->setTemplateData(array(
@@ -111,6 +127,10 @@ class Views extends Controller
         $this->display($app, 'list_article.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function frmArticle($params, $app)
     {
         $app->setTemplateData(array(
@@ -130,6 +150,10 @@ class Views extends Controller
         $this->display($app, 'frm_article.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewCategoryList($params, $app)
     {
         $app->setTemplateData(array(
@@ -182,6 +206,10 @@ class Views extends Controller
         $this->display($app, 'list_category.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewUserList($params, $app)
     {
         $app->setTemplateData(array(
@@ -217,6 +245,10 @@ class Views extends Controller
         $this->display($app, 'list_users.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewLogin($params, $app)
     {
         $app->setTemplateData(array('title' => 'Login',));
@@ -249,6 +281,10 @@ class Views extends Controller
         $this->display($app, 'frm_login.twig');
     }
 
+    /**
+     * @param $params
+     * @param $app
+     */
     public function viewSignup($params, $app)
     {
         $app->setTemplateData(array('title' => 'Signup',));
@@ -256,7 +292,11 @@ class Views extends Controller
         $this->display($app, 'frm_signup.twig');
     }
 
-    public function viewLogout($param, $app)
+    /**
+     * @param $params
+     * @param $app
+     */
+    public function viewLogout($params, $app)
     {
         $app->setTemplateData(array('title' => 'Logout',));
 
