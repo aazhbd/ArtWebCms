@@ -14,8 +14,7 @@ $routes = array(
         '/article/list' => '/controller/Views/viewArticleList',
 
         '/user/list' => '/controller/Views/viewUserList',
-        '/user/edit/(?<cid>\d+)' => '/controller/Views/viewUserList',
-        '/user/disable/(?<cid>\d+)' => '/controller/Views/viewUserList',
+        '/category/(?<opt>[A-Za-z_][A-Za-z0-9_]*)/(?<uid>\d+)' => '/controller/Views/viewUserList',
 
         '/category/list' => '/controller/Views/viewCategoryList',
         '/category/(?<aurl>[A-Za-z_][A-Za-z0-9_]*)/(?<cid>\d+)' => '/controller/Views/viewCategoryList',

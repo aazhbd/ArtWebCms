@@ -101,30 +101,33 @@ class Views extends Controller
             'title' => 'Articles List',
         ));
 
-        if ($app->getRequest()->getMethod() == "POST") {
-            $article_data = array(
-                'title' => trim($app->getRequest()->request->get('title')),
-                'subtitle' => trim($app->getRequest()->request->get('subtitle')),
-                'url' => trim($app->getRequest()->request->get('aurl')),
-                'category_id' => trim($app->getRequest()->request->get('category')),
-                'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
-            );
-
-            if (Article::addArticle($article_data, $app)) {
-                $app->setTemplateData(array('content_message' => "New article added successfully."));
-            }
-            else {
-                $app->setTemplateData(array('content_message' => "Article couldn't be saved."));
-            }
-        }
-
         $user_info = $app->getSession()->get('user_info');
 
         if ($user_info['utype'] == 1) {
+            if ($app->getRequest()->getMethod() == "POST") {
+                $article_data = array(
+                    'title' => trim($app->getRequest()->request->get('title')),
+                    'subtitle' => trim($app->getRequest()->request->get('subtitle')),
+                    'url' => trim($app->getRequest()->request->get('aurl')),
+                    'category_id' => trim($app->getRequest()->request->get('category')),
+                    'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
+                );
+
+                if (Article::addArticle($article_data, $app)) {
+                    $app->setTemplateData(array('content_message' => "New article added successfully."));
+                }
+                else {
+                    $app->setTemplateData(array('content_message' => "Article couldn't be saved."));
+                }
+            }
+
             $articles = Article::getArticles($app);
             if ($articles) {
                 $app->setTemplateData(array('articles' => $articles));
             }
+        }
+        else {
+            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
         }
 
         $this->display($app, 'list_article.twig');
@@ -239,12 +242,18 @@ class Views extends Controller
                 } elseif (User::addUser($user_data, $app)) {
                     $app->setTemplateData(array('content_message' => "New user added."));
                 }
+                else {
+                    $app->setTemplateData(array('content_message' => "User couldn't be saved."));
+                }
             }
 
             $users = User::getUsers($app);
             if ($users) {
                 $app->setTemplateData(array('users' => $users));
             }
+        }
+        else {
+            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
         }
 
         $this->display($app, 'list_users.twig');
@@ -303,7 +312,7 @@ class Views extends Controller
      */
     public function viewLogout($params, $app)
     {
-        $app->setTemplateData(array('title' => 'Logout',));
+        $app->setTemplateData(array('title' => 'Logout'));
 
         $logout = false;
 
