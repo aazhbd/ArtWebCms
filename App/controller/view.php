@@ -12,12 +12,12 @@ class Views extends Controller
      * @param $params
      * @param $app
      */
-    public function viewCustom($params, $app)
+    public function viewRoot($params, $app)
     {
         $app->setTemplateData(
             array(
-                'title' => 'This is custom page',
-                'body_content' => 'A test custom page loaded from controller/view.php.'
+                'title' => 'Start',
+                'body_content' => 'The start page loaded from controller/view.php.'
             )
         );
 
@@ -98,7 +98,7 @@ class Views extends Controller
     public function viewArticleList($params, $app)
     {
         $app->setTemplateData(array(
-            'title' => 'All articles',
+            'title' => 'Articles List',
         ));
 
         if ($app->getRequest()->getMethod() == "POST") {
@@ -157,10 +157,12 @@ class Views extends Controller
     public function viewCategoryList($params, $app)
     {
         $app->setTemplateData(array(
-            'title' => 'Add new category',
+            'title' => 'Category List',
         ));
 
         $user_info = $app->getSession()->get('user_info');
+
+        echo $user_info['utype'];
 
         if ($user_info['utype'] == 1) {
             if (isset($params[2])) {
@@ -201,6 +203,9 @@ class Views extends Controller
                 $app->setTemplateData(array('categories' => $categories));
             }
         }
+        else {
+            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
+        }
 
         $this->display($app, 'list_category.twig');
     }
@@ -212,7 +217,7 @@ class Views extends Controller
     public function viewUserList($params, $app)
     {
         $app->setTemplateData(array(
-            'title' => 'All users',
+            'title' => 'Users List',
         ));
 
         $user_info = $app->getSession()->get('user_info');

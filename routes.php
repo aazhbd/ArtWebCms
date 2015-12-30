@@ -2,7 +2,7 @@
 
 $routes = array(
     'urls' => array(
-        '' => '/controller/Views/viewCustom',
+        '' => '/controller/Views/viewRoot',
         '/home' => '/controller/Views/viewHome',
         '/login' => '/controller/Views/viewLogin',
         '/logout' => '/controller/Views/viewLogout',
