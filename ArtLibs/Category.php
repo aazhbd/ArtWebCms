@@ -113,7 +113,7 @@ class Category
             $executed = $query->execute(true);
         }
         catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error disabling user: " . $ex->getMessage());
+            $app->getErrorManager()->addMessage("Error disabling: " . $ex->getMessage());
             return false;
         }
 

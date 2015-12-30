@@ -141,6 +141,25 @@ class User
         return $executed;
     }
 
+    public static function updateUser($uid, $uinfo=array(), $app) {
+        if (empty($uinfo) || !isset($uid)) {
+            return false;
+        }
+
+        $uinfo['date_updated'] = new \FluentLiteral('NOW()');
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->update('users', $uinfo, $uid);
+            $executed = $query->execute(true);
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
+    }
+
     /**
      * @param null $user_id
      * @param $app
@@ -206,6 +225,50 @@ class User
     }
 
     /**
+     * @param $uid
+     * @param $app
+     * @return bool
+     */
+    public static function getUserById($uid, $app) {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("users")
+                ->select(null)
+                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'gender', 'ustatus', 'utype', 'state'))
+                ->where(array("id" => $uid))
+                ->fetch();
+        }
+        catch(\Exception $ex){
+            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            return false;
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param $state
+     * @param $uid
+     * @param $app
+     * @return bool
+     */
+    public static function setState($state, $uid, $app) {
+        if(!isset($state) || !isset($uid)) {
+            return false;
+        }
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => $state), $uid);
+            $executed = $query->execute(true);
+        }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error changing user state: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
+    }
+
+    /**
      * @return mixed
      */
     public function getApp()
@@ -246,7 +309,9 @@ class User
             $info = $this->getUserInfo();
             $this->user_status = $info['ustatus'];
         }
-        $this->user_status = 0;
+        else {
+            $this->user_status = 0;
+        }
 
         return $this;
     }

@@ -32,36 +32,34 @@
         <form class="pure-form pure-form-aligned" id="signupform" method="post" action="{{ path_url_postfix }}/user/list">
             <fieldset>
                 <legend>{{ legend|default('Enter information to signup.') }}</legend>
+                {% if action == "edit" %}
+                    <input type="hidden" value="{{ update_user.id }}" name="editval" />
+                {% endif %}
                 <div class="pure-control-group">
                     <label for="name">Name</label>
-                    <input id="name" type="text" placeholder="Name" name="name" />
+                    <input id="name" type="text" placeholder="Name" value="{{ update_user.firstname }}" name="name" />
                 </div>
 
                 <div class="pure-control-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" placeholder="Email" name="email" />
+                    <input id="email" type="email" placeholder="Email" value="{{ update_user.email }}" name="email" />
                 </div>
 
                 <div class="pure-control-group">
                     <label for="password">Password</label>
-                    <input id="password" type="password" placeholder="Password" name="password" />
-                </div>
-
-                <div class="pure-control-group">
-                    <label for="rpass">Re-type Password</label>
-                    <input id="rpass" type="password" placeholder="Re-type Password" name="rpass" />
+                    <input id="password" type="password" placeholder="Password" value="{{ update_user.pass }}" name="password" />
                 </div>
 
                 <div class="pure-control-group">
                     <label for="gender">Gender</label>
                     <select id="gender" name="gender">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
+                        <option {% if update_user.gender == "m" or update_user.gender == "M" %}selected{% endif %} value="M">Male</option>
+                        <option {% if update_user.gender == "f" or update_user.gender == "F" %}selected{% endif %} value="F">Female</option>
                     </select>
                 </div>
 
                 <div class="pure-controls">
-                    <input type="submit" class="pure-button pure-button-primary" name="submit" value="Add User" style="display: block; clear: both; margin-top: 5px; " />
+                    <input type="submit" class="pure-button pure-button-primary" name="submit" value="{% if action == "edit" %}Edit User{% else  %}Add User{% endif %}" style="display: block; clear: both; margin-top: 5px; " />
                 </div>
             </fieldset>
         </form>
@@ -73,7 +71,6 @@
                         name:{ required: true , maxlength: 100 },
                         email:{ required: true, email: true , maxlength: 50},
                         password:{ required: true, maxlength: 20},
-                        rpass:{ required: true, maxlength: 20, equalTo: "#password" },
                         gender:{ required: true }
                     },
                     messages:{
@@ -89,10 +86,6 @@
                         password: {
                             required: "Password minimum 5 characters.",
                             maxlength: "Password can't be longer than 20 characters."
-                        },
-                        rpass: {
-                            required: "Enter password again.",
-                            equalTo: "Password don't match."
                         },
                         gender: "Please select gender."
                     }
@@ -110,6 +103,8 @@
                     <td>Gender</td>
                     <td>Status</td>
                     <td>Type</td>
+                    <td style="width: 100px;">Edit</td>
+                    <td style="width: 100px;">Change Status</td>
                 </tr>
                 </thead>
                 <tfoot>
@@ -120,6 +115,8 @@
                     <td>Gender</td>
                     <td>Status</td>
                     <td>Type</td>
+                    <td>Edit</td>
+                    <td>Change Status</td>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -131,6 +128,8 @@
                         <td>{{ a.gender|upper  }}</td>
                         <td>{% if a.ustatus == 1 %}Active{% else %}Inactive{% endif %}</td>
                         <td>{% if a.utype == 1 %}Admin{% else %}Normal{% endif %}</td>
+                        <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/user/edit/{{ a.id }}/">Edit</a></td>
+                        <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/user/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
                     </tr>
                 {% endfor %}
             </table>
