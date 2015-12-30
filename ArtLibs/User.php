@@ -48,13 +48,11 @@ class User
             return false;
         }
 
-        if($query == false) {
-            return false;
-        }
-        else {
+        if($query) {
             $this->setUserInfo($query);
-            return true;
         }
+
+        return $query;
     }
 
     /**
