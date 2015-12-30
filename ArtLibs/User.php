@@ -50,9 +50,27 @@ class User
 
         if($query) {
             $this->setUserInfo($query);
+            $this->updateLoginTime($query['id']);
         }
 
         return $query;
+    }
+
+    public function updateLoginTime($uid) {
+        if (!isset($uid)) {
+            return false;
+        }
+
+        try {
+            $query = $this->getApp()->getDataManager()->getDataManager()->update('users', array('date_lastlogin' => new \FluentLiteral('NOW()')), $uid);
+            $executed = $query->execute(true);
+        }
+        catch(\Exception $ex){
+            $this->getApp()->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
     }
 
     /**
