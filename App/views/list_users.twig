@@ -128,9 +128,9 @@
                         <td>{{ a.id }}</td>
                         <td>{{ a.email }}</td>
                         <td>{{ a.firstname }}</td>
-                        <td>{{ a.gender }}</td>
-                        <td>{{ a.ustatus }}</td>
-                        <td>{{ a.utype }}</td>
+                        <td>{{ a.gender|upper  }}</td>
+                        <td>{% if a.ustatus == 1 %}Active{% else %}Inactive{% endif %}</td>
+                        <td>{% if a.utype == 1 %}Admin{% else %}Normal{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>
