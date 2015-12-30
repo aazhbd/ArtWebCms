@@ -141,6 +141,12 @@ class User
         return $executed;
     }
 
+    /**
+     * @param $uid
+     * @param array $uinfo
+     * @param $app
+     * @return bool
+     */
     public static function updateUser($uid, $uinfo=array(), $app) {
         if (empty($uinfo) || !isset($uid)) {
             return false;
@@ -158,51 +164,6 @@ class User
         }
 
         return $executed;
-    }
-
-    /**
-     * @param null $user_id
-     * @param $app
-     * @return bool
-     */
-    public static function disableUser($user_id=null, $app) {
-        if($user_id == null) {
-            return false;
-        }
-
-        try {
-            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 1), $user_id);
-            $query->execute(true);
-        }
-        catch(\Exception $ex){
-            $error = new ErrorManager();
-            $error->addMessage("Error disabling user: " . $ex->getMessage());
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param null $user_id
-     * @param $app
-     * @return bool
-     */
-    public static function enableUser($user_id=null, $app) {
-        if($user_id == null) {
-            return false;
-        }
-
-        try {
-            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => 0), $user_id)->execute(true);
-        }
-        catch(\Exception $ex){
-            $error = new ErrorManager();
-            $error->addMessage("Error disabling user: " . $ex->getMessage());
-            return false;
-        }
-
-        return true;
     }
 
     /**
