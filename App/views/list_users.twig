@@ -103,6 +103,8 @@
                     <td>Gender</td>
                     <td>Status</td>
                     <td>Type</td>
+                    <td>Inserted</td>
+                    <td>Updated</td>
                     <td style="width: 100px;">Edit</td>
                     <td style="width: 100px;">Change Status</td>
                 </tr>
@@ -115,6 +117,8 @@
                     <td>Gender</td>
                     <td>Status</td>
                     <td>Type</td>
+                    <td>Inserted</td>
+                    <td>Updated</td>
                     <td>Edit</td>
                     <td>Change Status</td>
                 </tr>
@@ -128,6 +132,8 @@
                         <td>{{ a.gender|upper  }}</td>
                         <td>{% if a.ustatus == 1 %}Active{% else %}Inactive{% endif %}</td>
                         <td>{% if a.utype == 1 %}Admin{% else %}Normal{% endif %}</td>
+                        <td>{{ a.date_inserted }}</td>
+                        <td>{{ a.date_updated }}</td>
                         <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/user/edit/{{ a.id }}/">Edit</a></td>
                         <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/user/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
                     </tr>

@@ -172,10 +172,7 @@ class User
      */
     public static function getUsers($app) {
         try {
-            $query = $app->getDataManager()->getDataManager()->from("users")
-                ->select(null)
-                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'gender', 'ustatus', 'utype', 'state'))
-                ->fetchAll();
+            $query = $app->getDataManager()->getDataManager()->from("users")->fetchAll();
         }
         catch(\Exception $ex){
             $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
