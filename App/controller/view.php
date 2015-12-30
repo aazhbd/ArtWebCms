@@ -177,11 +177,11 @@ class Views extends Controller
                     $cat_pre = Category::getCategoryById($cat_id, $app);
                     $app->setTemplateData(array('action' => 'edit', 'cat_id' => $cat_id, 'cat_pre' => $cat_pre));
                 } elseif ($action == "enable") {
-                    if (Category::setStateCategory(0, $cat_id, $app)) {
+                    if (Category::setState(0, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
                 } elseif ($action == "disable") {
-                    if (Category::setStateCategory(1, $cat_id, $app)) {
+                    if (Category::setState(1, $cat_id, $app)) {
                         $app->setTemplateData(array('content_message' => 'Category is ' . $params[1] . 'd.'));
                     }
                 }

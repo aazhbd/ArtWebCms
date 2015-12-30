@@ -103,7 +103,7 @@ class Category
      * @param $app
      * @return bool
      */
-    public static function setStateCategory($state, $category_id, $app) {
+    public static function setState($state, $category_id, $app) {
         if(!isset($state) || !isset($category_id)) {
             return false;
         }
