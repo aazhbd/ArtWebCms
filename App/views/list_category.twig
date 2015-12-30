@@ -42,12 +42,12 @@
             $(document).ready(function(){
                 $("#publish").validate({
                     rules:{
-                        catname:{ required: true , maxlength: 100 },
+                        catname:{ required: true , maxlength: 50 },
                     },
                     messages:{
                         catname: {
                             required: "Enter category name.",
-                            maxlength: "Can't be longer than 100 characters."
+                            maxlength: "Can't be longer than 50 characters."
                         }
                     }
                 });
