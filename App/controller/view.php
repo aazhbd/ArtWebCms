@@ -162,8 +162,6 @@ class Views extends Controller
 
         $user_info = $app->getSession()->get('user_info');
 
-        echo $user_info['utype'];
-
         if ($user_info['utype'] == 1) {
             if (isset($params[2])) {
                 $action = $params[1];
