@@ -1,5 +1,7 @@
-# ArtCMS
-A text content management system based on ArtWeb. ArtCMS is a fast, secure, feature rich, scalable text content management system for PHP5, using Symfony2 components integrating with the best practices of MVC.
+# ArtWebCms
+-----------
+
+ArtWebCms is a fast, secure, feature rich, scalable Content Management System, powered by ArtWeb using Symfony2 components integrating with the best practices of MVC.
 
 
 ### Requirements
