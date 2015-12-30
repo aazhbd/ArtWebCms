@@ -113,6 +113,9 @@ class Views extends Controller
             if (Article::addArticle($article_data, $app)) {
                 $app->setTemplateData(array('content_message' => "New article added successfully."));
             }
+            else {
+                $app->setTemplateData(array('content_message' => "Article couldn't be saved."));
+            }
         }
 
         $user_info = $app->getSession()->get('user_info');
