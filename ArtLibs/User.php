@@ -38,9 +38,7 @@ class User
     public function getUser($user, $pass) {
         try {
             $query = $this->app->getDataManager()->getDataManager()->from("users")
-                ->select(null)
-                ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'ustatus', 'utype', 'state'))
-                ->where(array("email" => $user, "pass" => $pass, "ustatus" => 1))
+                ->where(array("email" => $user, "pass" => $pass, "ustatus" => 1, "state" => 0))
                 ->fetch();
         }
         catch(\Exception $ex){
