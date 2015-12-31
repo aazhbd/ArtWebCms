@@ -127,7 +127,7 @@ class Views extends Controller
             }
         }
         else {
-            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
+            $app->setTemplateData(array('content_message' => 'Not found or accessible'));
         }
 
         $this->display($app, 'list_article.twig');
@@ -208,7 +208,7 @@ class Views extends Controller
             }
         }
         else {
-            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
+            $app->setTemplateData(array('content_message' => 'Not found or accessible'));
         }
 
         $this->display($app, 'list_category.twig');
@@ -276,7 +276,7 @@ class Views extends Controller
             }
         }
         else {
-            $app->setTemplateData(array('body_content' => 'Not found or accessible'));
+            $app->setTemplateData(array('content_message' => 'Not found or accessible'));
         }
 
         $this->display($app, 'list_users.twig');
