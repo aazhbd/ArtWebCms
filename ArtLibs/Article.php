@@ -16,16 +16,11 @@ class Article
                 ->fetchAll();
         }
         catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
+            return false;
         }
 
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
+        return $query;
     }
 
     /**
