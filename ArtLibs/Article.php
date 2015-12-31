@@ -42,10 +42,18 @@ class Article
         return $query;
     }
 
+    /**
+     * @param $article_data
+     * @param $aid
+     * @param $app
+     * @return bool
+     */
     public static function updateArticle($article_data, $aid, $app) {
         if(!isset($article_data) || !isset($aid)) {
             return false;
         }
+
+        $article_data['date_updated'] = new \FluentLiteral('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->update('articles', $article_data, $aid);
