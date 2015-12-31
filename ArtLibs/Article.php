@@ -62,7 +62,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->select(null)
                 ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
-                ->where(array("url" => $aurl,))
+                ->where(array("url" => $aurl, "state" => 0))
                 ->fetchAll();
         }
         catch(\PDOException $ex){
@@ -70,12 +70,7 @@ class Article
             return null;
         }
 
-        if($query == false) {
-            return null;
-        }
-        else {
-            return $query;
-        }
+        return $query;
     }
 
     /**

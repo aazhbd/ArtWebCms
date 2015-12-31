@@ -106,11 +106,13 @@ class Views extends Controller
         if ($user_info['utype'] == 1) {
             if ($app->getRequest()->getMethod() == "POST") {
                 $article_data = array(
+                    'uid' => $user_info['id'],
                     'title' => trim($app->getRequest()->request->get('title')),
                     'subtitle' => trim($app->getRequest()->request->get('subtitle')),
-                    'url' => trim($app->getRequest()->request->get('aurl')),
+                    'url' => strtolower(trim($app->getRequest()->request->get('aurl'))),
                     'category_id' => trim($app->getRequest()->request->get('category')),
                     'body' => addslashes(trim($app->getRequest()->request->get('abody'))),
+                    'state' => addslashes(trim($app->getRequest()->request->get('state'))),
                 );
 
                 if (Article::addArticle($article_data, $app)) {

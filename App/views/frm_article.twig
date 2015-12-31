@@ -57,6 +57,10 @@
                 <textarea class="pure-input-1-2" placeholder="Content" id="editorbody" rows="20" name="abody"></textarea>
             </fieldset>
 
+            <fieldset class="pure-group">
+                <input type="text" class="pure-input-1" placeholder="state 0/1" name="state" />
+            </fieldset>
+
             <input type="submit" class="pure-button pure-input-1 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
 
@@ -67,7 +71,7 @@
                         title:{ required: true , maxlength: 100 },
                         aurl:{ required: true, maxlength: 50},
                         category:{ required: true },
-                        abody:{ required: true, maxlength: 2000 }
+                        abody:{ required: true, maxlength: 20000 }
                     },
                     messages:{
                         title: {
