@@ -41,7 +41,8 @@
                     <td>Url</td>
                     <td>Title</td>
                     <td>Subtitle</td>
-                    <td>Date inserted</td>
+                    <td style="width: 100px;">Inserted</td>
+                    <td style="width: 100px;">Updated</td>
                 </tr>
                 </thead>
                 <tfoot>
@@ -51,7 +52,8 @@
                     <td>Url</td>
                     <td>Title</td>
                     <td>Subtitle</td>
-                    <td>Date inserted</td>
+                    <td>Inserted</td>
+                    <td>Updated</td>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -63,6 +65,7 @@
                         <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
                         <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 25)|raw }}</a></td>
                         <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
+                        <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_updated }}</a></td>
                     </tr>
                 {% endfor %}
             </table>
