@@ -149,12 +149,11 @@ class Views extends Controller
             'title' => 'Add new article',
         ));
 
-        $action = $params['opt'];
-        $aid = $params['aid'];
-
         $user_info = $app->getSession()->get('user_info');
         if ($user_info['utype'] == 1) {
-            if($action == 'edit' && $aid) {
+            if($params['opt'] == 'edit' && $params['aid']) {
+                $action = $params['opt'];
+                $aid = $params['aid'];
                 $app->setTemplateData(array('article' => Article::getArticleById($aid, $app), 'action' => "edit"));
             }
 
