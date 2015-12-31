@@ -33,23 +33,35 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticlesById($aid, $app) {
+    public static function getArticleById($aid, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->where(array("id" => $aid,))
-                ->fetchAll();
+                ->where(array("id" => $aid))
+                ->fetch();
         }
         catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
+            return false;
         }
 
-        if($query == false) {
-            return null;
+        return $query;
+    }
+
+    public static function updateArticle($article_data, $aid, $app) {
+        if(!isset($article_data) || !isset($aid)) {
+            return false;
         }
-        else {
-            return $query;
+
+        try {
+            $query = $app->getDataManager()->getDataManager()->update('articles', $article_data, $aid);
+            $executed = $query->execute(true);
         }
+        catch(\PDOException $ex){
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
+            return false;
+        }
+
+        return $executed;
     }
 
     /**
@@ -57,17 +69,15 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticlesByUrl($aurl, $app) {
+    public static function getArticleByUrl($aurl, $app) {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->select(null)
-                ->select(array('id', 'uid', 'category_id', 'url', 'title', 'subtitle', 'body', 'date_inserted'))
                 ->where(array("url" => $aurl, "state" => 0))
-                ->fetchAll();
+                ->fetch();
         }
         catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
-            return null;
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
+            return false;
         }
 
         return $query;

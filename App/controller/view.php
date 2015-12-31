@@ -73,17 +73,17 @@ class Views extends Controller
 
         if (isset($params['aid'])) {
             $aid = $params['aid'];
-            $article = Article::getArticlesById($aid, $app);
+            $article = Article::getArticleById($aid, $app);
         } elseif (isset($params['aurl'])) {
             $aurl = $params['aurl'];
-            $article = Article::getArticlesByUrl($aurl, $app);
+            $article = Article::getArticleByUrl($aurl, $app);
         }
 
         if ($article) {
             $app->setTemplateData(array(
-                'title' => $article[0]['title'],
-                'subtitle' => $article[0]['subtitle'],
-                'body' => stripslashes($article[0]['body']),
+                'title' => $article['title'],
+                'subtitle' => $article['subtitle'],
+                'body' => stripslashes($article['body']),
                 'article' => $article
             ));
         }
@@ -115,7 +115,11 @@ class Views extends Controller
                     'state' => addslashes(trim($app->getRequest()->request->get('state'))),
                 );
 
-                if (Article::addArticle($article_data, $app)) {
+                if($app->getRequest()->request->get('editval')) {
+                    $aid = trim($app->getRequest()->request->get('editval'));
+                    $app->setTemplateData(array('content_message' => (Article::updateArticle($article_data, $aid, $app)) ? "New article added successfully" : "Article update failed"));
+                }
+                elseif (Article::addArticle($article_data, $app)) {
                     $app->setTemplateData(array('content_message' => "New article added successfully."));
                 }
                 else {
@@ -145,9 +149,15 @@ class Views extends Controller
             'title' => 'Add new article',
         ));
 
-        $user_info = $app->getSession()->get('user_info');
+        $action = $params['opt'];
+        $aid = $params['aid'];
 
+        $user_info = $app->getSession()->get('user_info');
         if ($user_info['utype'] == 1) {
+            if($action == 'edit' && $aid) {
+                $app->setTemplateData(array('article' => Article::getArticleById($aid, $app), 'action' => "edit"));
+            }
+
             $categories = Category::getCategories($app, 0);
 
             if ($categories) {
