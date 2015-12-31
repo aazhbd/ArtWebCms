@@ -37,15 +37,16 @@
         {{ parent() }}
         {{ body_content }}
 
-        <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/article/list">
-            <fieldset>
-                <input type="text" class="pure-input-1-2" placeholder="Title" name="title" />
-                <input type="text" class="pure-input-1-2" placeholder="Subtitle" name="subtitle" />
+        <form class="pure-form pure-form-stacked" style="width: 768px;" id="publish" method="post" action="{{ path_url_postfix }}/article/list">
+            <fieldset class="pure-group">
+                <legend>Add article</legend>
+                <input type="text" class="pure-input-1" placeholder="Title" name="title" />
+                <input type="text" class="pure-input-1" placeholder="Subtitle" name="subtitle" />
             </fieldset>
 
-            <fieldset>
-                <input type="text" class="pure-input-1-2" placeholder="Url" name="aurl" />
-                <select class="pure-input-1-2" name="category">
+            <fieldset class="pure-group">
+                <input type="text" class="pure-input-1" placeholder="Url" name="aurl" />
+                <select class="pure-input-1" name="category">
                     {% for cat in categories %}
                         <option value="{{ cat.id }}">{{ cat.catname }}</option>
                     {% endfor %}
@@ -56,7 +57,7 @@
                 <textarea class="pure-input-1-2" placeholder="Content" id="editorbody" rows="20" name="abody"></textarea>
             </fieldset>
 
-            <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
+            <input type="submit" class="pure-button pure-input-1 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
 
         <script type="text/javascript">
