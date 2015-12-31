@@ -54,6 +54,10 @@ class User
         return $query;
     }
 
+    /**
+     * @param $uid
+     * @return bool
+     */
     public function updateLoginTime($uid) {
         if (!isset($uid)) {
             return false;
@@ -96,10 +100,11 @@ class User
      * @return bool
      */
     public static function clearSession($app) {
-        if($app->getSession()->get('is_authenticated')) {
-            $app->getSession()->set('is_authenticated', false);
-            $app->getSession()->set('user_info', null);
+        if(!$app->getSession()->get('is_authenticated')) {
+            return false;
         }
+        $app->getSession()->set('is_authenticated', false);
+        $app->getSession()->set('user_info', null);
         return true;
     }
 
@@ -122,12 +127,7 @@ class User
             return false;
         }
 
-        if($query == false) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return $query;
     }
 
     /**
@@ -147,8 +147,7 @@ class User
             $executed = $query->execute(true);
         }
         catch(\Exception $ex){
-            $error = new ErrorManager();
-            $error->addMessage("Error adding new user: " . $ex->getMessage());
+            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
             return false;
         }
 
