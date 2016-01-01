@@ -9,15 +9,15 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticles($app, $state=null) {
+    public static function getArticles($app, $state = null)
+    {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles");
-            if($state != null) {
+            if ($state != null) {
                 $query->where(array('state' => $state));
             }
             $q = $query->orderBy('date_inserted DESC')->fetchAll();
-        }
-        catch(\PDOException $ex){
+        } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -30,8 +30,9 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticleById($aid, $app) {
-        if(!isset($aid)) {
+    public static function getArticleById($aid, $app)
+    {
+        if (!isset($aid)) {
             return false;
         }
 
@@ -39,8 +40,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("id" => $aid))
                 ->fetch();
-        }
-        catch(\PDOException $ex){
+        } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -54,8 +54,9 @@ class Article
      * @param $app
      * @return bool
      */
-    public static function updateArticle($article_data, $aid, $app) {
-        if(!isset($article_data) || !isset($aid)) {
+    public static function updateArticle($article_data, $aid, $app)
+    {
+        if (!isset($article_data) || !isset($aid)) {
             return false;
         }
 
@@ -64,8 +65,7 @@ class Article
         try {
             $query = $app->getDataManager()->getDataManager()->update('articles', $article_data, $aid);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
+        } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -78,8 +78,9 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticleByUrl($aurl, $app) {
-        if(!isset($aurl)) {
+    public static function getArticleByUrl($aurl, $app)
+    {
+        if (!isset($aurl)) {
             return false;
         }
 
@@ -87,8 +88,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("url" => $aurl, "state" => 0))
                 ->fetch();
-        }
-        catch(\PDOException $ex){
+        } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -101,7 +101,8 @@ class Article
      * @param $app
      * @return bool
      */
-    public static function addArticle($article_data, $app) {
+    public static function addArticle($article_data, $app)
+    {
         if (empty($article_data)) {
             return false;
         }
@@ -111,9 +112,8 @@ class Article
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error adding new article: " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 

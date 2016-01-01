@@ -19,13 +19,14 @@ class User
      * @param $email
      * @param $pass
      */
-    public function __construct($app, $email, $pass) {
+    public function __construct($app, $email, $pass)
+    {
         $this->app = $app;
 
         $this->user_info = array();
 
         $this->authenticated = $this->getUser($email, $pass);
-        if($this->authenticated) {
+        if ($this->authenticated) {
             $this->setSession();
         }
     }
@@ -35,18 +36,18 @@ class User
      * @param $pass
      * @return bool
      */
-    public function getUser($user, $pass) {
+    public function getUser($user, $pass)
+    {
         try {
             $query = $this->app->getDataManager()->getDataManager()->from("users")
                 ->where(array("email" => $user, "pass" => $pass, "ustatus" => 1, "state" => 0))
                 ->fetch();
-        }
-        catch(\Exception $ex){
-            $this->getApp()->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
-        if($query) {
+        if ($query) {
             $this->setUserInfo($query);
             $this->updateLoginTime($query['id']);
         }
@@ -58,17 +59,18 @@ class User
      * @param $uid
      * @return bool
      */
-    public function updateLoginTime($uid) {
+    public function updateLoginTime($uid)
+    {
         if (!isset($uid)) {
             return false;
         }
 
         try {
-            $query = $this->getApp()->getDataManager()->getDataManager()->update('users', array('date_lastlogin' => new \FluentLiteral('NOW()')), $uid);
+            $query = $this->getApp()->getDataManager()->getDataManager()
+                ->update('users', array('date_lastlogin' => new \FluentLiteral('NOW()')), $uid);
             $executed = $query->execute(true);
-        }
-        catch(\Exception $ex){
-            $this->getApp()->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -78,13 +80,13 @@ class User
     /**
      * @return boolean
      */
-    public function setSession() {
-        if(!$this->getApp()->getSession()->isStarted()) {
+    public function setSession()
+    {
+        if (!$this->getApp()->getSession()->isStarted()) {
             try {
                 $this->getApp()->getRequest()->getSession()->start();
-            }
-            catch(\Exception $ex) {
-                $this->getApp()->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+            } catch (\Exception $ex) {
+                $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
                 return false;
             }
         }
@@ -99,8 +101,9 @@ class User
      * @param $app
      * @return bool
      */
-    public static function clearSession($app) {
-        if(!$app->getSession()->get('is_authenticated')) {
+    public static function clearSession($app)
+    {
+        if (!$app->getSession()->get('is_authenticated')) {
             return false;
         }
         $app->getSession()->set('is_authenticated', false);
@@ -113,17 +116,17 @@ class User
      * @param $app
      * @return bool
      */
-    public static function userExists($email, $app) {
+    public static function userExists($email, $app)
+    {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
                 ->select(array('id'))
                 ->where(array("email" => $email))
                 ->fetch();
-        }
-        catch(\Exception $ex){
+        } catch (\Exception $ex) {
             $error = new ErrorManager();
-            $error->addMessage("Error retrieving user information : " . $ex->getMessage());
+            $error->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -135,7 +138,8 @@ class User
      * @param $app
      * @return bool
      */
-    public static function addUser($uinfo=array(), $app) {
+    public static function addUser($uinfo = array(), $app)
+    {
         if (empty($uinfo)) {
             return false;
         }
@@ -145,9 +149,8 @@ class User
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);
             $executed = $query->execute(true);
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -160,7 +163,8 @@ class User
      * @param $app
      * @return bool
      */
-    public static function updateUser($uid, $uinfo=array(), $app) {
+    public static function updateUser($uid, $uinfo = array(), $app)
+    {
         if (empty($uinfo) || !isset($uid)) {
             return false;
         }
@@ -170,9 +174,8 @@ class User
         try {
             $query = $app->getDataManager()->getDataManager()->update('users', $uinfo, $uid);
             $executed = $query->execute(true);
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -183,12 +186,12 @@ class User
      * @param $app
      * @return mixed
      */
-    public static function getUsers($app) {
+    public static function getUsers($app)
+    {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")->fetchAll();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -200,16 +203,16 @@ class User
      * @param $app
      * @return bool
      */
-    public static function getUserById($uid, $app) {
+    public static function getUserById($uid, $app)
+    {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
                 ->select(null)
                 ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'gender', 'ustatus', 'utype', 'state'))
                 ->where(array("id" => $uid))
                 ->fetch();
-        }
-        catch(\Exception $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+        } catch (\Exception $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -222,17 +225,17 @@ class User
      * @param $app
      * @return bool
      */
-    public static function setState($state, $uid, $app) {
-        if(!isset($state) || !isset($uid)) {
+    public static function setState($state, $uid, $app)
+    {
+        if (!isset($state) || !isset($uid)) {
             return false;
         }
 
         try {
             $query = $app->getDataManager()->getDataManager()->update('users', array('state' => $state), $uid);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error changing user state: " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -262,8 +265,7 @@ class User
      */
     public function getUserStatus()
     {
-        if($this->isAuthenticated())
-        {
+        if ($this->isAuthenticated()) {
             $info = $this->getUserInfo();
             return $info['ustatus'];
         }
@@ -276,11 +278,10 @@ class User
      */
     public function setUserStatus()
     {
-        if($this->isAuthenticated()) {
+        if ($this->isAuthenticated()) {
             $info = $this->getUserInfo();
             $this->user_status = $info['ustatus'];
-        }
-        else {
+        } else {
             $this->user_status = 0;
         }
 
