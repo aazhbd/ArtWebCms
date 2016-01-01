@@ -1,5 +1,4 @@
 # ArtWebCms
------------
 
 ArtWebCms is a fast, secure, feature rich, scalable Content Management System, powered by ArtWeb using Symfony2 components integrating with the best practices of MVC.
 
@@ -19,5 +18,5 @@ The code is released under MIT License.
 ### Contact
 -----------
 
-	Development
-	AAZH (aazhbd@yahoo.com)
+Development
+AAZH (aazhbd@yahoo.com)
