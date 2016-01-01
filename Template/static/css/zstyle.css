@@ -83,7 +83,7 @@ img {
     opacity: 0.82;
     position: fixed;
     top: 0px;
-    padding: 11px 0;
+    padding: 0;
     width: 100%;
     z-index: 999;
 }
@@ -91,6 +91,7 @@ img {
 #navigatemenu {
     float: left;
     z-index: 999;
+    padding: 10px 0;
 }
 
 /* end head */
@@ -128,6 +129,7 @@ img {
 #logo {
     float: left;
     height: 37px;
+    padding: 4px 0;
 }
 
 /* logo ends here */

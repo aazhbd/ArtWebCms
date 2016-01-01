@@ -34,12 +34,11 @@
 
         <div id="topright">
             {% if session.get('is_authenticated') %}
-                {{ session.get('user_info').firstname }}
-                <a href="{{ path_url_postfix }}/home">Member Home</a> |
+                <a class="pure-button" href="{{ path_url_postfix }}/home">{% if session.get('user_info').firstname %}{{ session.get('user_info').firstname }}'s{% else %}User{% endif %} Home</a>
                 <a href="{{ path_url_postfix }}/logout">Logout</a>
             {% else %}
-                <a href="{{ path_url_postfix }}/login">Login</a> |
-                <a href="{{ path_url_postfix }}/signup">Signup</a>
+                <a class="pure-button" href="{{ path_url_postfix }}/login">Login</a>
+                <a class="pure-button" href="{{ path_url_postfix }}/signup">Signup</a>
             {% endif %}
         </div>
     </div>
