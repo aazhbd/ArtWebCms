@@ -115,6 +115,9 @@ class Views extends Controller
                     'state' => addslashes(trim($app->getRequest()->request->get('state'))),
                 );
 
+                $invalid_chars = array(" ", "\n", "/", "\\", "$", "#", "@", "^", "&", "*");
+                $article_data['url'] = str_replace($invalid_chars, "_", $article_data['url']);
+
                 if($app->getRequest()->request->get('editval')) {
                     $aid = trim($app->getRequest()->request->get('editval'));
                     $app->setTemplateData(array('content_message' => (Article::updateArticle($article_data, $aid, $app)) ? "Article updated successfully" : "Article update failed"));
