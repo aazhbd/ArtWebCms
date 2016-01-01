@@ -31,9 +31,11 @@
 
         <form class="pure-form pure-form-aligned" id="signupform" method="post" action="{{ path_url_postfix }}/user/list">
             <fieldset>
-                <legend>{{ legend|default('Enter information to signup.') }}</legend>
                 {% if action == "edit" %}
+                    <legend>Edit User</legend>
                     <input type="hidden" value="{{ update_user.id }}" name="editval" />
+                {% else %}
+                    <legend>Add New User</legend>
                 {% endif %}
                 <div class="pure-control-group">
                     <label for="name">Name</label>

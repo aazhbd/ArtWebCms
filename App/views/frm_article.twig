@@ -40,9 +40,11 @@
 
         <form class="pure-form pure-form-stacked" style="width: 768px;" id="publish" method="post" action="{{ path_url_postfix }}/article/list">
             <fieldset class="pure-group">
-                <legend>Add article</legend>
                 {% if action == "edit" %}
+                    <legend>Edit Article</legend>
                     <input type="hidden" value="{{ article.id }}" name="editval" />
+                {% else %}
+                    <legend>Add New Article</legend>
                 {% endif %}
                 <input type="text" class="pure-input-1" placeholder="Title" value="{{ article.title }}" name="title" />
                 <input type="text" class="pure-input-1" placeholder="Subtitle" value="{{ article.subtitle }}" name="subtitle" />

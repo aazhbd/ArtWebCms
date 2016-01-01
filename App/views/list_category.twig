@@ -28,10 +28,13 @@
     {{ body_content }}
     {% if session.get('user_info').utype == 1 %}
         <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/category/list/">
+            {% if action == "edit" %}
+                <legend>Edit Category</legend>
+                <input type="hidden" value="{{ cat_id }}" name="editval" />
+            {% else %}
+                <legend>Add New Category</legend>
+            {% endif %}
             <fieldset>
-                {% if action == "edit" %}
-                    <input type="hidden" value="{{ cat_id }}" name="editval" />
-                {% endif %}
                 <input type="text" class="pure-input-1-2" placeholder="Category name" value="{{ cat_pre.catname }}" name="catname" />
             </fieldset>
 
