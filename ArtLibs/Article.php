@@ -9,18 +9,20 @@ class Article
      * @param $app
      * @return mixed
      */
-    public static function getArticles($app) {
+    public static function getArticles($app, $state=null) {
         try {
-            $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->orderBy('date_inserted DESC')
-                ->fetchAll();
+            $query = $app->getDataManager()->getDataManager()->from("articles");
+            if($state != null) {
+                $query->where(array('state' => 0));
+            }
+            $q = $query->orderBy('date_inserted DESC')->fetchAll();
         }
         catch(\PDOException $ex){
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
-        return $query;
+        return $q;
     }
 
     /**
@@ -29,6 +31,10 @@ class Article
      * @return mixed
      */
     public static function getArticleById($aid, $app) {
+        if(!isset($aid)) {
+            return false;
+        }
+
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("id" => $aid))
@@ -73,6 +79,10 @@ class Article
      * @return mixed
      */
     public static function getArticleByUrl($aurl, $app) {
+        if(!isset($aurl)) {
+            return false;
+        }
+
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("url" => $aurl, "state" => 0))
