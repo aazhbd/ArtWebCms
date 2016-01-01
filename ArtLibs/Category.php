@@ -10,19 +10,18 @@ class Category
      * @param null $state
      * @return mixed
      */
-    public static function getCategories($app, $state=null) {
-        if(!isset($state)) {
+    public static function getCategories($app, $state = null)
+    {
+        if (!isset($state)) {
             $query = $app->getDataManager()->getDataManager()->from("categories");
-        }
-        else {
+        } else {
             $query = $app->getDataManager()->getDataManager()->from("categories")->where(array("state" => $state));
         }
 
         try {
             $q = $query->fetchAll();
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return null;
         }
 
@@ -34,14 +33,14 @@ class Category
      * @param $app
      * @return mixed
      */
-    public static function getCategoryById($cat_id, $app) {
+    public static function getCategoryById($cat_id, $app)
+    {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")
                 ->where(array("id" => $cat_id,))
                 ->fetch();
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error retrieving user information : " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return null;
         }
 
@@ -53,7 +52,8 @@ class Category
      * @param $app
      * @return bool
      */
-    public static function addCategory($category=array(), $app) {
+    public static function addCategory($category = array(), $app)
+    {
         if (empty($category)) {
             return false;
         }
@@ -63,9 +63,8 @@ class Category
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -78,7 +77,8 @@ class Category
      * @param $app
      * @return bool
      */
-    public static function updateCategory($cat_id, $category=array(), $app) {
+    public static function updateCategory($cat_id, $category = array(), $app)
+    {
         if (empty($category) || !isset($cat_id)) {
             return false;
         }
@@ -88,9 +88,8 @@ class Category
         try {
             $query = $app->getDataManager()->getDataManager()->update('categories', $category, $cat_id);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error adding new user: " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
@@ -103,18 +102,18 @@ class Category
      * @param $app
      * @return bool
      */
-    public static function setState($state, $category_id, $app) {
-        if(!isset($state) || !isset($category_id)) {
+    public static function setState($state, $category_id, $app)
+    {
+        if (!isset($state) || !isset($category_id)) {
             return false;
         }
 
         try {
             $query = $app->getDataManager()->getDataManager()
-                ->update('categories', array('state' => $state, 'date_updated' =>  new \FluentLiteral('NOW()')), $category_id);
+                ->update('categories', array('state' => $state, 'date_updated' => new \FluentLiteral('NOW()')), $category_id);
             $executed = $query->execute(true);
-        }
-        catch(\PDOException $ex){
-            $app->getErrorManager()->addMessage("Error disabling: " . $ex->getMessage());
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
 
