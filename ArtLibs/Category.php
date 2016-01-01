@@ -109,7 +109,8 @@ class Category
         }
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('categories', array('state' => $state), $category_id);
+            $query = $app->getDataManager()->getDataManager()
+                ->update('categories', array('state' => $state, 'date_updated' =>  new \FluentLiteral('NOW()')), $category_id);
             $executed = $query->execute(true);
         }
         catch(\PDOException $ex){
