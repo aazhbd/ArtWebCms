@@ -13,7 +13,7 @@ class Article
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles");
             if($state != null) {
-                $query->where(array('state' => 0));
+                $query->where(array('state' => $state));
             }
             $q = $query->orderBy('date_inserted DESC')->fetchAll();
         }
