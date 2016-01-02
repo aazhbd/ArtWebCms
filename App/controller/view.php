@@ -32,7 +32,6 @@ class Views extends Controller
     {
         $app->setTemplateData(array(
             'title' => 'Home',
-            'subtitle' => 'Active Articles',
         ));
 
         if ($app->getRequest()->getMethod() == "POST") {
@@ -55,7 +54,7 @@ class Views extends Controller
         if ($user_info['utype'] == 1) {
             $articles = Article::getArticles($app, 0);
             if ($articles) {
-                $app->setTemplateData(array('articles' => $articles));
+                $app->setTemplateData(array('subtitle' => 'Active Articles', 'articles' => $articles));
             }
         }
 
