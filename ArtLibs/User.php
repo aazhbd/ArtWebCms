@@ -232,7 +232,8 @@ class User
         }
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('users', array('state' => $state), $uid);
+            $query = $app->getDataManager()->getDataManager()
+                ->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'state' => $state), $uid);
             $executed = $query->execute(true);
         } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
