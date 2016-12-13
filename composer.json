@@ -8,7 +8,6 @@
     "lichtner/fluentpdo": "dev-master",
     "components/jquery": "~2.1",
     "components/jqueryui": "^1.11",
-    "tinymce/tinymce": "*",
     "symfony/expression-language": "~2.5",
     "twig/twig": "1.24"
   },
