@@ -7,7 +7,7 @@
     <meta name="keywords" content="ArtCMS, {{ keys }}" />
     <meta name="robots" content="index, follow, I followed" />
 
-    <title>{% block title %} {{ user_var.project_name }}{% endblock %}</title>
+    <title>{{ user_var.project_name }} - {% block title %}{% endblock %}</title>
 
     <link href="{{ path_static }}css/zstyle.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="{{ path_static }}css/pure.css" rel="stylesheet" type="text/css" media="screen"/>
