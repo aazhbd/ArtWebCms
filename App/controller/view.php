@@ -174,9 +174,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewCategoryList($params, $app)
+    public function viewCategoryList($params, Application $app)
     {
         $app->setTemplateData(array(
             'title' => 'Category List',
