@@ -312,9 +312,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewLogin($params, $app)
+    public function viewLogin($params, Application $app)
     {
         $app->setTemplateData(array('title' => 'Login',));
 
