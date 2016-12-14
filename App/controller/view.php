@@ -159,7 +159,7 @@ class Views extends Controller
             if(isset($params['opt']) && isset($params['aid'])) {
                 $action = $params['opt'];
                 $aid = $params['aid'];
-                $app->setTemplateData(array('article' => Article::getArticleById($aid, $app), 'action' => "edit"));
+                $app->setTemplateData(array('article' => Article::getArticleById($aid, $app), 'action' => $action));
             }
 
             $categories = Category::getCategories($app, 0);
