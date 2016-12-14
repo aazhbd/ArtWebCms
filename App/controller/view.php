@@ -348,9 +348,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewSignup($params, $app)
+    public function viewSignup($params, Application $app)
     {
         $app->setTemplateData(array('title' => 'Signup',));
 
