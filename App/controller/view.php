@@ -64,9 +64,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewArticle($params, $app)
+    public function viewArticle($params, Application $app)
     {
         $app->setTemplateData(array('title' => 'Not found'));
         $article = false;
