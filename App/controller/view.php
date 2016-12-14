@@ -146,9 +146,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function frmArticle($params, $app)
+    public function frmArticle($params, Application $app)
     {
         $app->setTemplateData(array(
             'title' => 'Add new article',
