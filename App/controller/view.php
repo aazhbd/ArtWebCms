@@ -1,5 +1,6 @@
 <?php
 
+use ArtLibs\Application;
 use ArtLibs\Controller;
 use ArtLibs\User;
 use ArtLibs\Article;
@@ -10,9 +11,9 @@ class Views extends Controller
 {
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewRoot($params, $app)
+    public function viewRoot($params, Application $app)
     {
         $app->setTemplateData(
             array(
