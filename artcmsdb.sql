@@ -18,8 +18,8 @@ CREATE TABLE `articles` (
   `subtitle` varchar(500) DEFAULT NULL,
   `body` mediumtext,
   `meta_tags` varchar(200) DEFAULT NULL,
-  `date_inserted` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
+  `date_inserted` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `date_updated` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `state` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `em_index` (`url`)
@@ -66,4 +66,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `pass`, `firstname`, `lastname`, `gender`, `date_ofbirth`, `validator`, `utype`, `ustatus`, `date_lastlogin`, `date_inserted`, `date_updated`, `state`) VALUES
   (1,	'admin',	'admin',	'admin',	'user',	'm',	'2010-03-01',	'632667547e7cd3e0466547863e1207a8c0c0c549',	1,	1,	'2016-12-13 23:21:41',	'2010-03-11 04:22:24',	'2010-03-11 04:22:24',	0);
 
--- 2016-12-13 23:57:41
+-- 2016-12-14 00:04:18
