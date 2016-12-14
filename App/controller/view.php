@@ -359,9 +359,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewLogout($params, $app)
+    public function viewLogout($params, Application $app)
     {
         $app->setTemplateData(array('title' => 'Logout'));
 
