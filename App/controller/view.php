@@ -18,7 +18,7 @@ class Views extends Controller
         $app->setTemplateData(
             array(
                 'title' => 'Start',
-                'body_content' => 'The start page loaded from controller/view.php.'
+                'body_content' => 'The start page loaded from App/controller/view.php.'
             )
         );
 
