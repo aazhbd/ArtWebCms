@@ -244,9 +244,9 @@ class Views extends Controller
 
     /**
      * @param $params
-     * @param $app
+     * @param Application $app
      */
-    public function viewUserList($params, $app)
+    public function viewUserList($params, Application $app)
     {
         $app->setTemplateData(array(
             'title' => 'Users List',
