@@ -27,12 +27,12 @@
     {{ body_content }}
 
     {% if session.get('user_info').utype == 1 %}
+        <div style="float: right; padding: 10px;">
+            <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/add/">+ Add Article</a>
+            &nbsp;
+            <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/list/">Categories</a>
+        </div>
         {% if articles %}
-            <div style="float: right; padding: 10px;">
-                <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/add/">+ Add Article</a>
-                &nbsp;
-                <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/list/">Categories</a>
-            </div>
             <table class="pure-table-horizontal" id="sortedtable" style="width: 100%">
                 <thead>
                 <tr>
