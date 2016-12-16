@@ -6,10 +6,11 @@ namespace ArtLibs;
 class Article
 {
     /**
-     * @param $app
-     * @return mixed
+     * @param Application $app
+     * @param null $state
+     * @return bool
      */
-    public static function getArticles($app, $state = null)
+    public static function getArticles(Application $app, $state = null)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles");
