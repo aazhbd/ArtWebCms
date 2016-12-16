@@ -76,10 +76,10 @@ class Article
 
     /**
      * @param $aurl
-     * @param $app
-     * @return mixed
+     * @param Application $app
+     * @return bool
      */
-    public static function getArticleByUrl($aurl, $app)
+    public static function getArticleByUrl($aurl, Application $app)
     {
         if (!isset($aurl)) {
             return false;
