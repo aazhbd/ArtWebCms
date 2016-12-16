@@ -52,10 +52,10 @@ class Article
     /**
      * @param $article_data
      * @param $aid
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function updateArticle($article_data, $aid, $app)
+    public static function updateArticle($article_data, $aid, Application $app)
     {
         if (!isset($article_data) || !isset($aid)) {
             return false;
