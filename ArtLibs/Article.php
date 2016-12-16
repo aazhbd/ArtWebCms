@@ -28,10 +28,10 @@ class Article
 
     /**
      * @param $aid
-     * @param $app
-     * @return mixed
+     * @param Application $app
+     * @return bool
      */
-    public static function getArticleById($aid, $app)
+    public static function getArticleById($aid, Application $app)
     {
         if (!isset($aid)) {
             return false;
