@@ -24,6 +24,12 @@ body {
     position: absolute;
 }
 
+@media (min-width: 1000px) {
+    body{
+        font-size: 0.8vmax;
+    }
+}
+
 div {
     height: auto;
 }
