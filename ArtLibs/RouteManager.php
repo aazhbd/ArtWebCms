@@ -23,33 +23,6 @@ class RouteManager
     }
 
     /**
-     * @return mixed
-     */
-    public function getUrlParams()
-    {
-        return $this->url_params;
-    }
-
-    /**
-     * @param mixed $url_params
-     * @return mixed
-     */
-    public function setUrlParams($url_params = array())
-    {
-        if (count($url_params) < 1) {
-            $this->url_params = array_values(
-                array_filter(
-                    explode('/', trim($this->incoming_url, '\\'))
-                )
-            );
-        } else {
-            $this->url_params = $url_params;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param array $route_conf
      */
     public function dispatchUrl($route_conf = array())
@@ -104,17 +77,28 @@ class RouteManager
     /**
      * @return mixed
      */
-    public function getApp()
+    public function getUrlParams()
     {
-        return $this->app;
+        return $this->url_params;
     }
 
     /**
-     * @param mixed $app
+     * @param mixed $url_params
+     * @return mixed
      */
-    public function setApp($app)
+    public function setUrlParams($url_params = array())
     {
-        $this->app = $app;
+        if (count($url_params) < 1) {
+            $this->url_params = array_values(
+                array_filter(
+                    explode('/', trim($this->incoming_url, '\\'))
+                )
+            );
+        } else {
+            $this->url_params = $url_params;
+        }
+
+        return $this;
     }
 
     /**
@@ -152,6 +136,22 @@ class RouteManager
     public function setRoutes($routes)
     {
         $this->routes = $routes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+    /**
+     * @param mixed $app
+     */
+    public function setApp($app)
+    {
+        $this->app = $app;
     }
 
 }
