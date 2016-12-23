@@ -83,7 +83,7 @@ class Views extends Controller
             $app->setTemplateData(array(
                 'title' => $article['title'],
                 'subtitle' => $article['subtitle'],
-                'body' => $parsemd->text(stripslashes($article['body'])),
+                'body' => $parsemd->text(stripslashes(html_entity_decode(htmlentities($article['body'])))),
                 'article' => $article
             ));
         }
