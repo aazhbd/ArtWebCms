@@ -5,19 +5,29 @@ namespace ArtLibs;
 
 class Article
 {
+
     /**
      * @param Application $app
      * @param null $state
-     * @return bool
+     * @param null $category_id
+     * @return array|bool
      */
-    public static function getArticles(Application $app, $state = null)
+    public static function getArticles(Application $app, $state = null, $category_id = null)
     {
+        $cond = array();
+
+        if ($category_id !== null) {
+            $cond['category_id'] = (int)$category_id;
+        }
+
+        if ($state !== null) {
+            $cond['state'] = $state;
+        }
+
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles");
-            if ($state != null) {
-                $query->where(array('state' => $state));
-            }
-            $q = $query->orderBy('date_inserted DESC')->fetchAll();
+            $query->where($cond);
+            $q = $query->orderBy('date_inserted ASC')->fetchAll();
         } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
@@ -29,7 +39,7 @@ class Article
     /**
      * @param $aid
      * @param Application $app
-     * @return bool
+     * @return bool|mixed
      */
     public static function getArticleById($aid, Application $app)
     {
@@ -53,7 +63,7 @@ class Article
      * @param $article_data
      * @param $aid
      * @param Application $app
-     * @return bool
+     * @return bool|int|\PDOStatement
      */
     public static function updateArticle($article_data, $aid, Application $app)
     {
@@ -77,7 +87,7 @@ class Article
     /**
      * @param $aurl
      * @param Application $app
-     * @return bool
+     * @return bool|mixed
      */
     public static function getArticleByUrl($aurl, Application $app)
     {
@@ -100,7 +110,7 @@ class Article
     /**
      * @param $article_data
      * @param Application $app
-     * @return bool
+     * @return bool|int
      */
     public static function addArticle($article_data, Application $app)
     {
@@ -121,3 +131,11 @@ class Article
         return $executed;
     }
 }
+
+/**
+ * An open source web application development framework for PHP 5.
+ * @author        ArticulateLogic Labs
+ * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
+ * @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ * @license       MIT License
+ */
