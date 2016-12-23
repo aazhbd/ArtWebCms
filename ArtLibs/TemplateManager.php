@@ -7,9 +7,9 @@ class TemplateManager
 
     /**
      * TemplateManager constructor.
-     * @param $app
+     * @param Application $app
      */
-    function __construct($app)
+    function __construct(Application $app)
     {
         $this->template = new \Twig_Environment(
             new \Twig_Loader_Filesystem($app->getConfManager()->getPath()),
@@ -19,7 +19,7 @@ class TemplateManager
     }
 
     /**
-     * @return mixed
+     * @return \Twig_Environment
      */
     public function getTemplate()
     {
@@ -27,7 +27,7 @@ class TemplateManager
     }
 
     /**
-     * @param mixed $template
+     * @param $template
      */
     public function setTemplate($template)
     {
@@ -41,6 +41,6 @@ class TemplateManager
  * An open source web application development framework for PHP 5.
  * @author        ArticulateLogic Labs
  * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- * @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ * @copyright     Copyright (c)2009-2016 ArticulateLogic Labs
  * @license       MIT License
  */
