@@ -15,11 +15,11 @@ class User
 
     /**
      * User constructor.
-     * @param $app
+     * @param Application $app
      * @param $email
      * @param $pass
      */
-    public function __construct($app, $email, $pass)
+    public function __construct(Application $app, $email, $pass)
     {
         $this->app = $app;
 
@@ -56,7 +56,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return Application
      */
     public function getApp()
     {
@@ -64,10 +64,10 @@ class User
     }
 
     /**
-     * @param mixed $app
-     * @return User
+     * @param Application $app
+     * @return $this
      */
-    public function setApp($app)
+    public function setApp(Application $app)
     {
         $this->app = $app;
         return $this;
@@ -134,10 +134,10 @@ class User
     }
 
     /**
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function clearSession($app)
+    public static function clearSession(Application $app)
     {
         if (!$app->getSession()->get('is_authenticated')) {
             return false;
@@ -149,10 +149,10 @@ class User
 
     /**
      * @param $email
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function userExists($email, $app)
+    public static function userExists($email, Application $app)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
@@ -171,10 +171,10 @@ class User
 
     /**
      * @param array $uinfo
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function addUser($uinfo = array(), $app)
+    public static function addUser($uinfo = array(), Application $app)
     {
         if (empty($uinfo)) {
             return false;
@@ -196,10 +196,10 @@ class User
     /**
      * @param $uid
      * @param array $uinfo
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function updateUser($uid, $uinfo = array(), $app)
+    public static function updateUser($uid, $uinfo = array(), Application $app)
     {
         if (empty($uinfo) || !isset($uid)) {
             return false;
@@ -222,7 +222,7 @@ class User
      * @param $app
      * @return mixed
      */
-    public static function getUsers($app)
+    public static function getUsers(Application $app)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")->fetchAll();
@@ -236,10 +236,10 @@ class User
 
     /**
      * @param $uid
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function getUserById($uid, $app)
+    public static function getUserById($uid, Application $app)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
@@ -258,10 +258,10 @@ class User
     /**
      * @param $state
      * @param $uid
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function setState($state, $uid, $app)
+    public static function setState($state, $uid, Application $app)
     {
         if (!isset($state) || !isset($uid)) {
             return false;
