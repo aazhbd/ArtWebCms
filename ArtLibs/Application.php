@@ -31,7 +31,7 @@ class Application
      */
     function __construct()
     {
-        $this->error_manager = $this->setErrorManager(false);
+        $this->error_manager = $this->setErrorManager();
 
         try {
             /* Set all configurations */
@@ -86,14 +86,14 @@ class Application
     }
 
     /**
-     * @param mixed $error_manager
-     * @return mixed
+     * @param ErrorManager|null $error_manager
+     * @return ErrorManager|mixed
      */
-    public function setErrorManager($error_manager = false)
+    public function setErrorManager(ErrorManager $error_manager = null)
     {
         $this->error_manager = $error_manager;
 
-        if ($this->error_manager == false) {
+        if ($this->error_manager == null) {
             require_once('ErrorManager.php');
             $this->error_manager = new ErrorManager();
         }
