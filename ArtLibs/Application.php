@@ -35,7 +35,7 @@ class Application
 
         try {
             /* Set all configurations */
-            $this->conf = $this->setConf(false);
+            $this->conf = $this->setConf();
             $this->conf_manager = $this->setConfManager(false);
 
             if ($this->conf_manager->getDevelopmentMode()) {
@@ -247,19 +247,19 @@ class Application
     }
 
     /**
-     * @param mixed $conf
-     * @return mixed
+     * @param null $conf
+     * @return mixed|null
      * @throws \Exception
      */
-    public function setConf($conf = false)
+    public function setConf($conf = null)
     {
         $this->conf = $conf;
 
-        if ($this->conf == false) {
+        if ($this->conf == null) {
             $this->conf = include_once('../conf.php');
         }
 
-        if ($this->conf == false) {
+        if ($this->conf == null) {
             throw new \Exception("Unable to load configuration file.");
         }
 
