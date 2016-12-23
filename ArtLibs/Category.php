@@ -6,11 +6,11 @@ namespace ArtLibs;
 class Category
 {
     /**
-     * @param $app
+     * @param Application $app
      * @param null $state
-     * @return mixed
+     * @return null
      */
-    public static function getCategories($app, $state = null)
+    public static function getCategories(Application $app, $state = null)
     {
         if (!isset($state)) {
             $query = $app->getDataManager()->getDataManager()->from("categories");
@@ -30,10 +30,10 @@ class Category
 
     /**
      * @param $cat_id
-     * @param $app
-     * @return mixed
+     * @param Application $app
+     * @return null
      */
-    public static function getCategoryById($cat_id, $app)
+    public static function getCategoryById($cat_id, Application $app)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")
@@ -48,11 +48,30 @@ class Category
     }
 
     /**
+     * @param $cat_name
+     * @param Application $app
+     * @return null
+     */
+    public static function getCategoryByName($cat_name, Application $app)
+    {
+        try {
+            $query = $app->getDataManager()->getDataManager()->from("categories")
+                ->where(array("catname" => $cat_name))
+                ->fetch();
+        } catch (\PDOException $ex) {
+            $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
+            return null;
+        }
+
+        return $query;
+    }
+
+    /**
      * @param array $category
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function addCategory($category = array(), $app)
+    public static function addCategory($category = array(), Application $app)
     {
         if (empty($category)) {
             return false;
@@ -74,10 +93,10 @@ class Category
     /**
      * @param $cat_id
      * @param array $category
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function updateCategory($cat_id, $category = array(), $app)
+    public static function updateCategory($cat_id, $category = array(), Application $app)
     {
         if (empty($category) || !isset($cat_id)) {
             return false;
@@ -99,10 +118,10 @@ class Category
     /**
      * @param $state
      * @param $category_id
-     * @param $app
+     * @param Application $app
      * @return bool
      */
-    public static function setState($state, $category_id, $app)
+    public static function setState($state, $category_id, Application $app)
     {
         if (!isset($state) || !isset($category_id)) {
             return false;
@@ -120,3 +139,11 @@ class Category
         return $executed;
     }
 }
+
+/**
+ * An open source web application development framework for PHP 5.
+ * @author        ArticulateLogic Labs
+ * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
+ * @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ * @license       MIT License
+ */
