@@ -56,6 +56,24 @@ class User
     }
 
     /**
+     * @return mixed
+     */
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+    /**
+     * @param mixed $app
+     * @return User
+     */
+    public function setApp($app)
+    {
+        $this->app = $app;
+        return $this;
+    }
+
+    /**
      * @param $uid
      * @return bool
      */
@@ -95,6 +113,24 @@ class User
         $this->getApp()->getSession()->set('user_info', $this->getUserInfo());
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserInfo()
+    {
+        return $this->user_info;
+    }
+
+    /**
+     * @param array $user_info
+     * @return User
+     */
+    public function setUserInfo($user_info)
+    {
+        $this->user_info = $user_info;
+        return $this;
     }
 
     /**
@@ -246,24 +282,6 @@ class User
     /**
      * @return mixed
      */
-    public function getApp()
-    {
-        return $this->app;
-    }
-
-    /**
-     * @param mixed $app
-     * @return User
-     */
-    public function setApp($app)
-    {
-        $this->app = $app;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getUserStatus()
     {
         if ($this->isAuthenticated()) {
@@ -304,24 +322,6 @@ class User
     public function setAuthenticated($authenticated)
     {
         $this->authenticated = $authenticated;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getUserInfo()
-    {
-        return $this->user_info;
-    }
-
-    /**
-     * @param array $user_info
-     * @return User
-     */
-    public function setUserInfo($user_info)
-    {
-        $this->user_info = $user_info;
         return $this;
     }
 
