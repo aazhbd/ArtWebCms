@@ -146,9 +146,7 @@ class Views extends Controller
      */
     public function frmArticle($params, Application $app)
     {
-        $app->setTemplateData(array(
-            'title' => 'Add new article',
-        ));
+        $app->setTemplateData(array('title' => 'Add new article'));
 
         $user_info = $app->getSession()->get('user_info');
         if ($user_info['utype'] == 1) {
