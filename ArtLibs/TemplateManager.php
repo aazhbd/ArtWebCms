@@ -1,6 +1,8 @@
 <?php
 namespace ArtLibs;
 
+use Twig_Environment;
+
 class TemplateManager
 {
     private $template;
@@ -11,7 +13,7 @@ class TemplateManager
      */
     function __construct(Application $app)
     {
-        $this->template = new \Twig_Environment(
+        $this->template = new Twig_Environment(
             new \Twig_Loader_Filesystem($app->getConfManager()->getPath()),
             array('debug' => $app->getConfManager()->getDevelopmentMode())
         );
@@ -19,7 +21,7 @@ class TemplateManager
     }
 
     /**
-     * @return \Twig_Environment
+     * @return Twig_Environment
      */
     public function getTemplate()
     {
