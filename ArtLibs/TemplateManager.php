@@ -27,9 +27,9 @@ class TemplateManager
     }
 
     /**
-     * @param $template
+     * @param Twig_Environment $template
      */
-    public function setTemplate($template)
+    public function setTemplate(Twig_Environment $template)
     {
         $this->template = $template;
     }
