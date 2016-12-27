@@ -13,6 +13,10 @@ Requires `PHP 5.3` or greater.
 
 Since ArtWebCMS is based on [ArtWeb](http://articulatelogic.com/a/artweb/), the same [steps](http://articulatelogic.com/a/artweb/) can be followed to deploy it.
 
+After the code is deployed, it is necessary to import the included artcmsdb.sql file to MySql.
+
+After deploying the copy with webserver, you can access the admin interface with username: `admin` and password: `admin`
+
 ### License
 -----------
 
