@@ -17,7 +17,7 @@ After the code is deployed, it is necessary to import the included artcmsdb.sql 
 
 The interface can be accessed by opening, <http://localhost:8080/ArtWebCms/webroot/> the webserver URL and folder address can be different based on deployment.
 
-After deploying the copy with database and webserver, you can access the admin interface with username: `admin` and password: `admin`
+After deploying the copy with database and webserver, the admin interface can be accessed with username: `admin` and password: `admin` and the top menu can be edited by editing the file in `/App/views/home.twig`
 
 ### License
 -----------
