@@ -8,6 +8,10 @@ ArtWebCms is a fast, secure, feature rich, scalable Content Management System, p
 
 Requires `PHP 5.3` or greater.
 
+### install instructions
+------------------------
+
+Since ArtWebCMS is based on (ArtWeb)[http://articulatelogic.com/a/artweb/], the same (steps)[http://articulatelogic.com/a/artweb/] can be followed to deploy it.
 
 ### License
 -----------
