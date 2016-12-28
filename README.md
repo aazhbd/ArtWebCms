@@ -28,5 +28,5 @@ The code is released under MIT License.
 ### Contact
 -----------
 
-Development
-AAZH (aazhbd@yahoo.com)
+[Abdullah Al Zakir Hossain](https://de.linkedin.com/in/aazhbd)
+<aazhbd@yahoo.com>
