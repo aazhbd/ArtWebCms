@@ -31,4 +31,4 @@ The code is released under MIT License.
 -----------
 
 [Abdullah Al Zakir Hossain](https://de.linkedin.com/in/aazhbd)
-<aazhbd@yahoo.com>
+    - Email: <aazhbd@yahoo.com>
