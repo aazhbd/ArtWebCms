@@ -30,5 +30,8 @@ The code is released under MIT License.
 ### Contact
 -----------
 
-[Abdullah Al Zakir Hossain](https://de.linkedin.com/in/aazhbd)
-    - Email: <aazhbd@yahoo.com>
+> **Abdullah Al Zakir Hossain**
+
+- Email:   <aazhbd@yahoo.com>
+- Github:   <http://github.com/aazhbd>
+- Profile:   <https://de.linkedin.com/in/aazhbd>
