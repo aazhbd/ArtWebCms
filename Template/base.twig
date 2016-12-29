@@ -23,10 +23,9 @@
 
 <body>
 <div id="contentheader">
-    {% block contentheader %}
         <div id="banner">
             <img src="{{ path_static }}images/logo.gif" id="logo"/>
-
+            {% block contentheader %}
             <div id="navigatemenu">
                 <div class="pure-menu pure-menu-horizontal">
                     <ul class="pure-menu-list">
@@ -50,9 +49,8 @@
                 |
                 <a href="/uhome">Member Home</a>
             </div>
-
+            {% endblock %}
         </div>
-    {% endblock %}
 </div>
 
 <div id="contentbody">

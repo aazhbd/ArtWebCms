@@ -5,44 +5,41 @@
 {% endblock %}
 
 {% block contentheader %}
-    <div id="banner">
-        <img src="{{ path_static }}images/logo.gif" id="logo"/>
+<div id="navigatemenu">
+    <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item">
+                <a href="{{ path_url_postfix }}/home" class="pure-menu-link">Home</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="{{ path_url_postfix }}/a/about" class="pure-menu-link">About</a>
+            </li>
 
-        <div id="navigatemenu">
-            <div class="pure-menu pure-menu-horizontal">
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="{{ path_url_postfix }}/home" class="pure-menu-link">Home</a>
-                    </li>
-                    <li class="pure-menu-item">
-                        <a href="{{ path_url_postfix }}/a/about" class="pure-menu-link">About</a>
-                    </li>
-
-                    {% if session.get('user_info').utype == 1 %}
-                    <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                        <a href="{{ path_url_postfix }}/home" id="menuLink1" class="pure-menu-link">Admin Menu</a>
-                        <ul class="pure-menu-children">
-                            <li class="pure-menu-item"><a href="{{ path_url_postfix }}/user/list" class="pure-menu-link">Manage Users</a></li>
-                            <li class="pure-menu-item"><a href="{{ path_url_postfix }}/article/list" class="pure-menu-link">Manage Articles</a></li>
-                            <li class="pure-menu-item"><a href="{{ path_url_postfix }}/category/list" class="pure-menu-link">Manage Categories</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+            {% if session.get('user_info').utype == 1 %}
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                <a href="{{ path_url_postfix }}/home" id="menuLink1" class="pure-menu-link">Admin Menu</a>
+                <ul class="pure-menu-children">
+                    <li class="pure-menu-item"><a href="{{ path_url_postfix }}/user/list" class="pure-menu-link">Manage Users</a></li>
+                    <li class="pure-menu-item"><a href="{{ path_url_postfix }}/article/list" class="pure-menu-link">Manage Articles</a></li>
+                    <li class="pure-menu-item"><a href="{{ path_url_postfix }}/category/list" class="pure-menu-link">Manage Categories</a></li>
                 </ul>
-            </div>
-        </div>
-
-        <div id="topright">
-            {% if session.get('is_authenticated') %}
-                <a class="pure-button" href="{{ path_url_postfix }}/home">{% if session.get('user_info').firstname %}{{ session.get('user_info').firstname }}'s{% else %}User{% endif %} Home</a>
-                <a href="{{ path_url_postfix }}/logout">Logout</a>
-            {% else %}
-                <a class="pure-button" href="{{ path_url_postfix }}/login">Login</a>
-                <a class="pure-button" href="{{ path_url_postfix }}/signup">Signup</a>
+            </li>
             {% endif %}
-        </div>
+        </ul>
     </div>
+</div>
+
+<div id="topright">
+    {% if session.get('is_authenticated') %}
+        <a class="pure-button" href="{{ path_url_postfix }}/home">{% if session.get('user_info').firstname %}{{ session.get('user_info').firstname }}'s{% else %}User{% endif %} Home</a>
+        <a href="{{ path_url_postfix }}/logout">Logout</a>
+    {% else %}
+        <a class="pure-button" href="{{ path_url_postfix }}/login">Login</a>
+        <a class="pure-button" href="{{ path_url_postfix }}/signup">Signup</a>
+    {% endif %}
+</div>
 {% endblock %}
+
 
 {% block contentbody %}
     {% if content_message %}
