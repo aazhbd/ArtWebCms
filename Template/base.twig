@@ -23,34 +23,34 @@
 
 <body>
 <div id="contentheader">
-        <div id="banner">
-            <img src="{{ path_static }}images/logo.gif" id="logo"/>
-            {% block contentheader %}
-            <div id="navigatemenu">
-                <div class="pure-menu pure-menu-horizontal">
-                    <ul class="pure-menu-list">
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
-                    </ul>
-                </div>
+    <div id="banner">
+        <img src="{{ path_static }}images/logo.gif" id="logo"/>
+        {% block contentheader %}
+        <div id="navigatemenu">
+            <div class="pure-menu pure-menu-horizontal">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
+                </ul>
             </div>
-
-            <div id="search" class="pure-form">
-                <form class="frmsearch" method="post" id="frmsearch" action="">
-					<span>
-						<input type="text" class="search" placeholder="Search" name="search">
-						<input type="submit" class="btnsearch" value="Search" id="submit" name="submit">
-					</span>
-                </form>
-            </div>
-
-            <div id="topright">
-                <a href="/logout">Logout</a>
-                |
-                <a href="/uhome">Member Home</a>
-            </div>
-            {% endblock %}
         </div>
+
+        <div id="search" class="pure-form">
+            <form class="frmsearch" method="post" id="frmsearch" action="">
+                <span>
+                    <input type="text" class="search" placeholder="Search" name="search">
+                    <input type="submit" class="btnsearch" value="Search" id="submit" name="submit">
+                </span>
+            </form>
+        </div>
+
+        <div id="topright">
+            <a href="/logout">Logout</a>
+            |
+            <a href="/uhome">Member Home</a>
+        </div>
+        {% endblock %}
+    </div>
 </div>
 
 <div id="contentbody">
