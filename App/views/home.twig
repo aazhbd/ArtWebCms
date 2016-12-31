@@ -14,7 +14,6 @@
             <li class="pure-menu-item">
                 <a href="{{ path_url_postfix }}/a/about" class="pure-menu-link">About</a>
             </li>
-
             {% if session.get('user_info').utype == 1 %}
             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                 <a href="{{ path_url_postfix }}/home" id="menuLink1" class="pure-menu-link">Admin Menu</a>
@@ -28,7 +27,6 @@
         </ul>
     </div>
 </div>
-
 <div id="topright">
     {% if session.get('is_authenticated') %}
         <a class="pure-button" href="{{ path_url_postfix }}/home">{% if session.get('user_info').firstname %}{{ session.get('user_info').firstname }}'s{% else %}User{% endif %} Home</a>
@@ -40,18 +38,14 @@
 </div>
 {% endblock %}
 
-
 {% block contentbody %}
     {% if content_message %}
         <div id="reports">{{ content_message }}</div>
     {% endif %}
-
     {{ parent() }}
     {{ body_content }}
 {% endblock %}
 
 {% block footers %}
-    <p style="clear:both;">
-        &copy; 2010 - {{ "now"|date("Y") }} <a href="mailto:aazhbd@yahoo.com">AAZ H</a> | <a href="http://www.articulatelogic.com/">ArticulateLogic.com</a>
-    </p>
+    <p style="clear:both;">&copy; 2010 - {{ "now"|date("Y") }} <a href="mailto:aazhbd@yahoo.com">AAZ H</a> | <a href="http://www.articulatelogic.com/">ArticulateLogic.com</a></p>
 {% endblock %}
