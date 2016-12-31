@@ -1,7 +1,11 @@
 {% extends path_user_template ~ '/home.twig' %}
 
 {% block title %}
-    {{ page_title|default('List of Categories') }}
+    {% if action == "edit" %}
+        {{ page_title|default('Edit Category') }}
+    {% else %}
+        {{ page_title|default('List of Categories') }}
+    {% endif %}
 {% endblock %}
 
 {% block headtags %}
