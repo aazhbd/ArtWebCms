@@ -19,7 +19,6 @@
             if($("#errors").html() == '') {
                 $("#errors").hide();
             }
-
             var simplemde = new SimpleMDE({ element: $("#editorbody")[0] });
         });
     </script>
@@ -29,7 +28,6 @@
     {% if session.get('user_info').utype == 1 %}
         {{ parent() }}
         {{ body_content }}
-
         <form class="pure-form pure-form-stacked" style="width: 768px;" id="publish" method="post" action="{{ path_url_postfix }}/article/list">
             <fieldset class="pure-group">
                 {% if action == "edit" %}
@@ -41,7 +39,6 @@
                 <input type="text" class="pure-input-1" placeholder="Title" value="{{ article.title }}" name="title" />
                 <input type="text" class="pure-input-1" placeholder="Subtitle" value="{{ article.subtitle }}" name="subtitle" />
             </fieldset>
-
             <fieldset class="pure-group">
                 <input type="text" class="pure-input-1" placeholder="Url" value="{{ article.url }}" name="aurl" />
                 <select class="pure-input-1" name="category">
@@ -50,18 +47,14 @@
                     {% endfor %}
                 </select>
             </fieldset>
-
             <fieldset class="pure-group">
                 <textarea class="pure-input-1-2" placeholder="Content" id="editorbody" rows="20" name="abody">{{ article.body }}</textarea>
             </fieldset>
-
             <fieldset class="pure-group">
                 <input type="text" class="pure-input-1" placeholder="state 0/1" value="{{ article.state }}" name="state" />
             </fieldset>
-
             <input type="submit" class="pure-button pure-input-1 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
-
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#publish").validate({
@@ -91,7 +84,6 @@
                 });
             });
         </script>
-
     {% endif %}
 {% endblock %}
 
