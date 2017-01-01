@@ -56,33 +56,33 @@
             <input type="submit" class="pure-button pure-input-1 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
         <script type="text/javascript">
-            $(document).ready(function(){
-                $("#publish").validate({
-                    rules:{
-                        title:{ required: true , maxlength: 100 },
-                        aurl:{ required: true, maxlength: 50},
-                        category:{ required: true },
-                        abody:{ required: true, maxlength: 20000 }
+        $(document).ready(function(){
+            $("#publish").validate({
+                rules:{
+                    title:{ required: true , maxlength: 100 },
+                    aurl:{ required: true, maxlength: 50},
+                    category:{ required: true },
+                    abody:{ required: true, maxlength: 20000 }
+                },
+                messages:{
+                    title: {
+                        required: "Enter title.",
+                        maxlength: "Can't be longer than 100 characters."
                     },
-                    messages:{
-                        title: {
-                            required: "Enter title.",
-                            maxlength: "Can't be longer than 100 characters."
-                        },
-                        aurl: {
-                            required: "Enter url.",
-                            maxlength: "Can't be longer than 50 characters."
-                        },
-                        category: {
-                            required: "Category required."
-                        },
-                        abody: {
-                            required: "Enter article body.",
-                            maxlength: "Article can't be longer than 2000 characters."
-                        }
+                    aurl: {
+                        required: "Enter url.",
+                        maxlength: "Can't be longer than 50 characters."
+                    },
+                    category: {
+                        required: "Category required."
+                    },
+                    abody: {
+                        required: "Enter article body.",
+                        maxlength: "Article can't be longer than 2000 characters."
                     }
-                });
+                }
             });
+        });
         </script>
     {% endif %}
 {% endblock %}
