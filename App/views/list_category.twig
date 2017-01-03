@@ -17,7 +17,6 @@
             if($("#errors").html() == '') {
                 $("#errors").hide();
             }
-
             $('#sortedtable').dataTable({
                 "sPaginationType": "full_numbers",
                 "aLengthMenu": [[25, 50, -1], [25, 50, "All"]],
@@ -44,7 +43,6 @@
 
             <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
-
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#publish").validate({
@@ -60,7 +58,6 @@
                 });
             });
         </script>
-
         {% if categories %}
             <br />
             <table class="pure-table-horizontal" id="sortedtable" style="width: 100%;">
@@ -97,7 +94,6 @@
                 {% endfor %}
             </table>
         {% endif %}
-
     {% endif %}
 {% endblock %}
 
