@@ -59,40 +59,40 @@
             });
         </script>
         {% if categories %}
-            <br />
-            <table class="pure-table-horizontal" id="sortedtable" style="width: 100%;">
-                <thead>
+        <br />
+        <table class="pure-table-horizontal" id="sortedtable" style="width: 100%;">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td style="width: 100px;">Inserted</td>
+                <td style="width: 100px;">Updated</td>
+                <td style="width: 100px;">Edit</td>
+                <td style="width: 100px;">Change State</td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Inserted</td>
+                <td>Updated</td>
+                <td>Edit</td>
+                <td>Change State</td>
+            </tr>
+            </tfoot>
+            <tbody>
+            {% for a in categories %}
                 <tr>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td style="width: 100px;">Inserted</td>
-                    <td style="width: 100px;">Updated</td>
-                    <td style="width: 100px;">Edit</td>
-                    <td style="width: 100px;">Change State</td>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.catname }}</td>
+                    <td>{{ a.date_inserted }}</td>
+                    <td>{{ a.date_updated }}</td>
+                    <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
+                    <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
                 </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>Inserted</td>
-                    <td>Updated</td>
-                    <td>Edit</td>
-                    <td>Change State</td>
-                </tr>
-                </tfoot>
-                <tbody>
-                {% for a in categories %}
-                    <tr>
-                        <td>{{ a.id }}</td>
-                        <td>{{ a.catname }}</td>
-                        <td>{{ a.date_inserted }}</td>
-                        <td>{{ a.date_updated }}</td>
-                        <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
-                        <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
-                    </tr>
-                {% endfor %}
-            </table>
+            {% endfor %}
+        </table>
         {% endif %}
     {% endif %}
 {% endblock %}
