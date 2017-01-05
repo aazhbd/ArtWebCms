@@ -44,19 +44,19 @@
             <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
         </form>
         <script type="text/javascript">
-            $(document).ready(function(){
-                $("#publish").validate({
-                    rules:{
-                        catname:{ required: true , maxlength: 50 },
-                    },
-                    messages:{
-                        catname: {
-                            required: "Enter category name.",
-                            maxlength: "Can't be longer than 50 characters."
-                        }
+        $(document).ready(function(){
+            $("#publish").validate({
+                rules:{
+                    catname:{ required: true , maxlength: 50 },
+                },
+                messages:{
+                    catname: {
+                        required: "Enter category name.",
+                        maxlength: "Can't be longer than 50 characters."
                     }
-                });
+                }
             });
+        });
         </script>
         {% if categories %}
         <br />
