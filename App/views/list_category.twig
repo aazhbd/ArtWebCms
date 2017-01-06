@@ -83,14 +83,14 @@
         </tfoot>
         <tbody>
         {% for a in categories %}
-            <tr>
-                <td>{{ a.id }}</td>
-                <td>{{ a.catname }}</td>
-                <td>{{ a.date_inserted }}</td>
-                <td>{{ a.date_updated }}</td>
-                <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
-                <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
-            </tr>
+        <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.catname }}</td>
+            <td>{{ a.date_inserted }}</td>
+            <td>{{ a.date_updated }}</td>
+            <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
+            <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
+        </tr>
         {% endfor %}
     </table>
     {% endif %}
