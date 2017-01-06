@@ -30,70 +30,70 @@
     {{ parent() }}
     {{ body_content }}
     {% if session.get('user_info').utype == 1 %}
-        <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/category/list/">
-            {% if action == "edit" %}
-                <legend>Edit Category</legend>
-                <input type="hidden" value="{{ cat_id }}" name="editval" />
-            {% else %}
-                <legend>Add New Category</legend>
-            {% endif %}
-            <fieldset>
-                <input type="text" class="pure-input-1-2" placeholder="Category name" value="{{ cat_pre.catname }}" name="catname" />
-            </fieldset>
-
-            <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
-        </form>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            $("#publish").validate({
-                rules:{
-                    catname:{ required: true , maxlength: 50 },
-                },
-                messages:{
-                    catname: {
-                        required: "Enter category name.",
-                        maxlength: "Can't be longer than 50 characters."
-                    }
-                }
-            });
-        });
-        </script>
-        {% if categories %}
-        <br />
-        <table class="pure-table-horizontal" id="sortedtable" style="width: 100%;">
-            <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td style="width: 100px;">Inserted</td>
-                <td style="width: 100px;">Updated</td>
-                <td style="width: 100px;">Edit</td>
-                <td style="width: 100px;">Change State</td>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Inserted</td>
-                <td>Updated</td>
-                <td>Edit</td>
-                <td>Change State</td>
-            </tr>
-            </tfoot>
-            <tbody>
-            {% for a in categories %}
-                <tr>
-                    <td>{{ a.id }}</td>
-                    <td>{{ a.catname }}</td>
-                    <td>{{ a.date_inserted }}</td>
-                    <td>{{ a.date_updated }}</td>
-                    <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
-                    <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
-                </tr>
-            {% endfor %}
-        </table>
+    <form class="pure-form" style="width: 1024px;" id="publish" method="post" action="{{ path_url_postfix }}/category/list/">
+        {% if action == "edit" %}
+            <legend>Edit Category</legend>
+            <input type="hidden" value="{{ cat_id }}" name="editval" />
+        {% else %}
+            <legend>Add New Category</legend>
         {% endif %}
+        <fieldset>
+            <input type="text" class="pure-input-1-2" placeholder="Category name" value="{{ cat_pre.catname }}" name="catname" />
+        </fieldset>
+
+        <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" id="btn_submit" value="Submit"  />
+    </form>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#publish").validate({
+            rules:{
+                catname:{ required: true , maxlength: 50 },
+            },
+            messages:{
+                catname: {
+                    required: "Enter category name.",
+                    maxlength: "Can't be longer than 50 characters."
+                }
+            }
+        });
+    });
+    </script>
+    {% if categories %}
+    <br />
+    <table class="pure-table-horizontal" id="sortedtable" style="width: 100%;">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td style="width: 100px;">Inserted</td>
+            <td style="width: 100px;">Updated</td>
+            <td style="width: 100px;">Edit</td>
+            <td style="width: 100px;">Change State</td>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Inserted</td>
+            <td>Updated</td>
+            <td>Edit</td>
+            <td>Change State</td>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for a in categories %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td>{{ a.catname }}</td>
+                <td>{{ a.date_inserted }}</td>
+                <td>{{ a.date_updated }}</td>
+                <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/edit/{{ a.id }}/">Edit</a></td>
+                <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/{% if a.state == 0 %}disable{% else %}enable{% endif %}/{{ a.id }}/">{% if a.state == 0 %}Disable{% else %}Enable{% endif %}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     {% endif %}
 {% endblock %}
 
