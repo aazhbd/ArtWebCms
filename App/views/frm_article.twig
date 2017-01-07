@@ -1,12 +1,12 @@
 {% extends path_user_template ~ '/home.twig' %}
 
-{% block title %}
+{% block title %}{% spaceless %}
     {% if action == "edit" %}
         {{ page_title|default('Edit Article') }}
     {% else %}
         {{ page_title|default('Add Article') }}
     {% endif %}
-{% endblock %}
+{% endspaceless %}{% endblock %}
 
 {% block headtags %}
     <script src="{{ path_url }}{{ user_var.project_static }}/jquery.validate.min.js" type="text/javascript"></script>
