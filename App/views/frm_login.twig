@@ -18,7 +18,6 @@
 {% block contentbody %}
     {{ parent() }}
     {{ body_content }}
-
     <form class="pure-form pure-form-aligned" id="art-form" method="post" action="{{ path_url_postfix }}/home">
         <fieldset>
             <legend>{{ legend | default('Enter email and password to login.') }}</legend>
@@ -26,34 +25,29 @@
                 <label for="email">Email</label>
                 <input id="email" type="text" placeholder="Your email address" name="email">
             </div>
-
             <div class="pure-control-group">
                 <label for="password">Password</label>
                 <input id="password" type="password" placeholder="Your password" name="password">
             </div>
-
             <div class="pure-controls">
                 <button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Login</button>
-                <div>
-                    Not a member yet? <a href="{{ path_url_postfix }}/signup">Sign Up</a>
-                </div>
+                <div>Not a member yet? <a href="{{ path_url_postfix }}/signup">Sign Up</a></div>
             </div>
         </fieldset>
     </form>
-
     <script type="text/javascript">
-        $(document).ready ( function() {
-            $("#art-form").validate ( {
-                rules:{
-                    email:{ required: true },
-                    password:{ required: true }
-                },
-                messages: {
-                    email: { required: "Enter email." },
-                    password: { required: "Enter password." }
-                }
-            });
+    $(document).ready ( function() {
+        $("#art-form").validate ( {
+            rules:{
+                email:{ required: true },
+                password:{ required: true }
+            },
+            messages: {
+                email: { required: "Enter email." },
+                password: { required: "Enter password." }
+            }
         });
+    });
     </script>
 {% endblock %}
 
