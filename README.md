@@ -16,7 +16,7 @@ Requires `PHP 5.3` or greater, `composer 1.2` or greater
 The project can be extended by adding any number of components, installed and maintained by ```composer``` an initial installation contains,
 
  - Symfony 3 components
- - FluentPDO is used for database abstruction
+ - FluentPDO is used for database abstraction
  - Twig is used as Template manager
  - JQuery and JQuery UI is used for front end controls including validation
  - Editor formatting with markdown
