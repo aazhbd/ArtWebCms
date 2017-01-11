@@ -19,7 +19,7 @@ The project can be extended by adding any number of components, installed and ma
  - FluentPDO is used for database abstruction
  - Twig is used as Template manager
  - JQuery and JQuery UI is used for front end controls including validation
- - Editor formatting with Parsedown
+ - Editor formatting with markdown
 
 
 ### Install instructions
