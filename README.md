@@ -20,6 +20,7 @@ Requires `PHP 5.3` or greater, `composer 1.2` or greater
  - The operation flow and points of execution makes debugging easier.
  - The Route manager is flexible and mimics functionalities of proven flexibility of development such as Django.
  - It contains a flexible and expendable Configuration manager that handles system values along with custom user values.
+ - The datamanager is adaptable to any other ORM or SQL builder with any DBMS, including MySQL, PostgreSQL, SQLite etc.
 
 ### Install instructions
 ------------------------
