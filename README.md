@@ -15,6 +15,7 @@ Requires `PHP 5.3` or greater, `composer 1.2` or greater
 
  - The initial setup is very small but flexible.
  - The project can be extended by adding any number of components, installed and maintained with ```composer```.
+ - More static libraries and components can be added in project specific static container.
  - The code and structure adheres to the proven best practices of OOP and MVC, creating highly maintainable code.
  - The operation flow and points of execution makes debugging easier.
  - The Route manager is flexible and mimics functionalities of proven flexibility of development such as Django.
