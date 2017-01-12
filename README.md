@@ -7,6 +7,11 @@ ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, p
 ### Features
 ------------
 
+ - A comprehensive Admin panel that enables,
+     - Page creation, editing and deletion with selected category, using markdown.
+     - Category creation, edition and deletion.
+     - User management with password update and add, edit more users.
+     - Allows creating basic websites and blogs with high number of pages with high control.
  - The initial setup is very small but flexible.
  - The project can be extended by adding any number of components, installed and maintained with ```composer```.
  - More static libraries and components can be added in project specific static container.
