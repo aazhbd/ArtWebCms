@@ -21,18 +21,6 @@ Requires `PHP 5.3` or greater, `composer 1.2` or greater
  - The Route manager is flexible and mimics functionalities of proven flexibility of development such as Django.
  - It contains a flexible and expendable Configuration manager that handles system values along with custom user values.
 
-### Components
---------------
-
-an initial installation contains,
-
- - Symfony 3 components
- - FluentPDO is used for database abstraction
- - Twig is used as Template manager
- - JQuery and JQuery UI is used for front end controls including validation
- - Editor formatting with markdown
-
-
 ### Install instructions
 ------------------------
 
@@ -43,6 +31,17 @@ After the code is deployed, it is necessary to import the included artcmsdb.sql 
 The interface can be accessed by opening, <http://localhost:8080/ArtWebCms/webroot/> the webserver URL and folder address can be different based on deployment.
 
 After deploying the copy with database and webserver, the admin interface can be accessed with username: `admin` and password: `admin` and the top menu can be edited by editing the file in `/App/views/home.twig`
+
+### Components
+--------------
+
+An initial installation contains,
+
+ - Symfony 3 components
+ - FluentPDO is used for database abstraction
+ - Twig is used as Template manager
+ - JQuery and JQuery UI is used for front end controls including validation
+ - Editor formatting with markdown
 
 ### License
 -----------
