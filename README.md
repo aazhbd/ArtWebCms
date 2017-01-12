@@ -37,11 +37,11 @@ After deploying the copy with database and webserver, the admin interface can be
 
 An initial installation contains,
 
- - Symfony 3 components
- - FluentPDO is used with PDO database abstraction layer
- - Twig is used as Template manager
- - JQuery and JQuery UI is used for front end controls including validation
- - Editor formatting with markdown
+ - [Symfony](https://symfony.com/) 3 components
+ - [FluentPDO](https://github.com/envms/fluentpdo) is used with PDO database abstraction layer
+ - [Twig](http://twig.sensiolabs.org/) is used as Template manager
+ - [JQuery](https://jquery.com/) and [JQuery UI](https://jqueryui.com/) is used for front end controls including validation
+ - Editor formatting with [markdown](https://simplemde.com/)
 
 ### License
 -----------
