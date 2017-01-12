@@ -10,10 +10,20 @@ ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, p
 
 Requires `PHP 5.3` or greater, `composer 1.2` or greater
 
+### Features
+------------
+
+ - The initial setup is very small but flexible.
+ - The project can be extended by adding any number of components, installed and maintained with ```composer```.
+ - The code and structure adheres to the proven best practices of OOP and MVC, creating highly maintainable code.
+ - The operation flow and points of execution makes debugging easier.
+ - The Route manager is flexible and mimics functionalities of proven flexibility of development such as Django.
+ - It contains a flexible and expendable Configuration manager that handles system values along with custom user values.
+
 ### Components
 --------------
 
-The project can be extended by adding any number of components, installed and maintained by ```composer``` an initial installation contains,
+an initial installation contains,
 
  - Symfony 3 components
  - FluentPDO is used for database abstraction
