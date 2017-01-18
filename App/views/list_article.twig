@@ -32,48 +32,48 @@
         <a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/category/list/">Categories</a>
     </div>
     {% if articles %}
-        <table class="pure-table-horizontal" id="sortedtable" style="width: 100%">
-            <thead>
+    <table class="pure-table-horizontal" id="sortedtable" style="width: 100%">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Category Id</td>
+            <td>Url</td>
+            <td>Title</td>
+            <td>Subtitle</td>
+            <td style="width: 100px;">State</td>
+            <td style="width: 100px;">Inserted</td>
+            <td style="width: 100px;">Updated</td>
+            <td style="width: 100px;">Edit</td>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td>ID</td>
+            <td>Category Id</td>
+            <td>Url</td>
+            <td>Title</td>
+            <td>Subtitle</td>
+            <td>State</td>
+            <td>Inserted</td>
+            <td>Updated</td>
+            <td>Edit</td>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for a in articles %}
             <tr>
-                <td>ID</td>
-                <td>Category Id</td>
-                <td>Url</td>
-                <td>Title</td>
-                <td>Subtitle</td>
-                <td style="width: 100px;">State</td>
-                <td style="width: 100px;">Inserted</td>
-                <td style="width: 100px;">Updated</td>
-                <td style="width: 100px;">Edit</td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.id }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.category_id }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.url }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 25)|raw }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{% if a.state == 0 %}Enabled{% else %}Disabled{% endif %}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
+                <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_updated }}</a></td>
+                <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/edit/{{ a.id }}/">Edit</a></td>
             </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <td>ID</td>
-                <td>Category Id</td>
-                <td>Url</td>
-                <td>Title</td>
-                <td>Subtitle</td>
-                <td>State</td>
-                <td>Inserted</td>
-                <td>Updated</td>
-                <td>Edit</td>
-            </tr>
-            </tfoot>
-            <tbody>
-            {% for a in articles %}
-                <tr>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.id }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.category_id }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.url }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.title }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.subtitle|slice(0, 25)|raw }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{% if a.state == 0 %}Enabled{% else %}Disabled{% endif %}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_inserted }}</a></td>
-                    <td><a href="{{ path_url_postfix }}/a/{{ a.url }}/">{{ a.date_updated }}</a></td>
-                    <td><a class="pure-button pure-button-primary" href="{{ path_url_postfix }}/article/edit/{{ a.id }}/">Edit</a></td>
-                </tr>
-            {% endfor %}
-        </table>
+        {% endfor %}
+    </table>
     {% endif %}
     {% endif %}
 {% endblock %}
