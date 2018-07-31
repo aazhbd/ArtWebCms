@@ -2,7 +2,7 @@
 
 ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, powered by ArtWeb using Symfony2 components integrating with the best practices of MVC.
 
-![ArtWebCMS](http://articulatelogic.com/file/view/artwebcms/)
+![ArtWebCMS](http://articulatedlogic.com/file/view/artwebcms/)
 
 ### Features
 ------------
