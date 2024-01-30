@@ -25,12 +25,12 @@ ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, p
 ### Requirements
 ----------------
 
-Requires `PHP 5.3` or greater, `composer 1.2` or greater
+Requires `PHP` or greater, `composer 1.2` or greater
 
 ### Install instructions
 ------------------------
 
-Since ArtWebCMS is based on [ArtWeb](http://articulatelogic.com/a/artweb/), the same [steps](http://articulatelogic.com/a/artweb/) can be followed to deploy it.
+Since ArtWebCMS is based on [ArtWeb](http://articulatedlogic.com/a/artweb/), the same [steps](http://articulatedlogic.com/a/artweb/) can be followed to deploy it.
 
 After the code is deployed, it is necessary to import the included artcmsdb.sql file to MySQL. This creates an initial user for admin and some dummy pages.
 
