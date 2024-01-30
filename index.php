@@ -1,6 +1,6 @@
 <?php
 
-require_once('../ArtLibs/Application.php');
+require_once('ArtLibs/Application.php');
 
 $app = new \ArtLibs\Application();
 
