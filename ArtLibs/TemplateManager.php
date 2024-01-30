@@ -1,7 +1,7 @@
 <?php
 namespace ArtLibs;
 
-use Twig_Environment;
+use \Twig\Environment;
 
 class TemplateManager
 {
@@ -21,7 +21,7 @@ class TemplateManager
     }
 
     /**
-     * @return Twig_Environment
+     * @return \Twig\Environment
      */
     public function getTemplate()
     {
@@ -29,9 +29,9 @@ class TemplateManager
     }
 
     /**
-     * @param Twig_Environment $template
+     * @param \Twig\Environment $template
      */
-    public function setTemplate(Twig_Environment $template)
+    public function setTemplate(\Twig\Environment $template)
     {
         $this->template = $template;
     }
@@ -40,9 +40,9 @@ class TemplateManager
 
 
 /**
- * An open source web application development framework for PHP 5.
- * @author        ArticulateLogic Labs
+ * An open source web application development framework for PHP.
+ * @author        articulatedlogic Labs
  * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- * @copyright     Copyright (c)2009-2016 ArticulateLogic Labs
+ * @copyright     Copyright (c)2009-2016 articulatedlogic Labs
  * @license       MIT License
  */

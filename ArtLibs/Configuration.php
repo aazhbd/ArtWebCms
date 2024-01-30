@@ -158,7 +158,7 @@ class Configuration
 
     /**
      * @param $library
-     * @return string
+     * @return Configuration
      */
     public function loadLibrary($library)
     {
@@ -443,9 +443,9 @@ class Configuration
 
 
 /**
- * An open source web application development framework for PHP 5.
- * @author        ArticulateLogic Labs
+ * An open source web application development framework for PHP.
+ * @author        articulatedlogic Labs
  * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- * @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ * @copyright     Copyright (c)2009-2014 articulatedlogic Labs
  * @license       MIT License
  */

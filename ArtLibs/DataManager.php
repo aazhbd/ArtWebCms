@@ -18,15 +18,15 @@ class DataManager
 
         try {
             $data = new \PDO('mysql:host=' . $conf->getDbHost() . ';dbname=' . $conf->getDbName() . '', $conf->getDbUser(), $conf->getDbPass());
-            $this->data_manager = new \Envms\FluentPDO\Query($data);
-            $this->data_manager->debug = false;
+            $this->data_manager = new \Envms\FluentPDO\Query($data); //new \FluentPDO($data);
+            $this->data_manager->debug = true;
         } catch (\Exception $ex) {
             $this->message = "Database connection failed : " . $ex->getMessage();
         }
     }
 
     /**
-     * @return \FluentPDO
+     * @return \Envms\FluentPDO\Query
      */
     public function getDataManager()
     {
@@ -35,7 +35,7 @@ class DataManager
 
     /**
      * @param $data_manager
-     * @return \FluentPDO
+     * @return \Envms\FluentPDO\Query
      */
     public function setDataManager($data_manager)
     {
@@ -68,9 +68,9 @@ class DataManager
 
 
 /**
- * An open source web application development framework for PHP 5.
- * @author        ArticulateLogic Labs
+ * An open source web application development framework for PHP.
+ * @author        articulatedlogic Labs
  * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- * @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ * @copyright     Copyright (c)2009-2014 articulatedlogic Labs
  * @license       MIT License
  */
