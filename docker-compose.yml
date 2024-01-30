@@ -6,8 +6,8 @@ services:
     container_name: mysql_container
     environment:
       TZ: 'Europe/Berlin'
-      MYSQL_DATABASE: artweb_db
-      MYSQL_USER: artwebuser
+      MYSQL_DATABASE: artcms_db
+      MYSQL_USER: artcmsuser
       MYSQL_PASSWORD: tpass
       MYSQL_ALLOW_EMPTY_PASSWORD: true
       MYSQL_ROOT_PASSWORD: tpass
@@ -19,7 +19,7 @@ services:
   www:
     depends_on:
       - data-service
-    container_name: artweb_container
+    container_name: artcms_container
     build:
       context: ./
       dockerfile: ./Dockerfile
