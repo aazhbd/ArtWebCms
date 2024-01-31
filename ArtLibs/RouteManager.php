@@ -162,6 +162,6 @@ class RouteManager
  * An open source web application development framework for PHP.
  * @author        ArticulatedLogic
  * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- * @copyright     Copyright (c)2009-2014 ArticulatedLogic
+ * @copyright     Copyright (c)2009-2024 ArticulatedLogic
  * @license       MIT License
  */
