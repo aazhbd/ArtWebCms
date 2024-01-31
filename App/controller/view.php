@@ -184,7 +184,7 @@ class Views extends Controller
                 $cat_id = $params[2];
 
                 if ($action == "edit") {
-                    $cat_pre = Category::getCategoryById($cat_id, $app);
+                    $cat_pre = Category::getCategoryById($app, $cat_id);
                     $app->setTemplateData(array('action' => 'edit', 'cat_id' => $cat_id, 'cat_pre' => $cat_pre));
                 } elseif ($action == "enable") {
                     $app->setTemplateData(

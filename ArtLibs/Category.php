@@ -32,11 +32,11 @@ class Category
     }
 
     /**
-     * @param $cat_id
      * @param Application $app
-     * @return null
+     * @param $cat_id
+     * @return false|mixed|null
      */
-    public static function getCategoryById($cat_id, Application $app)
+    public static function getCategoryById(Application $app, $cat_id)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("categories")
