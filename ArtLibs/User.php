@@ -221,8 +221,8 @@ class User
     }
 
     /**
-     * @param $app
-     * @return mixed
+     * @param Application $app
+     * @return array|bool
      */
     public static function getUsers(Application $app)
     {
