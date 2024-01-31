@@ -139,7 +139,7 @@ class User
      * @param Application $app
      * @return bool
      */
-    public static function clearSession(Application $app)
+    public static function clearSession(Application $app): bool
     {
         if (!$app->getSession()->get('is_authenticated')) {
             return false;
@@ -154,7 +154,7 @@ class User
      * @param Application $app
      * @return bool
      */
-    public static function userExists($email, Application $app)
+    public static function userExists($email, Application $app): bool
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")
@@ -173,19 +173,19 @@ class User
 
     /**
      * @param Application $app
-     * @param array $uinfo
+     * @param array $user_info
      * @return bool
      */
-    public static function addUser(Application $app, array $uinfo = array()): bool
+    public static function addUser(Application $app, array $user_info = array()): bool
     {
-        if (empty($uinfo)) {
+        if (empty($user_info)) {
             return false;
         }
 
-        $uinfo['date_inserted'] = new Literal('NOW()');
+        $user_info['date_inserted'] = new Literal('NOW()');
 
         try {
-            $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);
+            $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($user_info);
             $executed = $query->execute(true);
         } catch (\Exception $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
