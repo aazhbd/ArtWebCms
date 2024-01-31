@@ -295,10 +295,9 @@ class User
     }
 
     /**
-     * @return User
-     * @internal param mixed $user_status
+     * @return $this
      */
-    public function setUserStatus()
+    public function setUserStatus(): User
     {
         if ($this->isAuthenticated()) {
             $info = $this->getUserInfo();
