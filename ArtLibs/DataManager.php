@@ -18,8 +18,8 @@ class DataManager
 
         try {
             $data = new \PDO('mysql:host=' . $conf->getDbHost() . ';dbname=' . $conf->getDbName() . '', $conf->getDbUser(), $conf->getDbPass());
-            $this->data_manager = new \Envms\FluentPDO\Query($data); //new \FluentPDO($data);
-            $this->data_manager->debug = true;
+            $this->data_manager = new \Envms\FluentPDO\Query($data);
+            $this->data_manager->debug = $conf->getDevelopmentMode();
         } catch (\Exception $ex) {
             $this->message = "Database connection failed : " . $ex->getMessage();
         }
