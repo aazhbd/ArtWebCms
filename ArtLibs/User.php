@@ -237,11 +237,11 @@ class User
     }
 
     /**
-     * @param $uid
      * @param Application $app
-     * @return bool
+     * @param $uid
+     * @return false|mixed
      */
-    public static function getUserById($uid, Application $app)
+    public static function getUserById(Application $app, $uid)
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")

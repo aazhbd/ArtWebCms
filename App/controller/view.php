@@ -252,7 +252,7 @@ class Views extends Controller
                     $msg = (User::setState(1, $params['uid'], $app)) ? "User Disabled" : "User state change failed";
                     $app->setTemplateData(array('content_message' => $msg));
                 } elseif ($params['opt'] == "edit") {
-                    $update_user = User::getUserById($params['uid'], $app);
+                    $update_user = User::getUserById($app, $params['uid']);
                     $app->setTemplateData(array('action' => 'edit', 'update_user' => $update_user));
                 } else {
                     $app->setTemplateData(array('content_message' => 'Not found or accessible'));
