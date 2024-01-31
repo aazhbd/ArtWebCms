@@ -50,7 +50,7 @@ class Views extends Controller
 
         $user_info = $app->getSession()->get('user_info');
 
-        if ($user_info['utype'] == 1) {
+        if (isset($user_info) && $user_info['utype'] == 1) {
             $articles = Article::getArticles($app, 0);
             if ($articles) {
                 $app->setTemplateData(array('subtitle' => 'Active Articles', 'articles' => $articles));
