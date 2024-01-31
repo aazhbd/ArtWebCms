@@ -14,7 +14,6 @@ class User
     protected $app;
 
     /**
-     * User constructor.
      * @param Application $app
      * @param $email
      * @param $pass
@@ -34,7 +33,7 @@ class User
     /**
      * @param $user
      * @param $pass
-     * @return bool
+     * @return false|mixed
      */
     public function getUser($user, $pass)
     {
@@ -58,7 +57,7 @@ class User
     /**
      * @return Application
      */
-    public function getApp()
+    public function getApp(): Application
     {
         return $this->app;
     }
@@ -67,7 +66,7 @@ class User
      * @param Application $app
      * @return $this
      */
-    public function setApp(Application $app)
+    public function setApp(Application $app): User
     {
         $this->app = $app;
         return $this;
