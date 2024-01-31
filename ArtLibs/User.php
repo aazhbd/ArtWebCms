@@ -45,7 +45,7 @@ class User
             $query = $this->app->getDataManager()->getDataManager()->from("users")
                 ->where(array("email" => $user, "pass" => $pass, "ustatus" => 1, "state" => 0))
                 ->fetch();
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -90,7 +90,7 @@ class User
             $query = $this->getApp()->getDataManager()->getDataManager()
                 ->update('users', array('date_lastlogin' => new \FluentLiteral('NOW()')), $uid);
             $executed = $query->execute(true);
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -106,7 +106,7 @@ class User
         if (!$this->getApp()->getSession()->isStarted()) {
             try {
                 $this->getApp()->getRequest()->getSession()->start();
-            } catch (\Exception $ex) {
+            } catch (DBException $ex) {
                 $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
                 return false;
             }
@@ -163,7 +163,7 @@ class User
                 ->select(array('id'))
                 ->where(array("email" => $email))
                 ->fetch();
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $error = new ErrorManager();
             $error->addMessage("Error : " . $ex->getMessage());
             return false;
@@ -188,7 +188,7 @@ class User
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($user_info);
             $executed = $query->execute(true);
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -229,7 +229,7 @@ class User
     {
         try {
             $query = $app->getDataManager()->getDataManager()->from("users")->fetchAll();
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -250,7 +250,7 @@ class User
                 ->select(array('id', 'firstname', 'lastname', 'email', 'pass', 'gender', 'ustatus', 'utype', 'state'))
                 ->where(array("id" => $uid))
                 ->fetch();
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
