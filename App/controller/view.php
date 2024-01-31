@@ -122,7 +122,7 @@ class Views extends Controller
 
                 if ($app->getRequest()->request->get('editval')) {
                     $aid = trim($app->getRequest()->request->get('editval'));
-                    $app->setTemplateData(array('content_message' => (Article::updateArticle($article_data, $aid, $app)) ? "Article updated successfully" : "Article update failed"));
+                    $app->setTemplateData(array('content_message' => (Article::updateArticle($app, $article_data, $aid)) ? "Article updated successfully" : "Article update failed"));
                 } elseif (Article::addArticle($article_data, $app)) {
                     $app->setTemplateData(array('content_message' => "New article added successfully."));
                 } else {

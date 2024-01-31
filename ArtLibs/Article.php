@@ -11,8 +11,8 @@ class Article
 
     /**
      * @param Application $app
-     * @param null $state
-     * @param null $category_id
+     * @param $state
+     * @param $category_id
      * @return array|bool
      */
     public static function getArticles(Application $app, $state = null, $category_id = null)
@@ -63,12 +63,12 @@ class Article
     }
 
     /**
+     * @param Application $app
      * @param $article_data
      * @param $aid
-     * @param Application $app
      * @return bool|int|PDOStatement
      */
-    public static function updateArticle($article_data, $aid, Application $app)
+    public static function updateArticle(Application $app, $article_data, $aid)
     {
         if (!isset($article_data) || !isset($aid)) {
             return false;
