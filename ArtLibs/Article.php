@@ -88,9 +88,9 @@ class Article
     }
 
     /**
-     * @param $article_url
      * @param Application $app
-     * @return bool|mixed
+     * @param $article_url
+     * @return false|mixed
      */
     public static function getArticleByUrl(Application $app, $article_url)
     {
