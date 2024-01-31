@@ -13,9 +13,9 @@ class User
 
     protected $authenticated;
 
-    protected $user_info;
+    protected array $user_info;
 
-    protected $app;
+    protected Application $app;
 
     /**
      * @param Application $app
