@@ -95,18 +95,18 @@ class Category
     }
 
     /**
+     * @param Application $app
      * @param $cat_id
      * @param array $category
-     * @param Application $app
-     * @return bool
+     * @return bool|int|\PDOStatement
      */
-    public static function updateCategory($cat_id, $category = array(), Application $app)
+    public static function updateCategory(Application $app, $cat_id, array $category = array())
     {
         if (empty($category) || !isset($cat_id)) {
             return false;
         }
 
-        $category['date_updated'] = new \FluentLiteral('NOW()');
+        $category['date_updated'] = new Literal('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->update('categories', $category, $cat_id);

@@ -210,7 +210,7 @@ class Views extends Controller
                     $cid = $app->getRequest()->request->get('editval');
                     $app->setTemplateData(
                         array(
-                            'content_message' => (Category::updateCategory($cid, $category, $app)) ? 'Category successfully updated' : 'Category save failed'
+                            'content_message' => (Category::updateCategory($app, $cid, $category)) ? 'Category successfully updated' : 'Category save failed'
                         )
                     );
                 } elseif (Category::addCategory($app, $category)) {
