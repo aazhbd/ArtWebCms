@@ -2,8 +2,8 @@
 
 namespace ArtLibs;
 
-use \Envms\FluentPDO\Exception as DBException;
-use \Envms\FluentPDO\Literal;
+use Envms\FluentPDO\Exception as DBException;
+use Envms\FluentPDO\Literal;
 use PDOException;
 use PDOStatement;
 
