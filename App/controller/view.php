@@ -189,13 +189,13 @@ class Views extends Controller
                 } elseif ($action == "enable") {
                     $app->setTemplateData(
                         array(
-                            'content_message' => (Category::setState(0, $cat_id, $app)) ? 'Category is ' . $params[1] . 'd.' : 'State change failed'
+                            'content_message' => (Category::setState($app, $cat_id, 0)) ? 'Category is ' . $params[1] . 'd.' : 'State change failed'
                         )
                     );
                 } elseif ($action == "disable") {
                     $app->setTemplateData(
                         array(
-                            'content_message' => (Category::setState(1, $cat_id, $app)) ? 'Category is ' . $params[1] . 'd.' : 'State change failed'
+                            'content_message' => (Category::setState($app, $cat_id, 1)) ? 'Category is ' . $params[1] . 'd.' : 'State change failed'
                         )
                     );
                 }

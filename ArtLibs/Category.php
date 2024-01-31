@@ -120,12 +120,12 @@ class Category
     }
 
     /**
-     * @param $state
-     * @param $category_id
      * @param Application $app
-     * @return bool
+     * @param $category_id
+     * @param $state
+     * @return bool|int|\PDOStatement
      */
-    public static function setState($state, $category_id, Application $app)
+    public static function setState(Application $app, $category_id, $state)
     {
         if (!isset($state) || !isset($category_id)) {
             return false;
@@ -133,7 +133,7 @@ class Category
 
         try {
             $query = $app->getDataManager()->getDataManager()
-                ->update('categories', array('state' => $state, 'date_updated' => new \FluentLiteral('NOW()')), $category_id);
+                ->update('categories', array('state' => $state, 'date_updated' => new Literal('NOW()')), $category_id);
             $executed = $query->execute(true);
         } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
