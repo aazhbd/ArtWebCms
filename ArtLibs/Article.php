@@ -2,6 +2,9 @@
 
 namespace ArtLibs;
 
+use Envms\FluentPDO\Literal;
+use Envms\FluentPDO\Exception as DBException;
+use PDOStatement;
 
 class Article
 {
@@ -28,7 +31,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles");
             $query->where($cond);
             $q = $query->orderBy('date_inserted ASC')->fetchAll();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -51,7 +54,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("id" => $aid))
                 ->fetch();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -63,7 +66,7 @@ class Article
      * @param $article_data
      * @param $aid
      * @param Application $app
-     * @return bool|int|\PDOStatement
+     * @return bool|int|PDOStatement
      */
     public static function updateArticle($article_data, $aid, Application $app)
     {
@@ -71,12 +74,12 @@ class Article
             return false;
         }
 
-        $article_data['date_updated'] = new \FluentLiteral('NOW()');
+        $article_data['date_updated'] = new Literal('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->update('articles', $article_data, $aid);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -99,7 +102,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("url" => $aurl, "state" => 0))
                 ->fetch();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -118,12 +121,12 @@ class Article
             return false;
         }
 
-        $article_data['date_inserted'] = new \FluentLiteral('NOW()');
+        $article_data['date_inserted'] = new Literal('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
