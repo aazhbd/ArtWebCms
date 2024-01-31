@@ -2,13 +2,16 @@
 
 namespace ArtLibs;
 
+use \Envms\FluentPDO\Exception as DBException;
+
 
 class Category
 {
     /**
      * @param Application $app
-     * @param null $state
-     * @return null
+     * @param $state
+     * @return array|bool|null
+     * @throws DBException
      */
     public static function getCategories(Application $app, $state = null)
     {
@@ -20,7 +23,7 @@ class Category
 
         try {
             $q = $query->fetchAll();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return null;
         }
@@ -39,7 +42,7 @@ class Category
             $query = $app->getDataManager()->getDataManager()->from("categories")
                 ->where(array("id" => $cat_id,))
                 ->fetch();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return null;
         }
@@ -58,7 +61,7 @@ class Category
             $query = $app->getDataManager()->getDataManager()->from("categories")
                 ->where(array("catname" => $cat_name))
                 ->fetch();
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return null;
         }
@@ -82,7 +85,7 @@ class Category
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -107,7 +110,7 @@ class Category
         try {
             $query = $app->getDataManager()->getDataManager()->update('categories', $category, $cat_id);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -131,7 +134,7 @@ class Category
             $query = $app->getDataManager()->getDataManager()
                 ->update('categories', array('state' => $state, 'date_updated' => new \FluentLiteral('NOW()')), $category_id);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
