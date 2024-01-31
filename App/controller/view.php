@@ -271,7 +271,7 @@ class Views extends Controller
 
                 if ($app->getRequest()->request->get('editval')) {
                     $uid = $app->getRequest()->request->get('editval');
-                    $app->setTemplateData(array('content_message' => (User::updateUser($uid, $user_data, $app) ? "User updated successfully" : "User couldn't be updated")));
+                    $app->setTemplateData(array('content_message' => (User::updateUser($app, $uid, $user_data) ? "User updated successfully" : "User couldn't be updated")));
                 } elseif (User::userExists($user_data['email'], $app)) {
                     $app->setTemplateData(array('content_message' => 'User with email ' . $user_data['email'] . ' already exists. Try different email'));
                 } elseif (User::addUser($app, $user_data)) {

@@ -3,6 +3,7 @@
 namespace ArtLibs;
 
 use \Envms\FluentPDO\Literal;
+use PDOStatement;
 
 
 class User
@@ -195,21 +196,21 @@ class User
     }
 
     /**
-     * @param $uid
-     * @param array $uinfo
      * @param Application $app
-     * @return bool
+     * @param $uid
+     * @param array $user_info
+     * @return bool|int|PDOStatement
      */
-    public static function updateUser($uid, $uinfo = array(), Application $app)
+    public static function updateUser(Application $app, $uid, array $user_info = array())
     {
-        if (empty($uinfo) || !isset($uid)) {
+        if (empty($user_info) || !isset($uid)) {
             return false;
         }
 
-        $uinfo['date_updated'] = new \FluentLiteral('NOW()');
+        $user_info['date_updated'] = new Literal('NOW()');
 
         try {
-            $query = $app->getDataManager()->getDataManager()->update('users', $uinfo, $uid);
+            $query = $app->getDataManager()->getDataManager()->update('users', $user_info, $uid);
             $executed = $query->execute(true);
         } catch (\Exception $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
