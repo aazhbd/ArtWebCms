@@ -72,10 +72,10 @@ class Views extends Controller
 
         if (isset($params['aid'])) {
             $aid = $params['aid'];
-            $article = Article::getArticleById($aid, $app);
+            $article = Article::getArticleById($app, $aid);
         } elseif (isset($params['aurl'])) {
             $aurl = $params['aurl'];
-            $article = Article::getArticleByUrl($aurl, $app);
+            $article = Article::getArticleByUrl($app, $aurl);
         }
 
         $parsemd = new Parsedown();
@@ -154,7 +154,7 @@ class Views extends Controller
             if (isset($params['opt']) && isset($params['aid'])) {
                 $action = $params['opt'];
                 $aid = $params['aid'];
-                $app->setTemplateData(array('article' => Article::getArticleById($aid, $app), 'action' => $action));
+                $app->setTemplateData(array('article' => Article::getArticleById($app, $aid), 'action' => $action));
             }
 
             $categories = Category::getCategories($app, 0);

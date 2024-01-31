@@ -40,11 +40,11 @@ class Article
     }
 
     /**
-     * @param $aid
      * @param Application $app
-     * @return bool|mixed
+     * @param $aid
+     * @return false|mixed
      */
-    public static function getArticleById($aid, Application $app)
+    public static function getArticleById(Application $app, $aid)
     {
         if (!isset($aid)) {
             return false;
@@ -88,19 +88,19 @@ class Article
     }
 
     /**
-     * @param $aurl
+     * @param $article_url
      * @param Application $app
      * @return bool|mixed
      */
-    public static function getArticleByUrl($aurl, Application $app)
+    public static function getArticleByUrl(Application $app, $article_url)
     {
-        if (!isset($aurl)) {
+        if (!isset($article_url)) {
             return false;
         }
 
         try {
             $query = $app->getDataManager()->getDataManager()->from("articles")
-                ->where(array("url" => $aurl, "state" => 0))
+                ->where(array("url" => $article_url, "state" => 0))
                 ->fetch();
         } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
