@@ -3,6 +3,7 @@
 namespace ArtLibs;
 
 use \Envms\FluentPDO\Exception as DBException;
+use \Envms\FluentPDO\Literal;
 
 
 class Category
@@ -70,17 +71,17 @@ class Category
     }
 
     /**
-     * @param array $category
      * @param Application $app
-     * @return bool
+     * @param array $category
+     * @return bool|int
      */
-    public static function addCategory($category = array(), Application $app)
+    public static function addCategory(Application $app, array $category = array())
     {
         if (empty($category)) {
             return false;
         }
 
-        $category['date_inserted'] = new \FluentLiteral('NOW()');
+        $category['date_inserted'] = new Literal('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('categories')->values($category);

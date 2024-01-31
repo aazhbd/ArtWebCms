@@ -213,7 +213,7 @@ class Views extends Controller
                             'content_message' => (Category::updateCategory($cid, $category, $app)) ? 'Category successfully updated' : 'Category save failed'
                         )
                     );
-                } elseif (Category::addCategory($category, $app)) {
+                } elseif (Category::addCategory($app, $category)) {
                     $app->setTemplateData(array('content_message' => 'New category successfully added'));
                 } else {
                     $app->setTemplateData(array('content_message' => 'New category save failed'));
