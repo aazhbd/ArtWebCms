@@ -310,7 +310,7 @@ class User
     }
 
     /**
-     * @return boolean
+     * @return false|mixed
      */
     public function isAuthenticated()
     {
@@ -318,10 +318,10 @@ class User
     }
 
     /**
-     * @param boolean $authenticated
-     * @return User
+     * @param $authenticated
+     * @return $this
      */
-    public function setAuthenticated($authenticated)
+    public function setAuthenticated($authenticated): User
     {
         $this->authenticated = $authenticated;
         return $this;
