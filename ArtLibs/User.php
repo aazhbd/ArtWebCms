@@ -3,6 +3,7 @@
 namespace ArtLibs;
 
 use \Envms\FluentPDO\Literal;
+use \Envms\FluentPDO\Exception as DBException;
 use PDOStatement;
 
 
@@ -212,7 +213,7 @@ class User
         try {
             $query = $app->getDataManager()->getDataManager()->update('users', $user_info, $uid);
             $executed = $query->execute(true);
-        } catch (\Exception $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -258,12 +259,12 @@ class User
     }
 
     /**
-     * @param $state
-     * @param $uid
      * @param Application $app
+     * @param $uid
+     * @param $state
      * @return bool
      */
-    public static function setState(Application $app, $uid, $state)
+    public static function setState(Application $app, $uid, $state): bool
     {
         if (!isset($state) || !isset($uid)) {
             return false;
@@ -273,7 +274,7 @@ class User
             $query = $app->getDataManager()->getDataManager()
                 ->update('users', array('date_updated' => new Literal('NOW()'), 'state' => $state), $uid);
             $executed = $query->execute(true);
-        } catch (\PDOException $ex) {
+        } catch (DBException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
