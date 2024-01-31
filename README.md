@@ -25,7 +25,7 @@ ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, p
 ### Requirements
 ----------------
 
-Requires `PHP` or newer, `composer 7` or newer
+Requires `PHP 8.2` or newer, `composer 7` or newer
 
 ### Install instructions
 ------------------------
