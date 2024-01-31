@@ -88,7 +88,7 @@ class User
 
         try {
             $query = $this->getApp()->getDataManager()->getDataManager()
-                ->update('users', array('date_lastlogin' => new \FluentLiteral('NOW()')), $uid);
+                ->update('users', array('date_lastlogin' => new Literal('NOW()')), $uid);
             $executed = $query->execute(true);
         } catch (DBException $ex) {
             $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
