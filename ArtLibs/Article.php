@@ -111,11 +111,11 @@ class Article
     }
 
     /**
-     * @param $article_data
      * @param Application $app
+     * @param $article_data
      * @return bool|int
      */
-    public static function addArticle($article_data, Application $app)
+    public static function addArticle(Application $app, $article_data)
     {
         if (empty($article_data)) {
             return false;
