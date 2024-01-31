@@ -80,7 +80,7 @@ class User
      * @param $uid
      * @return bool
      */
-    public function updateLoginTime($uid)
+    public function updateLoginTime($uid): bool
     {
         if (!isset($uid)) {
             return false;
@@ -101,7 +101,7 @@ class User
     /**
      * @return boolean
      */
-    public function setSession()
+    public function setSession(): bool
     {
         if (!$this->getApp()->getSession()->isStarted()) {
             try {
@@ -121,7 +121,7 @@ class User
     /**
      * @return array
      */
-    public function getUserInfo()
+    public function getUserInfo(): array
     {
         return $this->user_info;
     }
@@ -130,7 +130,7 @@ class User
      * @param array $user_info
      * @return User
      */
-    public function setUserInfo($user_info)
+    public function setUserInfo(array $user_info): User
     {
         $this->user_info = $user_info;
         return $this;
