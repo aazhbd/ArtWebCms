@@ -85,7 +85,7 @@ class Views extends Controller
                 'page_title' => $article['title'],
                 'title' => $article['title'],
                 'subtitle' => $article['subtitle'],
-                'body' => $parsemd->text(stripslashes(html_entity_decode(htmlentities($article['body'])))),
+                'body' => $parsemd->toHtml(stripslashes(html_entity_decode(htmlentities($article['body'])))),
                 'article' => $article
             ));
         }
