@@ -4,6 +4,7 @@ namespace ArtLibs;
 
 use \Envms\FluentPDO\Exception as DBException;
 use \Envms\FluentPDO\Literal;
+use PDOStatement;
 
 
 class Category
@@ -98,7 +99,7 @@ class Category
      * @param Application $app
      * @param $cat_id
      * @param array $category
-     * @return bool|int|\PDOStatement
+     * @return bool|int|PDOStatement
      */
     public static function updateCategory(Application $app, $cat_id, array $category = array())
     {
@@ -123,7 +124,7 @@ class Category
      * @param Application $app
      * @param $category_id
      * @param $state
-     * @return bool|int|\PDOStatement
+     * @return bool|int|PDOStatement
      */
     public static function setState(Application $app, $category_id, $state)
     {
