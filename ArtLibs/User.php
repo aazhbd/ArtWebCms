@@ -2,6 +2,8 @@
 
 namespace ArtLibs;
 
+use \Envms\FluentPDO\Literal;
+
 
 class User
 {
@@ -169,17 +171,17 @@ class User
     }
 
     /**
-     * @param array $uinfo
      * @param Application $app
+     * @param array $uinfo
      * @return bool
      */
-    public static function addUser($uinfo = array(), Application $app)
+    public static function addUser(Application $app, array $uinfo = array()): bool
     {
         if (empty($uinfo)) {
             return false;
         }
 
-        $uinfo['date_inserted'] = new \FluentLiteral('NOW()');
+        $uinfo['date_inserted'] = new Literal('NOW()');
 
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('users')->values($uinfo);

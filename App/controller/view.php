@@ -274,7 +274,7 @@ class Views extends Controller
                     $app->setTemplateData(array('content_message' => (User::updateUser($uid, $user_data, $app) ? "User updated successfully" : "User couldn't be updated")));
                 } elseif (User::userExists($user_data['email'], $app)) {
                     $app->setTemplateData(array('content_message' => 'User with email ' . $user_data['email'] . ' already exists. Try different email'));
-                } elseif (User::addUser($user_data, $app)) {
+                } elseif (User::addUser($app, $user_data)) {
                     $app->setTemplateData(array('content_message' => "New user added."));
                 } else {
                     $app->setTemplateData(array('content_message' => "User couldn't be saved."));
@@ -316,7 +316,7 @@ class Views extends Controller
                 return;
             }
 
-            if (User::addUser($user_data, $app)) {
+            if (User::addUser($app, $user_data)) {
                 $app->setTemplateData(array('title' => 'Login', 'content_message' => 'The user is successfully added and can login',));
             } else {
                 $app->setTemplateData(array('title' => 'Signup', 'content_message' => 'Signup was unsuccessful, try again.',));
