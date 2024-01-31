@@ -25,18 +25,28 @@ ArtWebCMS is a fast, secure, feature rich, scalable Content Management System, p
 ### Requirements
 ----------------
 
-Requires `PHP` or greater, `composer 1.2` or greater
+Requires `PHP` or newer, `composer 7` or newer
 
 ### Install instructions
 ------------------------
 
 Since ArtWebCMS is based on [ArtWeb](http://articulatedlogic.com/a/artweb/), the same [steps](http://articulatedlogic.com/a/artweb/) can be followed to deploy it.
 
-After the code is deployed, it is necessary to import the included artcmsdb.sql file to MySQL. This creates an initial user for admin and some dummy pages.
+The repository contains appropriate docker configuration to deploy the development system.
+Assuming the docker is installed and available on the command line, the following commands can be used
+to deploy a running system:
 
-The interface can be accessed by opening, <http://localhost:8080/ArtWebCms/webroot/> the webserver URL and folder address can be different based on deployment.
+```console
+$ git clone https://github.com/aazhbd/ArtWeb.git && cd ArtWeb
+$ docker-compose up
+```
 
-After deploying the copy with database and webserver, the admin interface can be accessed with username: `admin` and password: `admin` and the top menu can be edited by editing the file in `/App/views/home.twig`
+Once the installation is complete, the home page can be accessed by opening ```http://localhost:8080/```
+
+After deploying the copy with database and webserver, the admin interface can be accessed with
+ username: `admin` and password: `admin` and the top menu can be edited by editing the file in `/App/views/home.twig`
+
+An initial database and example contents are available in the ```data_source/artcmsdb.sql``` file, which is imported during provision if the database is created through docker.
 
 ### Components
 --------------
