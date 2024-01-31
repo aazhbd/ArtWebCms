@@ -4,6 +4,7 @@ namespace ArtLibs;
 
 use Envms\FluentPDO\Literal;
 use Envms\FluentPDO\Exception as DBException;
+use PDOException;
 use PDOStatement;
 
 class Article
@@ -31,7 +32,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles");
             $query->where($cond);
             $q = $query->orderBy('date_inserted ASC')->fetchAll();
-        } catch (DBException $ex) {
+        } catch (DBException|PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -54,7 +55,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("id" => $aid))
                 ->fetch();
-        } catch (DBException $ex) {
+        } catch (DBException|PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -79,7 +80,7 @@ class Article
         try {
             $query = $app->getDataManager()->getDataManager()->update('articles', $article_data, $aid);
             $executed = $query->execute(true);
-        } catch (DBException $ex) {
+        } catch (DBException|PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -102,7 +103,7 @@ class Article
             $query = $app->getDataManager()->getDataManager()->from("articles")
                 ->where(array("url" => $article_url, "state" => 0))
                 ->fetch();
-        } catch (DBException $ex) {
+        } catch (DBException|PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
@@ -126,7 +127,7 @@ class Article
         try {
             $query = $app->getDataManager()->getDataManager()->insertInto('articles')->values($article_data);
             $executed = $query->execute(true);
-        } catch (DBException $ex) {
+        } catch (DBException|PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;
         }
