@@ -263,7 +263,7 @@ class User
      * @param Application $app
      * @return bool
      */
-    public static function setState($state, $uid, Application $app)
+    public static function setState(Application $app, $uid, $state)
     {
         if (!isset($state) || !isset($uid)) {
             return false;
@@ -271,7 +271,7 @@ class User
 
         try {
             $query = $app->getDataManager()->getDataManager()
-                ->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'state' => $state), $uid);
+                ->update('users', array('date_updated' => new Literal('NOW()'), 'state' => $state), $uid);
             $executed = $query->execute(true);
         } catch (\PDOException $ex) {
             $app->getErrorManager()->addMessage("Error : " . $ex->getMessage());

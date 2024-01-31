@@ -246,10 +246,10 @@ class Views extends Controller
         if ($user_info['utype'] == 1) {
             if (isset($params['opt']) && isset($params['uid'])) {
                 if ($params['opt'] == "enable") {
-                    $msg = (User::setState(0, $params['uid'], $app)) ? "User Enabled" : "User state change failed";
+                    $msg = (User::setState($app, $params['uid'], 0)) ? "User Enabled" : "User state change failed";
                     $app->setTemplateData(array('content_message' => $msg));
                 } elseif ($params['opt'] == "disable") {
-                    $msg = (User::setState(1, $params['uid'], $app)) ? "User Disabled" : "User state change failed";
+                    $msg = (User::setState($app, $params['uid'], 1)) ? "User Disabled" : "User state change failed";
                     $app->setTemplateData(array('content_message' => $msg));
                 } elseif ($params['opt'] == "edit") {
                     $update_user = User::getUserById($app, $params['uid']);
