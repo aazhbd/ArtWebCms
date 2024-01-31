@@ -1,6 +1,8 @@
 <?php
 
-namespace ArtLibs;
+namespace App\Model;
+
+use ArtLibs\Application;
 
 use Envms\FluentPDO\Exception as DBException;
 use Envms\FluentPDO\Literal;

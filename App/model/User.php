@@ -1,6 +1,8 @@
 <?php
 
-namespace ArtLibs;
+namespace App\Model;
+
+use ArtLibs\Application;
 
 use Envms\FluentPDO\Literal;
 use Envms\FluentPDO\Exception as DBException;
@@ -89,7 +91,7 @@ class User
         try {
             $query = $this->getApp()->getDataManager()->getDataManager()
                 ->update('users', array('date_lastlogin' => new Literal('NOW()')), $uid);
-            $executed = $query->execute(true);
+            $executed = $query->execute();
         } catch (DBException $ex) {
             $this->getApp()->getErrorManager()->addMessage("Error : " . $ex->getMessage());
             return false;

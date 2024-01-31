@@ -1,12 +1,12 @@
 <?php
 
-use ArtLibs\Application;
-use ArtLibs\Controller;
-use ArtLibs\User;
-use ArtLibs\Article;
-use ArtLibs\Category;
 use Erusev\Parsedown\Parsedown;
 
+use ArtLibs\Application;
+use ArtLibs\Controller;
+use App\Model\User;
+use App\Model\Article;
+use App\Model\Category;
 
 class Views extends Controller
 {

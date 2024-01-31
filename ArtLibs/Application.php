@@ -48,6 +48,7 @@ class Application
             /* Load all libraries */
             $this->conf_manager->loadLibrary($this->conf_manager->getPath() . '/ArtLibs');
             $this->conf_manager->loadLibrary($this->conf_manager->getPath() . '/App/controller');
+            $this->conf_manager->loadLibrary($this->conf_manager->getPath() . '/App/model');
 
             if (file_exists($this->conf_manager->getPath() . '/vendor/autoload.php')) {
                 require_once($this->conf_manager->getPath() . '/vendor/autoload.php');
