@@ -283,7 +283,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return int|mixed
      */
     public function getUserStatus()
     {
