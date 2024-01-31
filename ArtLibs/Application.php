@@ -2,6 +2,7 @@
 
 namespace ArtLibs;
 
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -13,7 +14,7 @@ class Application
 
     protected $route_manager;
 
-    protected $data_manager;
+    protected DataManager $data_manager;
 
     protected $template_manager;
 
@@ -23,9 +24,9 @@ class Application
 
     protected $routes;
 
-    protected $request;
+    protected Request $request;
 
-    protected $session;
+    protected Session $session;
 
     /**
      * Application constructor.
@@ -74,7 +75,7 @@ class Application
             $this->route_manager = $this->setRouteManager();
             $this->template_manager = $this->setTemplateManager();
 
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             $this->getErrorManager()->addMessage('Exception occurred : ' . $ex->getMessage());
         }
     }
@@ -89,9 +90,9 @@ class Application
 
     /**
      * @param ErrorManager|null $error_manager
-     * @return ErrorManager|mixed
+     * @return ErrorManager
      */
-    public function setErrorManager(ErrorManager $error_manager = null)
+    public function setErrorManager(ErrorManager $error_manager = null): ?ErrorManager
     {
         $this->error_manager = $error_manager;
 
@@ -253,7 +254,7 @@ class Application
     /**
      * @param array $conf
      * @return array|mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function setConf(array $conf = array())
     {
@@ -264,7 +265,7 @@ class Application
         }
 
         if (empty($this->conf)) {
-            throw new \Exception("Unable to load configuration file.");
+            throw new Exception("Unable to load configuration file.");
         }
 
         return $this->conf;
@@ -281,7 +282,7 @@ class Application
     /**
      * @param array $routes
      * @return array|mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function setRoutes(array $routes = array())
     {
@@ -292,7 +293,7 @@ class Application
         }
 
         if (empty($this->routes)) {
-            throw new \Exception("Unable to load routes file. ");
+            throw new Exception("Unable to load routes file. ");
         }
 
         return $this->routes;
