@@ -53,7 +53,7 @@ An initial database and example contents are available in the ```data_source/art
 
 An initial installation contains,
 
- - [Symfony](https://symfony.com/) 3 components
+ - [Symfony](https://symfony.com/) components
  - [FluentPDO](https://github.com/envms/fluentpdo) is used with PDO database abstraction layer
  - [Twig](http://twig.sensiolabs.org/) is used as Template manager
  - [JQuery](https://jquery.com/) and [JQuery UI](https://jqueryui.com/) is used for front end controls including validation
